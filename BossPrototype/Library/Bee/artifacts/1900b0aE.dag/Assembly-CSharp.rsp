@@ -350,6 +350,7 @@
 "Assets/Scripts/BossMovement.cs"
 "Assets/Scripts/CameraMovement.cs"
 "Assets/Scripts/PlayerMovement.cs"
+"Assets/Scripts/TestScript.cs"
 -langversion:9.0
 
 /deterministic
