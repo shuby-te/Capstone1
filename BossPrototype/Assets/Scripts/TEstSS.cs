@@ -7,6 +7,7 @@ public class TEstSS : MonoBehaviour
     // Start is called before the first frame update
 
     //asdasdaTEST
+    //LASTTEST
     void Start()
     {
         
