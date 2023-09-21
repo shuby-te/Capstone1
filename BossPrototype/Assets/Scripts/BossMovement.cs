@@ -53,20 +53,6 @@ public class BossMovement : MonoBehaviour
             Vector3 t_dir = (player.transform.position - transform.position).normalized;
             transform.forward = Vector3.Lerp(transform.forward, t_dir, 10f);
         }
-        else if(!isAttack)
-        {
-            Debug.Log("이게 안되네");
-
-            if(isNotice)
-                transform.forward = Vector3.Lerp(transform.forward, Vector3.zero - transform.position, 10f);
-
-            isNotice = false;
-            transform.position = Vector3.MoveTowards(transform.position, Vector3.zero, 0.05f);
-
-            if (transform.position == Vector3.zero)
-                transform.rotation = Quaternion.Euler(0, 180, 0);               
-        }
-
     }
 
     IEnumerator SwordAttack()
