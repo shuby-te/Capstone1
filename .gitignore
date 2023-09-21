@@ -4,6 +4,8 @@
 #
 Library/
 Logs/
+Obj/
+UserSettings/
 /[Ll]ibrary/
 /[Tt]emp/
 /[Oo]bj/
