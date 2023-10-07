@@ -38,7 +38,7 @@ public class Si_BossMovement : MonoBehaviour
         }
         if (dir >= 8 && !isAttack)
         {
-
+            anim.SetInteger("isAttack", 2);
             Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
             Vector3 t_dir = (playerPos - transform.position).normalized;
             transform.forward = Vector3.Lerp(transform.forward, t_dir, 0.1f);
@@ -48,6 +48,7 @@ public class Si_BossMovement : MonoBehaviour
     IEnumerator TurnHead()
     {
         Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
+        anim.SetInteger("isAttack", 2);
         for (float i = 0; i < 1; i += 0.1f)
         {
             Vector3 t_dir = (playerPos - transform.position).normalized;
