@@ -226,7 +226,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4169279968784986531, guid: 8208e03d8fc79b14ca761a6efcaa84b2, type: 3}
   m_PrefabInstance: {fileID: 1736480648}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &345822110
+--- !u!114 &345822111
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,11 +235,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 345822105}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93b702d865493a647b67a669b81603a1, type: 3}
+  m_Script: {fileID: 11500000, guid: 31940a025752f274886d94dd3f1bceb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 597500403}
+  Gear: {fileID: 4145334396530772629, guid: b85513193037e904e9c23f422d538d91, type: 3}
+  miniGear: {fileID: 0}
+  player: {fileID: 2023431634}
   speed: 5
+  lerpSpeed: 5
 --- !u!1 &452559391
 GameObject:
   m_ObjectHideFlags: 0

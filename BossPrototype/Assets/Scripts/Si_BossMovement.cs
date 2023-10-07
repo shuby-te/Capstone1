@@ -7,6 +7,9 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Si_BossMovement : MonoBehaviour
 {
+    public GameObject Gear;
+    public GameObject miniGear;
+
     public GameObject player;
     public float speed;
     public float lerpSpeed;
@@ -20,6 +23,7 @@ public class Si_BossMovement : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        BossAttackType1();
     }
 
     void Update()
@@ -72,5 +76,14 @@ public class Si_BossMovement : MonoBehaviour
     {
         //if (other.CompareTag("Player"))
         //    Destroy(other.gameObject);
+    }
+
+    void BossAttackType1()
+    {
+        Vector3 gearPos = transform.localPosition;
+        gearPos.x += 3;
+        gearPos.y += 3;
+        Instantiate(Gear, gearPos, Gear.transform.rotation);
+        Instantiate(miniGear, gearPos, miniGear.transform.rotation);
     }
 }
