@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class BossMovement : MonoBehaviour
+public class Si_BossMovement : MonoBehaviour
 {
     public GameObject player;
     public float speed;
@@ -32,7 +32,7 @@ public class BossMovement : MonoBehaviour
             StartCoroutine(TurnHead());
 
         }
-        if (dir <= 12 && !isAttack)
+        if (dir >= 8 && !isAttack)
         {
 
             Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
