@@ -20,7 +20,9 @@ public class Si_BossAttack : MonoBehaviour
 
     void BossAttackType1()
     {
-
+        Vector3 gearPos = transform.localPosition;
+        gearPos.x += 3; 
+        Instantiate(Gear, gearPos, Gear.transform.rotation);
     }
     void BossAttackType2()
     {
