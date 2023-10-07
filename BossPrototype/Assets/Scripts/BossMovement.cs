@@ -55,7 +55,7 @@ public class BossMovement : MonoBehaviour
         }
     }
 
-    IEnumerator SwordAttack()
+    /*IEnumerator SwordAttack()
     {
         anim.SetInteger("isAttack", 1);
 
@@ -67,11 +67,11 @@ public class BossMovement : MonoBehaviour
         
         isAttack = false;
         yield break;
-    }
+    }*/
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
             Destroy(other.gameObject);
-    }
+    }*/
 }

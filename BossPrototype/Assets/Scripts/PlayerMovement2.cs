@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -21,18 +22,21 @@ public class PlayerMovement2 : MonoBehaviour
     void Update()
     {
         //ket input
-        dir.x = Input.GetAxisRaw("Horizontal");
-        dir.z = Input.GetAxisRaw("Vertical");
+        if(!isDash)
+        {
+            dir.x = Input.GetAxisRaw("Horizontal");
+            dir.z = Input.GetAxisRaw("Vertical");
 
-        dir.Normalize();
+            dir.Normalize();
+        }
 
         //dash
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDash)
         {
             isDash = true;
-            Vector3 dashPower = transform.forward * dash * -Mathf.Log(1 / 10f);
-            rb.AddForce(dashPower, ForceMode.VelocityChange);
-            isDash = false;
+            speed *= 2;
+
+            StartCoroutine("OffTheDash");
         }
     }
 
@@ -52,5 +56,12 @@ public class PlayerMovement2 : MonoBehaviour
 
         //move
         rb.MovePosition(gameObject.transform.position + dir * speed * Time.deltaTime);
+    }
+    
+    IEnumerator OffTheDash()
+    {
+        yield return new WaitForSeconds(0.4f);
+        speed /= 2;
+        isDash = false;
     }
 }
