@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 3273174883848616044}
   - component: {fileID: 1796764527868470139}
   - component: {fileID: 5513023633281250733}
-  - component: {fileID: 6311551716692937567}
+  - component: {fileID: -1124297203775227162}
   m_Layer: 0
-  m_Name: Si_Mini_Gear
-  m_TagString: MiniGear
+  m_Name: Si_Bomb
+  m_TagString: Bomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4145334396530772629}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.02, y: 5.04, z: 13.65}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -93,12 +93,12 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4145334396530772629}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.1175914, y: 3.3963788, z: 1}
-  m_Center: {x: 0.26772332, y: -1.1981894, z: 0}
---- !u!114 &6311551716692937567
+  m_Size: {x: 0.9999998, y: 0.9316963, z: 0.9999998}
+  m_Center: {x: 0, y: 0.022709053, z: 0}
+--- !u!114 &-1124297203775227162
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,4 +110,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38fa24f199465294aa4222118832b4b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 0

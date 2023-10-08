@@ -238,8 +238,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31940a025752f274886d94dd3f1bceb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Gear: {fileID: 4145334396530772629, guid: b85513193037e904e9c23f422d538d91, type: 3}
-  miniGear: {fileID: 0}
+  gear: {fileID: 4145334396530772629, guid: b85513193037e904e9c23f422d538d91, type: 3}
+  miniGear: {fileID: 4145334396530772629, guid: 34a803e666ee85846891e5952c4b05f8, type: 3}
+  bomb: {fileID: 4145334396530772629, guid: c2f0b1d8f215d7c4887b95060dea2757, type: 3}
   player: {fileID: 2023431634}
   speed: 5
   lerpSpeed: 5
