@@ -7,8 +7,9 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Si_BossMovement : MonoBehaviour
 {
-    public GameObject Gear;
+    public GameObject gear;
     public GameObject miniGear;
+    public GameObject bomb;
 
     public GameObject player;
     public float speed;
@@ -24,6 +25,7 @@ public class Si_BossMovement : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         BossAttackType1();
+        BossAttackType2();
     }
 
     void Update()
@@ -81,10 +83,49 @@ public class Si_BossMovement : MonoBehaviour
 
     void BossAttackType1()
     {
+        StartCoroutine(GearAttack());
+    }
+    IEnumerator GearAttack()
+    {
         Vector3 gearPos = transform.localPosition;
         gearPos.x += 3;
         gearPos.y += 3;
-        Instantiate(Gear, gearPos, Gear.transform.rotation);
-        Instantiate(miniGear, gearPos, miniGear.transform.rotation);
+        Instantiate(gear, gearPos, gear.transform.rotation);
+        yield return new WaitForSeconds(3);
+
+        for (int i = 1; i < 9; i++)
+        {
+            gear.transform.Rotate(Vector3.up, 45);
+            Quaternion gearRot = gear.transform.rotation;
+            Instantiate(miniGear, gearPos, gearRot);
+        }
+    }
+
+    void BossAttackType2()
+    {
+        StartCoroutine(BombTimer());
+    }
+
+    IEnumerator BombTimer()
+    {
+        GameObject Bomb = Instantiate(bomb);
+        Bomb.transform.parent = player.transform;
+        Bomb.transform.position = new Vector3(0, 3, 0);
+        Renderer renderer = Bomb.GetComponent<Renderer>();
+        Color targetColora = Color.blue;
+        Color targetColorb = Color.magenta;
+        Color targetColorc = Color.red;
+
+        renderer.material.color = targetColora;
+
+        yield return new WaitForSeconds(1);
+        renderer.material.color = targetColorb;
+
+        yield return new WaitForSeconds(1);
+        renderer.material.color = targetColorc;
+
+        yield return new WaitForSeconds(1);
+        Destroy(Bomb);
+        yield break;
     }
 }
