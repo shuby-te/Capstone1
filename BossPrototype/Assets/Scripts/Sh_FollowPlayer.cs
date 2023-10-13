@@ -8,13 +8,14 @@ public class Sh_FollowPlayer : MonoBehaviour
     
     private Vector3 followPos;
     public int followDelay;
+    public Transform partnerNav;
     public Transform player;
     public Queue<Vector3> playerPos;  
 
     void Start()
     {
         playerPos = new Queue<Vector3>();
-        followPos = player.position + relativeDis;
+        followPos = partnerNav.position + relativeDis;
     }
 
     void Update()
@@ -25,11 +26,14 @@ public class Sh_FollowPlayer : MonoBehaviour
 
     void Watch()
     {
-        if(!playerPos.Contains(player.position))
-            playerPos.Enqueue(player.position);
+        if(!playerPos.Contains(partnerNav.position))
+            playerPos.Enqueue(partnerNav.position);
 
         if (playerPos.Count > followDelay)
             followPos = playerPos.Dequeue() + relativeDis;
+
+        transform.forward = new Vector3(player.position.x - transform.position.x, 
+            0, player.position.z - transform.position.z);
     }
 
     void Follow()

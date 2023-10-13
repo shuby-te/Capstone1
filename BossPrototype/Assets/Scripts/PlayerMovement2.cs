@@ -11,23 +11,52 @@ public class PlayerMovement2 : MonoBehaviour
     public float rotateSpeed = 7f;
 
     Rigidbody rb;
+    GameObject partner;
+
     Vector3 dir = Vector3.zero;
     bool isDash;
+    float xAxis = 1f, zAxis = -1f;
+    float partnerSpeed = 4f;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        partner = this.transform.GetChild(1).gameObject;
     }
 
     void Update()
     {
-        //ket input
-        if(!isDash)
+        //key input
+        if (!isDash)
         {
             dir.x = Input.GetAxisRaw("Horizontal");
             dir.z = Input.GetAxisRaw("Vertical");
 
             dir.Normalize();
+        }
+
+        //partner.transform.Translate(dir.x * 1.6f, partner.transform.position.y, dir.z * 1.6f);
+
+        if (Input.GetKey(KeyCode.W))
+        {
+            zAxis += Time.deltaTime * partnerSpeed;
+            if (zAxis > 1f) zAxis = 1f;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            zAxis -= Time.deltaTime * partnerSpeed;
+            if (zAxis < -1f) zAxis = -1f;
+        }
+
+        if (Input.GetKey(KeyCode.D))
+        {
+            xAxis += Time.deltaTime * partnerSpeed;
+            if (xAxis > 1f) xAxis = 1f;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            xAxis -= Time.deltaTime * partnerSpeed;
+            if (xAxis < -1f) xAxis = -1f;
         }
 
         //dash
@@ -56,6 +85,10 @@ public class PlayerMovement2 : MonoBehaviour
 
         //move
         rb.MovePosition(gameObject.transform.position + dir * speed * Time.deltaTime);
+
+        //partner move
+        partner.transform.position = new Vector3(transform.position.x - xAxis * 1.6f,
+            transform.position.y + 2.5f, transform.position.z - zAxis * 1.6f);
     }
     
     IEnumerator OffTheDash()
