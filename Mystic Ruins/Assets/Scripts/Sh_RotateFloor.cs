@@ -5,51 +5,66 @@ using UnityEngine;
 public class Sh_RotateFloor : MonoBehaviour
 {
     public GameObject hourFloor;
+    public GameObject minuteFloor;
+
+    private GameObject player;
     [SerializeField] bool isActivate;
+    [SerializeField] bool isCol;
 
-    private void OnCollisionStay(Collision collision)
+    private void Update()
     {
-        Debug.Log("colli");
-
-        if (collision.gameObject.CompareTag("Player"))
-        { 
-            Debug.Log("taggi");
+        if(isCol)
+        {
             if (Input.GetKeyDown(KeyCode.U) && !isActivate)
             {
-                if (collision.gameObject.transform.parent == null)
-                    collision.gameObject.transform.SetParent(transform, true);
+                if (player != null && player.transform.parent == null)
+                    player.transform.SetParent(transform, true);
 
                 isActivate = true;
-                StartCoroutine(moveFloor(this.gameObject, 1));
-                StartCoroutine(moveFloor(hourFloor, 1));            
+                StartCoroutine(moveFloor(minuteFloor, 1));
+                StartCoroutine(moveFloor(hourFloor, 1));
             }
 
-            else if(Input.GetKeyDown(KeyCode.I) && !isActivate) 
+            else if (Input.GetKeyDown(KeyCode.I) && !isActivate)
             {
-                if (collision.gameObject.transform.parent == null)
-                    collision.gameObject.transform.SetParent(transform, true);
+                if (player != null && player.transform.parent == null)
+                    player.transform.SetParent(transform, true);
 
                 isActivate = true;
-                StartCoroutine(moveFloor(this.gameObject, 2));
+                StartCoroutine(moveFloor(minuteFloor, 2));
                 StartCoroutine(moveFloor(hourFloor, 1));
             }
 
             else if (Input.GetKeyDown(KeyCode.O) && !isActivate)
             {
-                if (collision.gameObject.transform.parent == null)
-                {
-                    Debug.Log("parri");
-                    collision.gameObject.transform.SetParent(transform, true);
-                }
+                if (player != null && player.transform.parent == null)
+                    player.transform.SetParent(transform, true);
 
                 isActivate = true;
-                StartCoroutine(moveFloor(this.gameObject, 3));
+                StartCoroutine(moveFloor(minuteFloor, 3));
                 StartCoroutine(moveFloor(hourFloor, 1));
-            }     
+            }
         }
-        else if(collision.gameObject.CompareTag("Player"))
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        Debug.Log("colli");
+
+        if (other.gameObject.CompareTag("Player"))
         {
-            collision.gameObject.transform.SetParent(null, true);
+            player = other.gameObject;
+            Debug.Log("taggi");
+            isCol = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            other.gameObject.transform.SetParent(null, true);
+            isCol = false;
         }
     }
 
@@ -66,7 +81,7 @@ public class Sh_RotateFloor : MonoBehaviour
         }
 
         Debug.Log(num);
-        if (gameObj == this.gameObject)
+        if (gameObj == minuteFloor)
             isActivate = false;
     }
 }
