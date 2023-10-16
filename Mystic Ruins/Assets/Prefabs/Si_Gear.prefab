@@ -11,8 +11,7 @@ GameObject:
   - component: {fileID: 440282144864350040}
   - component: {fileID: 3273174883848616044}
   - component: {fileID: 1796764527868470139}
-  - component: {fileID: 5513023633281250733}
-  - component: {fileID: -1124297203775227162}
+  - component: {fileID: 4701079704917999635}
   m_Layer: 0
   m_Name: Si_Gear
   m_TagString: BigGear
@@ -27,8 +26,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4145334396530772629}
-  m_LocalRotation: {x: -0, y: -0.86602545, z: -0, w: 0.50000006}
-  m_LocalPosition: {x: 0.02, y: 5.04, z: 13.65}
+  m_LocalRotation: {x: -0.70710975, y: -0.000013306737, z: -0.000005590828, w: 0.7071039}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -42,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4145334396530772629}
-  m_Mesh: {fileID: 5828714007021999026, guid: 2efb5044754b5614e8407753378ede8e, type: 3}
+  m_Mesh: {fileID: 5760465168522449586, guid: d2a23396431946849967a0828ea6e2b0, type: 3}
 --- !u!23 &1796764527868470139
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -63,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -85,20 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5513023633281250733
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4145334396530772629}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.9999998, y: 0.9316963, z: 0.9999998}
-  m_Center: {x: 0, y: 0.022709053, z: 0}
---- !u!114 &-1124297203775227162
+--- !u!114 &4701079704917999635
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,3 +97,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 0
+  isActive: 0

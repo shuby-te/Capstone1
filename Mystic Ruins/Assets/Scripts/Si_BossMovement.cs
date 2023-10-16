@@ -12,7 +12,7 @@ public class Si_BossMovement : MonoBehaviour
     public GameObject gear;
     public GameObject miniGear;
     public GameObject bomb;
-
+    public GameObject bombSpawn;
     public GameObject player;
     public float speed;
     public float lerpSpeed;
@@ -29,8 +29,8 @@ public class Si_BossMovement : MonoBehaviour
 
     void Start()
     {
+        Physics.gravity = Physics.gravity * 0;
         anim = GetComponent<Animator>();
-        anim.speed += 1.3f;
     }
 
     void Update()
@@ -45,7 +45,6 @@ public class Si_BossMovement : MonoBehaviour
         if (!isAttack && isActive)
         {
             isAttack = true;
-            StartCoroutine(Attack());
         }
         if ((isActive && !isAttack) || move)
         {
@@ -58,32 +57,7 @@ public class Si_BossMovement : MonoBehaviour
             TurnHead();
         }
     }
-    IEnumerator Attack()
-    {
-        attackType = UnityEngine.Random.Range(1, 5);
-        if (lastAttackType == attackType)
-        {
-            isAttack = false;
-            yield break;
-        }
-        lastAttackType = attackType;
-        switch (attackType)
-        {
-            case 1:
-                move = true;
-                break;
-            case 2:
-                yield return StartCoroutine(AttackType2());
-                StartCoroutine(deley());
-                isAttack = false;
-                break;
-            case 3:
-                if (boomActive) { break; }
-                yield return StartCoroutine(AttackType3());
-                break;
-        }
-        yield break;
-    }
+
     IEnumerator deley()
     {
         anim.SetBool("isWalk", false);
@@ -104,52 +78,17 @@ public class Si_BossMovement : MonoBehaviour
         yield break;
     }
 
-    IEnumerator AttackType2()
-    {
-        anim.SetInteger("isAttack", 3);
-        Vector3 gearPos = transform.localPosition;
-        gearPos.x += 3;
-        gearPos.y += 3;
-        Instantiate(gear, gearPos, gear.transform.rotation);
-        yield return new WaitForSeconds(3);
-        anim.SetInteger("isAttack", 0);
-        for (int i = 1; i < 9; i++)
-        {
-            gear.transform.Rotate(Vector3.up, 45);
-            Quaternion gearRot = gear.transform.rotation;
-            Instantiate(miniGear, gearPos, gearRot);
-        }
-        yield break;
-    }
 
     IEnumerator AttackType3()
     {
         anim.SetInteger("isAttack", 3);
 
-        GameObject Bomb = Instantiate(bomb);
+        GameObject Bomb = Instantiate(bomb, bombSpawn.transform);
         boomActive = true;
-        Bomb.transform.parent = player.transform;
-        Bomb.transform.localPosition = new Vector3(0, 3, 0);
-        Renderer renderer = Bomb.GetComponent<Renderer>();
-        Color targetColora = Color.blue;
-        Color targetColorb = Color.magenta;
-        Color targetColorc = Color.red;
-
-        renderer.material.color = targetColora;
-
+        Bomb.transform.parent = bombSpawn.transform;
         yield return new WaitForSeconds(1);
         isAttack = false;
         anim.SetInteger("isAttack", 0);
-
-        renderer.material.color = targetColorb;
-
-        yield return new WaitForSeconds(1);
-        renderer.material.color = targetColorc;
-
-        yield return new WaitForSeconds(1);
-        Destroy(Bomb);
-        boomActive = false;
-
         yield break;
     }
 
