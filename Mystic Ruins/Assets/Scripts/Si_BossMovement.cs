@@ -29,7 +29,7 @@ public class Si_BossMovement : MonoBehaviour
 
     void Start()
     {
-        Physics.gravity = Physics.gravity * 0;
+        Physics.gravity = Physics.gravity * 10;
         anim = GetComponent<Animator>();
     }
 
