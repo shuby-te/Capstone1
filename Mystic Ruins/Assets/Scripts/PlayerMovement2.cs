@@ -35,26 +35,19 @@ public class PlayerMovement2 : MonoBehaviour
             dir.Normalize();
         }
 
-        //partner.transform.Translate(dir.x * 1.6f, partner.transform.position.y, dir.z * 1.6f);
-
-        if (Input.GetKey(KeyCode.W))
-        {
+        if (Input.GetKey(KeyCode.W)){
             zAxis += Time.deltaTime * partnerSpeed;
             if (zAxis > 1f) zAxis = 1f;
         }
-        if (Input.GetKey(KeyCode.S))
-        {
+        if (Input.GetKey(KeyCode.S)){
             zAxis -= Time.deltaTime * partnerSpeed;
             if (zAxis < -1f) zAxis = -1f;
         }
-
-        if (Input.GetKey(KeyCode.D))
-        {
+        if (Input.GetKey(KeyCode.D)){
             xAxis += Time.deltaTime * partnerSpeed;
             if (xAxis > 1f) xAxis = 1f;
         }
-        if (Input.GetKey(KeyCode.A))
-        {
+        if (Input.GetKey(KeyCode.A)){
             xAxis -= Time.deltaTime * partnerSpeed;
             if (xAxis < -1f) xAxis = -1f;
         }
