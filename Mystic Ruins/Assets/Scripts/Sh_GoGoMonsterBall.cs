@@ -13,18 +13,16 @@ public class Sh_GoGoMonsterBall : MonoBehaviour
     public GameObject hydropump;
 
     bool isSkill = false;
+    bool isPump = false;
     Vector3 movedBlinkPos;
-    Vector3 stoppedBlinkPos;
-
-    void Start()
-    {
-        
-    }
+    Vector3 stoppedBlinkPos; //어디 쓸려고 만들었지?
 
     void Update()
     {
         if(!isSkill)
             movedBlinkPos = player.position + (player.forward * blinkLen);
+
+        
 
         if (Input.GetKeyDown(KeyCode.Alpha1)) 
         {            
@@ -33,45 +31,78 @@ public class Sh_GoGoMonsterBall : MonoBehaviour
                 isSkill = true;
                 partner.GetComponent<Sh_FollowPlayer>().isEnable = false;
                 
-                StartCoroutine("Blink");
+                StartCoroutine(Blink(1));
+            }
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            if (!isSkill)
+            {
+                isSkill = true;
+                partner.GetComponent<Sh_FollowPlayer>().isEnable = false;
+
+                StartCoroutine(Blink(2));
             }
         }
     }
 
-    IEnumerator Blink()
+    IEnumerator Blink(int num)
     {
         blink.transform.position = partner.position;
         blink.Play();
         partner.gameObject.SetActive(false);
         partner.position = movedBlinkPos;
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
        
         partner.rotation = player.rotation;
-        fireBreath.transform.rotation = player.rotation;
         partner.gameObject.SetActive(true);
         yield return null;
-        fireBreath.transform.position = movedBlinkPos;
+
         blink.transform.position = movedBlinkPos;
         blink.Play();
 
-        StartCoroutine("FireBreath");
+        switch(num)
+        {
+            case 1:
+                fireBreath.transform.rotation = player.rotation;
+                fireBreath.transform.position = movedBlinkPos;
+                StartCoroutine("FireBreath");                
+                break;
+            case 2:
+                
+                StartCoroutine("Hydropump");
+                break;
+            case 3:
+                
+                break;
+        }
+        
         yield break;
     }
 
     IEnumerator FireBreath()
     {
-        partner.GetComponent<Sh_FollowPlayer>().resetQue();
+        
         yield return new WaitForSeconds(0.4f);
         
         fireBreath.Play();
         yield return new WaitForSeconds(2f);    //실제 동작 시간은 1.7f
 
-        //partner.gameObject.SetActive(false);        
+        blink.Play();
+        partner.gameObject.SetActive(false);       
         partner.GetComponent<Sh_FollowPlayer>().isEnable = true;    
-        isSkill = false;    //거지같은 처음 위치 훑고가기 문제 해결 필요
-        //partner.position = new Vector3(player.position.x + 1.6f, player.position.y + 2.5f, player.position.z - 1.6f);
-        yield return new WaitForSeconds(0.1f);
+        isSkill = false;
+        yield return new WaitForSeconds(0.5f);
 
-        //partner.gameObject.SetActive(true);
+        partner.GetComponent<Sh_FollowPlayer>().resetPos();
+        partner.gameObject.SetActive(true);
+        yield return null;
+        blink.transform.position = partner.position;
+        blink.Play();
+    }
+
+    IEnumerator Hydropump()
+    {
+        yield return new WaitForSeconds(0.4f);
     }
 }

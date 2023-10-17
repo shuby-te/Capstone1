@@ -12,7 +12,7 @@ public class Sh_FollowPlayer : MonoBehaviour
     public int followDelay;
     public bool isEnable;
 
-    private Vector3 followPos;
+    public Vector3 followPos;
 
     void Start()
     {
@@ -23,7 +23,7 @@ public class Sh_FollowPlayer : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(playerPos.Count);
+        //Debug.Log(playerPos.Count);
         if (isEnable)
         {
             Watch();
@@ -48,10 +48,9 @@ public class Sh_FollowPlayer : MonoBehaviour
         transform.position = followPos;
     }
 
-    public void resetQue()
+    public void resetPos()
     {
         playerPos.Clear();
-        Debug.Log("큐 내용물: " + playerPos.Count);
-        Debug.Log("큐는 내가 정리했으니 걱정 말라고");
+        followPos = partnerNav.position + relativeDis;
     }
 }
