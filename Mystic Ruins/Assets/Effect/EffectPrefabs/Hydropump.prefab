@@ -9749,7 +9749,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8371477933317259820}
-  - component: {fileID: 8371477933317259987}
   m_Layer: 0
   m_Name: Hydropump
   m_TagString: Untagged
@@ -9775,24 +9774,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8371477933317259987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8371477933317259823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d56cbe96b0900f4ba8ab50bf33deb89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Maxtime: 1
-  waitTime: 0.1
-  objA:
-  - {fileID: 7638754630940249926}
-  - {fileID: 7638754630580214072}
-  ReperenceName: _MainTime
 --- !u!1 &8371477934374134239
 GameObject:
   m_ObjectHideFlags: 0

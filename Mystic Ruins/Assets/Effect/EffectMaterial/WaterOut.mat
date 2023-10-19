@@ -128,6 +128,7 @@ Material:
     - _MainColor: {r: 0, g: 0.41568628, b: 0.7490196, a: 0}
     - _MainMax: {r: 0, g: 1, b: 0, a: 0}
     - _MainTextureSp: {r: -1.5, g: 0, b: 0, a: 0}
+    - _MainTextureSpeed: {r: -1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7444385976773498193
 MonoBehaviour:
