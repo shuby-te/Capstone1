@@ -942,7 +942,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector2MaterialSlot",
     "m_ObjectId": "24b30f781b5b4bddbc9326cfa5cdc80b",
     "m_Id": 0,
-    "m_DisplayName": "MainTextureSp",
+    "m_DisplayName": "MainTextureSpeed",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
@@ -2980,13 +2980,13 @@
     "m_Name": "",
     "m_ChildObjectList": [
         {
-            "m_Id": "d9310cc0a8c7493f9b3088c0370cf6f5"
-        },
-        {
             "m_Id": "976fd6e3b76345bcba5fe15b19dd1d27"
         },
         {
             "m_Id": "3c0f5a92cc8541d1bc0742841f2c54f4"
+        },
+        {
+            "m_Id": "d9310cc0a8c7493f9b3088c0370cf6f5"
         },
         {
             "m_Id": "13770a3b625f4af0994d8e62830442eb"
@@ -3052,10 +3052,10 @@
     "m_Guid": {
         "m_GuidSerialized": "1ff71ecc-a676-4a6f-b8bd-6dd2b221752d"
     },
-    "m_Name": "MainTextureSp",
+    "m_Name": "MainTextureSpeed",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "MainTextureSp",
-    "m_DefaultReferenceName": "_MainTextureSp",
+    "m_RefNameGeneratedByDisplayName": "MainTextureSpeed",
+    "m_DefaultReferenceName": "_MainTextureSpeed",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
     "m_UseCustomSlotLabel": false,
