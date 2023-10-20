@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Water 1
+  m_Name: WaterOut
   m_Shader: {fileID: -6465566751694194690, guid: f268c961cbfcd3c49aff2453afc9dda4,
     type: 3}
   m_ValidKeywords:
@@ -104,6 +104,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Main0to1: 1
+    - _MainTime: 1
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
@@ -123,8 +125,10 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _MainColor: {r: 0, g: 0.5511078, b: 1, a: 0}
+    - _MainColor: {r: 0, g: 0.41568628, b: 0.7490196, a: 0}
+    - _MainMax: {r: 0, g: 1, b: 0, a: 0}
     - _MainTextureSp: {r: -1.5, g: 0, b: 0, a: 0}
+    - _MainTextureSpeed: {r: -1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7444385976773498193
 MonoBehaviour:
