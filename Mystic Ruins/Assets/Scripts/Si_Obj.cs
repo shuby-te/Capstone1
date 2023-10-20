@@ -20,7 +20,7 @@ public class Si_Obj : MonoBehaviour
     {
             if (gameObject.CompareTag("BigGear"))
             {
-                Destroy(gameObject, 3f);
+                Destroy(gameObject, 3.5f);
             }
             if (gameObject.CompareTag("MiniGear"))
             {

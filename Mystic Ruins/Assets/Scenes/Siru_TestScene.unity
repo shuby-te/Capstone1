@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 84780319}
   m_Layer: 0
-  m_Name: SpawnGear
+  m_Name: SpawnRotate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -970,7 +970,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1144598552}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -182.25, y: 0, z: 190}
+  m_LocalPosition: {x: -144, y: 0, z: 144.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6117,16 +6117,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d2ae82d64e95b9438fd9b2106880e82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dropGearSpawnPoint: {fileID: 1058357110}
-  dropGearSpawnRotate: {fileID: 84780318}
+  GearSpawnPoint: {fileID: 1058357110}
+  GearSpawnRotate: {fileID: 84780318}
   spreadGearSpawnPoint: {fileID: 1058357110}
-  bombSpawnPoint: {fileID: 0}
+  bombSpawnPoint: {fileID: 759909343}
   dropGear: {fileID: 4145334396530772629, guid: db5adb7be786096438150b9a4da5fca6,
     type: 3}
   bigGear: {fileID: 4145334396530772629, guid: b85513193037e904e9c23f422d538d91, type: 3}
   miniGear: {fileID: 4145334396530772629, guid: 34a803e666ee85846891e5952c4b05f8,
     type: 3}
-  bomb: {fileID: 0}
+  bomb: {fileID: 4145334396530772629, guid: c2f0b1d8f215d7c4887b95060dea2757, type: 3}
 --- !u!4 &1454147522
 Transform:
   m_ObjectHideFlags: 0
@@ -15462,7 +15462,8 @@ MonoBehaviour:
   player: {fileID: 1144598552}
   speed: 5
   lerpSpeed: 2
-  isNotice: 0
+  spawnManager: {fileID: 1454147520}
+  isBreak: 0
   isAttack: 0
   isActive: 0
   boomActive: 0

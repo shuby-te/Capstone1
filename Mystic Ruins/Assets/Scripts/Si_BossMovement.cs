@@ -14,21 +14,24 @@ public class Si_BossMovement : MonoBehaviour
     public GameObject bomb;
     public GameObject bombSpawn;
     public GameObject player;
+    public GameObject spawnManager;
+
     public float speed;
     public float lerpSpeed;
-
-    Animator anim;
-    public bool isNotice = false;
-    public bool isAttack = false;
-    public bool isActive = false;
-    public bool boomActive = false;
-    public bool move = false;
+    public bool isBreak = false; //딜레이 체크
+    public bool isAttack = false; //공격패턴 진행중인지 체크
+    public bool isActive = false; //보스가 행동중인지 체큰
+    public bool boomActive = false; //폭탄이 작동중인지 체크
+    public bool move = false; //
     public int attackType;
+    public int lastAttackType = 0;
 
-    public int lastAttackType;
+    Si_SpawnManeger SpawnManager;
+    Animator anim;
 
     void Start()
     {
+        SpawnManager = spawnManager.GetComponent<Si_SpawnManeger>();
         Physics.gravity = Physics.gravity * 10;
         anim = GetComponent<Animator>();
     }
@@ -39,13 +42,9 @@ public class Si_BossMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && dir < 4)
         {
             anim.SetBool("isActive", true);
-            StartCoroutine(deley());
-            isActive = true;
+            StartCoroutine(deley(5));
         }
-        if (!isAttack && isActive)
-        {
-            isAttack = true;
-        }
+
         if ((isActive && !isAttack) || move)
         {
             if (move && dir < 4)
@@ -56,16 +55,59 @@ public class Si_BossMovement : MonoBehaviour
             anim.SetBool("isWalk", true);
             TurnHead();
         }
+        if(!isAttack&&isActive)
+        {
+            StartCoroutine(Attack());
+        }
     }
-
-    IEnumerator deley()
+    
+    IEnumerator Attack() // 공격 패턴 무작위 선택
     {
+        if (!isAttack && isActive)
+        {
+            attackType = UnityEngine.Random.Range(1, 5);
+            if (attackType != lastAttackType)
+            {
+                isAttack = true;
+                switch (attackType)
+                {
+                    case 1:
+                        yield return StartCoroutine(AttackType1());
+                        break;
+                    case 2:
+                        yield return StartCoroutine(AttackType2());
+                        break;
+                    case 3:
+                        if (!boomActive)
+                            yield return StartCoroutine(AttackType3());
+                        else isAttack = false;
+                        break;
+                    case 4:
+                        yield return StartCoroutine(AttackType4());
+                        break;
+                }
+                lastAttackType = attackType;
+            }
+            else
+                isAttack = false;
+        }
+    }
+    IEnumerator deley(int i) //패턴 이후 텀
+    {
+        if(!isActive)
+        {
+            yield return new WaitForSeconds(i);
+            isActive = true;
+            yield break;
+        }
         anim.SetBool("isWalk", false);
-        yield return new WaitForSeconds(3);
+        isBreak = true;
+        yield return new WaitForSeconds(i);
+        isBreak = false;
         yield break;
     }
 
-    IEnumerator AttackType1()
+    IEnumerator AttackType1() //앞에떄림
     {
         anim.SetInteger("isAttack", 1);
         yield return new WaitForSeconds(1.3f);
@@ -74,31 +116,42 @@ public class Si_BossMovement : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
         isAttack = false;
-        StartCoroutine(deley());
+        yield break;
+    }
+
+    IEnumerator AttackType2()//기어 소환 후 8방향
+    {
+        anim.SetInteger("isAttack", 2);
+        yield return new WaitForSeconds(1);
+        SpawnManager.attack2();
+        yield return new WaitForSeconds(3);
+        anim.SetInteger("isAttack", 0);
+        yield return StartCoroutine(deley(1));
+        isAttack = false;
         yield break;
     }
 
 
-    IEnumerator AttackType3()
+    IEnumerator AttackType3()//폭탄 붙이기
     {
         anim.SetInteger("isAttack", 3);
-
-        GameObject Bomb = Instantiate(bomb, bombSpawn.transform);
-        boomActive = true;
-        Bomb.transform.parent = bombSpawn.transform;
         yield return new WaitForSeconds(1);
-        isAttack = false;
+        boomActive = true;
+        SpawnManager.attack3();
         anim.SetInteger("isAttack", 0);
+        yield return new WaitForSeconds(1);
+        yield return StartCoroutine(AttackType1());
+        boomActive = false;
         yield break;
     }
 
-    IEnumerator AttackType4()
+    IEnumerator AttackType4()//기어소환 후 떨어뜨림
     {
         anim.SetInteger("isAttack", 4);
-        Vector3 gearPos = transform.position;
-        gearPos.y += 10;
-        Instantiate(gear, gearPos, gear.transform.rotation);
-
+        SpawnManager.attack4();
+        yield return new WaitForSeconds(4f);
+        anim.SetInteger("isAttack", 0);
+        isAttack = false;
         yield break;
     }
 
