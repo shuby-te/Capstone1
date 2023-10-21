@@ -15,6 +15,7 @@ public class PlayerMovement2 : MonoBehaviour
 
     Vector3 dir = Vector3.zero;
     bool isDash;
+    bool isMove;
     float xAxis = 1f, zAxis = -1f;
     float partnerSpeed = 4f;
 
@@ -34,6 +35,9 @@ public class PlayerMovement2 : MonoBehaviour
 
             dir.Normalize();
         }
+
+        if(Input.anyKey) isMove = true;
+        else isMove = false;
 
         if (Input.GetKey(KeyCode.W)){
             zAxis += Time.deltaTime * partnerSpeed;
@@ -69,7 +73,8 @@ public class PlayerMovement2 : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
         {
-            Vector3 point = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+            //Vector3 point = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+            Vector3 point = hit.point;
 
             Vector3 rotateDir = point - transform.position;
             if (rotateDir != Vector3.zero)
@@ -77,7 +82,8 @@ public class PlayerMovement2 : MonoBehaviour
         }
 
         //move
-        rb.MovePosition(gameObject.transform.position + dir * speed * Time.deltaTime);
+        if(isMove)
+            rb.MovePosition(gameObject.transform.position + dir * speed * Time.deltaTime);
 
         //partner move
         partner.transform.position = new Vector3(transform.position.x - xAxis * 1.6f,
