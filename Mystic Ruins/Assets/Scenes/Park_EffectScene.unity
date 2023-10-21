@@ -541,6 +541,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Firebreath (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5684218958017339733, guid: 261679dbdeaa2ea46ba12865ee42ae22,
+        type: 3}
+      propertyPath: m_SortingFudge
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 261679dbdeaa2ea46ba12865ee42ae22, type: 3}
 --- !u!198 &357449945 stripped
@@ -1099,7 +1104,7 @@ ParticleSystemRenderer:
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
-  m_SortingFudge: 0
+  m_SortingFudge: 1
   m_NormalDirection: 1
   m_ShadowBias: 0
   m_RenderAlignment: 0
