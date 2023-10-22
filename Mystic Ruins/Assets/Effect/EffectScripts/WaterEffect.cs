@@ -11,8 +11,6 @@ public class WaterEffect : MonoBehaviour
     public string ReperenceName;
     private Renderer[] RenA;
     
-
-    // Start is called before the first frame update
     void Start()
     {
         RenA = new Renderer[objA.Length]; //배열길이 초기화
@@ -22,7 +20,6 @@ public class WaterEffect : MonoBehaviour
         
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
