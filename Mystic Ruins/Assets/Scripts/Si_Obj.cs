@@ -36,6 +36,11 @@ public class Si_Obj : MonoBehaviour
             {
                StartCoroutine(DropGear());
             }
+            if (gameObject.CompareTag("Rock"))
+            {
+                rb.useGravity = true;
+                Destroy(gameObject, 2f);
+            }
     }
     IEnumerator DropGear()
     {
@@ -44,10 +49,9 @@ public class Si_Obj : MonoBehaviour
             gameObject.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
             yield return new WaitForFixedUpdate();
         }
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.5f);
         rb.useGravity = true;
         Destroy(gameObject, 1);
-
         yield break;
     }
     private void OnTriggerEnter(Collider other)
