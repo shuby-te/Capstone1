@@ -73,8 +73,8 @@ public class PlayerMovement2 : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
         {
-            //Vector3 point = new Vector3(hit.point.x, transform.position.y, hit.point.z);
-            Vector3 point = hit.point;
+            Vector3 point = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+            //Vector3 point = hit.point;
 
             Vector3 rotateDir = point - transform.position;
             if (rotateDir != Vector3.zero)
