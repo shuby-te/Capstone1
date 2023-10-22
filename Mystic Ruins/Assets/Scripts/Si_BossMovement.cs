@@ -1,11 +1,5 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering.VirtualTexturing;
-using static UnityEngine.GraphicsBuffer;
 
 public class Si_BossMovement : MonoBehaviour
 {
@@ -42,7 +36,7 @@ public class Si_BossMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && dir < 4)
         {
             anim.SetBool("isActive", true);
-            StartCoroutine(deley(5));
+            StartCoroutine(deley(3));
         }
 
         if ((isActive && !isAttack) || move)
@@ -65,10 +59,11 @@ public class Si_BossMovement : MonoBehaviour
     {
         if (!isAttack && isActive)
         {
-            attackType = UnityEngine.Random.Range(1, 5);
+            attackType = UnityEngine.Random.Range(1, 6);
             if (attackType != lastAttackType)
             {
                 isAttack = true;
+                anim.SetBool("isAttack", true);
                 switch (attackType)
                 {
                     case 1:
@@ -84,6 +79,9 @@ public class Si_BossMovement : MonoBehaviour
                         break;
                     case 4:
                         yield return StartCoroutine(AttackType4());
+                        break;
+                    case 5:
+                        yield return StartCoroutine(AttackType5());
                         break;
                 }
                 lastAttackType = attackType;
@@ -103,30 +101,33 @@ public class Si_BossMovement : MonoBehaviour
         anim.SetBool("isWalk", false);
         isBreak = true;
         yield return new WaitForSeconds(i);
+        anim.SetBool("isBreak", false);
         isBreak = false;
+        anim.SetBool("isAttack", false);
         yield break;
     }
 
     IEnumerator AttackType1() //¾Õ¿¡‹š¸²
     {
-        anim.SetInteger("isAttack", 1);
+        anim.SetInteger("AttackType", 1);
         yield return new WaitForSeconds(1.3f);
-
-        anim.SetInteger("isAttack", 0);
-
-        yield return new WaitForSeconds(0.3f);
+        anim.SetInteger("AttackType", 0);
+        anim.SetBool("isBreak", true);
+        yield return new WaitForSeconds(1);
+        anim.SetBool("isBreak", false);
         isAttack = false;
         yield break;
     }
 
     IEnumerator AttackType2()//±â¾î ¼ÒÈ¯ ÈÄ 8¹æÇâ
     {
-        anim.SetInteger("isAttack", 2);
+        anim.SetInteger("AttackType", 2);
         yield return new WaitForSeconds(1);
         SpawnManager.attack2();
         yield return new WaitForSeconds(3);
-        anim.SetInteger("isAttack", 0);
-        yield return StartCoroutine(deley(1));
+        anim.SetInteger("AttackType", 0);
+        anim.SetBool("isBreak", true);
+        yield return StartCoroutine(deley(2));
         isAttack = false;
         yield break;
     }
@@ -134,27 +135,46 @@ public class Si_BossMovement : MonoBehaviour
 
     IEnumerator AttackType3()//ÆøÅº ºÙÀÌ±â
     {
-        anim.SetInteger("isAttack", 3);
+        anim.SetInteger("AttackType", 3);
         yield return new WaitForSeconds(1);
         boomActive = true;
-        SpawnManager.attack3();
-        anim.SetInteger("isAttack", 0);
+        SpawnManager.attack3(gameObject);
+        anim.SetInteger("AttackType", 0);
         yield return new WaitForSeconds(1);
+        TurnHead();
         yield return StartCoroutine(AttackType1());
-        boomActive = false;
         yield break;
     }
 
     IEnumerator AttackType4()//±â¾î¼ÒÈ¯ ÈÄ ¶³¾î¶ß¸²
     {
-        anim.SetInteger("isAttack", 4);
+        anim.SetInteger("AttackType", 4);
+        yield return new WaitForSeconds(1);
         SpawnManager.attack4();
-        yield return new WaitForSeconds(4f);
-        anim.SetInteger("isAttack", 0);
+        yield return new WaitForSeconds(0.3f);
+        anim.SetInteger("AttackType", 0);
+        anim.SetBool("isBreak", true);
+        yield return StartCoroutine(deley(2));
         isAttack = false;
         yield break;
     }
 
+    IEnumerator AttackType5()//ÀüÁø ÈÄ µ¹ ¶³¾î¶ß¸²
+    {
+        anim.SetInteger("AttackType", 5);
+        yield return new WaitForSeconds(1);
+        SpawnManager.attack5(3, 0.15f);
+        yield return new WaitForSeconds(1);
+        SpawnManager.attack5(3, 0.15f);
+        yield return new WaitForSeconds(2); 
+        SpawnManager.attack5(10, 0.15f);
+        yield return StartCoroutine(deley(2));
+        isAttack = false;
+
+
+
+        yield break;
+    }
     private void TurnHead()
     {
         Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);

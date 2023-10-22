@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tetris
+  - DropGear
+  - BigGear
+  - MiniGear
+  - Bomb
+  - Rock
   layers:
   - Default
   - TransparentFX
