@@ -16,7 +16,7 @@ public class Si_Obj : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
             if (gameObject.CompareTag("BigGear"))
             {
@@ -44,9 +44,9 @@ public class Si_Obj : MonoBehaviour
     }
     IEnumerator DropGear()
     {
-        while (gameObject.transform.localScale.y < 0.75)
+        while (gameObject.transform.localScale.y < 3)
         { 
-            gameObject.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+            gameObject.transform.localScale += new Vector3(0.03f, 0.01f, 0.01f);
             yield return new WaitForFixedUpdate();
         }
         yield return new WaitForSeconds(0.5f);
@@ -57,6 +57,6 @@ public class Si_Obj : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-            Debug.Log("¾ÆÇÄ");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½");
     }
 }

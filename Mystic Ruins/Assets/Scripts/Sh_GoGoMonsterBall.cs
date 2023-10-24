@@ -107,7 +107,7 @@ public class Sh_GoGoMonsterBall : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         
         fireBreath.Play();
-        yield return new WaitForSeconds(2f);    //½ÇÁ¦ µ¿ÀÛ ½Ã°£Àº 1.7f
+        yield return new WaitForSeconds(2f);    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ 1.7f
 
         PlayBlink();
         partner.gameObject.SetActive(false);       
@@ -130,7 +130,7 @@ public class Sh_GoGoMonsterBall : MonoBehaviour
         hydropump.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.SetFloat("_MainTime", waterLen);
         hydropump.transform.GetChild(1).gameObject.GetComponent<Renderer>().material.SetFloat("_MainTime", waterLen);
         PlayHydropump();
-        yield return new WaitForSeconds(6f);    //½ÇÁ¦ µ¿ÀÛ ½Ã°£Àº 7f (Áö¼Ó 6f + ¼Ò¸ê 1f)
+        yield return new WaitForSeconds(6f);    //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ï¿½ï¿½ 7f (ï¿½ï¿½ï¿½ï¿½ 6f + ï¿½Ò¸ï¿½ 1f)
 
         StartCoroutine("DeleteWater");
         yield return new WaitForSeconds(1.3f);
