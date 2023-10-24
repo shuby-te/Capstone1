@@ -12,6 +12,7 @@ public class PlayerMovement2 : MonoBehaviour
 
     Rigidbody rb;
     GameObject partner;
+    Animator anim;
 
     Vector3 dir = Vector3.zero;
     bool isDash;
@@ -23,6 +24,7 @@ public class PlayerMovement2 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         partner = this.transform.GetChild(1).gameObject;
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -82,7 +84,7 @@ public class PlayerMovement2 : MonoBehaviour
         }
 
         //move
-        if(isMove)
+        if(isMove && anim.GetInteger("isAttack") == 0)
             rb.MovePosition(gameObject.transform.position + dir * speed * Time.deltaTime);
 
         //partner move
