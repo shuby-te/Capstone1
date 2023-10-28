@@ -121,15 +121,19 @@ Material:
     - _Cull: 0
     - _Cutoff: 0.5
     - _DIs: 0.2
+    - _DecalMeshBiasType: 0
+    - _DecalMeshDepthBias: 0
+    - _DecalMeshViewBias: 0
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DisScaal: 30
+    - _DrawOrder: 0
     - _DstBlend: 10
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _MainTime: 13.7
+    - _MainTime: 30
     - _Metallic: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.005
