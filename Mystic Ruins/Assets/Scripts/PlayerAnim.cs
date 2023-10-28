@@ -76,7 +76,7 @@ public class PlayerAnim : MonoBehaviour
         else if (-67.5f < yAngle && yAngle <= -22.5f)
             mouseN = 8;
 
-        Debug.Log(keyN + ", " + mouseN);
+        //Debug.Log(keyN + ", " + mouseN);
 
         time += Time.deltaTime;
     }
