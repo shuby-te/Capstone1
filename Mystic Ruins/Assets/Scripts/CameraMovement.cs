@@ -10,6 +10,6 @@ public class CameraMovement : MonoBehaviour
     {
         transform.position = new Vector3(
             player.transform.position.x, player.transform.position.y + 8.5f, player.transform.position.z - 8);
-
+        transform.rotation = Quaternion.Euler(40, 0, 0);
     }
 }

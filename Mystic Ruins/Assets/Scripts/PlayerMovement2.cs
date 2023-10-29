@@ -12,6 +12,7 @@ public class PlayerMovement2 : MonoBehaviour
 
     Rigidbody rb;
     GameObject partner;
+    Animator anim;
 
     Vector3 dir = Vector3.zero;
     bool isDash;
@@ -23,6 +24,7 @@ public class PlayerMovement2 : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         partner = this.transform.GetChild(1).gameObject;
+        anim = GetComponent<Animator>();
     }
 
     void Update()
@@ -74,7 +76,6 @@ public class PlayerMovement2 : MonoBehaviour
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
         {
             Vector3 point = new Vector3(hit.point.x, transform.position.y, hit.point.z);
-            //Vector3 point = hit.point;
 
             Vector3 rotateDir = point - transform.position;
             if (rotateDir != Vector3.zero)
@@ -82,7 +83,7 @@ public class PlayerMovement2 : MonoBehaviour
         }
 
         //move
-        if(isMove)
+        if(isMove && anim.GetInteger("isAttack") == 0)
             rb.MovePosition(gameObject.transform.position + dir * speed * Time.deltaTime);
 
         //partner move
