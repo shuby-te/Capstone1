@@ -6218,8 +6218,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 3.7970123, y: 7.0371914, z: 5.588867}
-  m_Center: {x: -0.08769989, y: 3.0185957, z: 0.15112305}
+  m_Size: {x: 3.7970123, y: 7.0371914, z: 1.7516022}
+  m_Center: {x: -0.08769989, y: 3.0185957, z: -0.14748383}
 --- !u!54 &739463311
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7691,6 +7691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 0
   isActive: 0
+  isSkil: 0
   boss: {fileID: 541332691}
 --- !u!1 &924651194
 GameObject:
@@ -10261,6 +10262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 0
   isActive: 0
+  isSkil: 0
   boss: {fileID: 541332691}
 --- !u!65 &1225288748
 BoxCollider:
@@ -16031,6 +16033,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   time: 0
   isActive: 0
+  isSkil: 0
   boss: {fileID: 541332691}
 --- !u!1 &2087131850
 GameObject:

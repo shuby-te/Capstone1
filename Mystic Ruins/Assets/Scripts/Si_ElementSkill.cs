@@ -7,6 +7,8 @@ public class Si_ElementSkill : MonoBehaviour
 {
     public int time=0;
     public bool isActive = false;
+    public bool isSkil = false;
+
     public GameObject boss;
     // Start is called before the first frame update
     void Start()
@@ -17,13 +19,15 @@ public class Si_ElementSkill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Alpha1))
+        if (Input.GetKey(KeyCode.Alpha2)&&!isActive&&!isSkil)
         {
+            isSkil = true;
             StartCoroutine(on(6));
         }
-        if (time > 1000)
+        if (time > 1000&& !boss.GetComponent<Si_BossMovement>().isStun)
         {
             boss.GetComponent<Si_BossMovement>().isStun=true;
+            StartCoroutine(wake());
         }
     }
     private void OnTriggerStay(Collider other)
@@ -47,11 +51,23 @@ public class Si_ElementSkill : MonoBehaviour
         }
 
     }
-
+    IEnumerator wait(float x)
+    {
+        yield return new WaitForSeconds(x);
+    }
+    IEnumerator wake()
+    {
+        yield return new WaitForSeconds(3);
+        boss.GetComponent<Si_BossMovement>().isStun = false;
+    }
     IEnumerator on(int x)
     {
+        yield return StartCoroutine(wait(0.4f));
         isActive = true;
         yield return new WaitForSeconds(x);
         isActive = false;
+        time = 0;
+        yield return StartCoroutine(wait(1.3f));
+        isSkil = false;
     }
 }

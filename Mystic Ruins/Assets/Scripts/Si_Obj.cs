@@ -13,52 +13,56 @@ public class Si_Obj : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
+
+        if (gameObject.CompareTag("BigGear"))
+        {
+            Destroy(gameObject, 3.5f);
+        }
+ 
+        if (gameObject.CompareTag("Bomb"))
+        {
+
+            Destroy(gameObject, 3f);
+        }
+
+        if (gameObject.CompareTag("Rock"))
+        {
+            rb.useGravity = true;
+            rb.AddForce(Vector3.down * 100, ForceMode.Impulse);
+            Destroy(gameObject, 2f);
+        }
+        if (gameObject.CompareTag("Fire"))
+        {
+            rb.useGravity = true;
+            rb.AddForce(Vector3.down * 100, ForceMode.Impulse);
+            Destroy(gameObject, 2.5f);
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-            if (gameObject.CompareTag("BigGear"))
-            {
-                Destroy(gameObject, 3.5f);
-            }
-            if (gameObject.CompareTag("MiniGear"))
-            {
-                transform.position +=  transform.right * Time.deltaTime * speed;
-                Destroy(gameObject, 3f);
-            }
-            if (gameObject.CompareTag("Bomb"))
-            {
-
-                Destroy(gameObject, 3f);
-            }
-            if (gameObject.CompareTag("DropGear"))
-            {
-               StartCoroutine(DropGear());
-                if (isDrop)
-                {
-                    rb.AddForce(Vector3.down * 300);
-                    rb.useGravity = true;
-                    Destroy(gameObject, 2);
-                }
-            }
-            if (gameObject.CompareTag("Rock"))
+        if (gameObject.CompareTag("DropGear"))
+        {
+            StartCoroutine(DropGear());
+            if (isDrop)
             {
                 rb.useGravity = true;
-                rb.AddForce(Vector3.down * 120);
-                Destroy(gameObject, 2f);
+                rb.AddForce(Vector3.down * 30,ForceMode.Impulse);
+                Destroy(gameObject, 2);
+                isDrop= false;
             }
-            if(gameObject.CompareTag("Fire"))
-            {
-                rb.useGravity = true;
-                rb.AddForce(Vector3.down * 120);
-                Destroy(gameObject, 2.5f);
-                
-            }
+        }
+        if (gameObject.CompareTag("MiniGear"))
+        {
+            transform.position += transform.right * Time.deltaTime * speed;
+            Destroy(gameObject, 3f);
+        }
     }
+
     IEnumerator DropGear()
     {
-        while (gameObject.transform.localScale.y < 3)
+        while (gameObject.transform.localScale.y < 5)
         { 
             gameObject.transform.localScale += new Vector3(0.03f, 0.01f, 0.01f);
             yield return new WaitForFixedUpdate();
