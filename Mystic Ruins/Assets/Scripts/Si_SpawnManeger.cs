@@ -9,12 +9,13 @@ public class Si_SpawnManeger : MonoBehaviour
     public GameObject gearSpawnRotate;
     public GameObject spreadGearSpawnPoint;
     public GameObject bombSpawnPoint;
-    public GameObject rockSpawnPoint;
+    public GameObject bossRoomCenter;
     public GameObject dropGear;
     public GameObject bigGear;
     public GameObject miniGear;
     public GameObject bomb;
     public GameObject rock;
+    public GameObject fire;
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +44,10 @@ public class Si_SpawnManeger : MonoBehaviour
     public void attack5(int count, float r)
     {
         StartCoroutine(SpawnRock(count, r));
+    }
+    public void attack9()
+    {
+        StartCoroutine(SpawnFire());
     }
     IEnumerator SpreadGear()
     {
@@ -101,12 +106,33 @@ public class Si_SpawnManeger : MonoBehaviour
             if (x * x + z * z < r * r)
             {
                 i++;
-                GameObject Rock = Instantiate(rock, rockSpawnPoint.transform.localPosition, new Quaternion(rx, ry, rz, rw));
+                GameObject Rock = Instantiate(rock, bossRoomCenter.transform.localPosition, new Quaternion(rx, ry, rz, rw));
                 //GameObject Rock=Instantiate(rock, rockSpawnPoint.transform);
-                Rock.transform.parent = rockSpawnPoint.transform.parent;
+                Rock.transform.parent = bossRoomCenter.transform.parent;
                 Rock.transform.localPosition = new Vector3(x, 0.3f, z);
                 Rock.transform.localScale = new Vector3(0.007f, 0.007f, 0.007f);
             }   
+        }
+        yield break;
+    }
+    IEnumerator SpawnFire()
+    {
+        float x, z;
+        int i = 0;
+        while (i < 7)
+        {
+            x = Random.Range(-0.12f, 0.12f);
+            z = Random.Range(-0.12f, 0.12f);
+
+            if (x * x + z * z < 0.12 * 0.12)
+            {
+                i++;
+                GameObject fireBall=Instantiate(fire, bossRoomCenter.transform);
+                fireBall.transform.parent = bossRoomCenter.transform.parent;
+                fireBall.transform.localPosition = new Vector3(x, 0.3f, z);
+                fireBall.transform.localScale = new Vector3(0.007f, 0.007f, 0.007f);
+                yield return new WaitForSeconds(0.3f);
+            }
         }
         yield break;
     }

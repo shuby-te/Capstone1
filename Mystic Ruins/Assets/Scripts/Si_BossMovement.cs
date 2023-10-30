@@ -15,6 +15,7 @@ public class Si_BossMovement : MonoBehaviour
     public bool boomActive = false; //��ź�� �۵������� üũ
     public bool isFar = true;
     public bool move = false; //
+    public bool isStun = false;
     public int attackNum;
     public int lastAttack = 0;
     public int count;
@@ -47,7 +48,7 @@ public class Si_BossMovement : MonoBehaviour
             anim.SetBool("isWalk", true);
             StartCoroutine(TurnHead());
         }
-        if (isActive && !isAttack&&!isBreak)
+        if (isActive && !isAttack&&!isBreak &&!isStun)
         {
 
             if (isFar)
@@ -172,7 +173,7 @@ public class Si_BossMovement : MonoBehaviour
         DisCheck();
         isAttack = false;
         yield break;
-    }
+    }//끝
 
     IEnumerator Attack2()//��� ��ȯ �� 8����
     {
@@ -185,7 +186,7 @@ public class Si_BossMovement : MonoBehaviour
         yield return StartCoroutine(deley(2f));
         isAttack = false;
         yield break;
-    }
+    }//0.3 끝
 
 
     IEnumerator Attack3()//��ź ���̱�
@@ -200,7 +201,7 @@ public class Si_BossMovement : MonoBehaviour
         DisCheck();
         yield return StartCoroutine(Attack1());
         yield break;
-    }
+    }//0.7
 
     IEnumerator Attack4()//����ȯ �� ����߸�
     {
@@ -213,7 +214,7 @@ public class Si_BossMovement : MonoBehaviour
         yield return StartCoroutine(deley(2f));
         isAttack = false;
         yield break;
-    }
+    }//0.4
 
     IEnumerator Attack5()//���� �� �� ����߸�
     {
@@ -230,7 +231,7 @@ public class Si_BossMovement : MonoBehaviour
         isAttack = false;
 
         yield break;
-    }
+    }//0.2 0.45 0.8
     IEnumerator Attack6()
     {
         isAttack = false;
@@ -256,11 +257,24 @@ public class Si_BossMovement : MonoBehaviour
             if(!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern9_1"))
             {
                 break;
-                Debug.Log("good");
+            }
+            if(isStun)
+            {
+                anim.SetBool("isStun", true);
+                yield return new WaitForSeconds(3);
+                anim.SetBool("isStun", false);
+                break;
             }
             yield return new FixedUpdate();
         }
-        Debug.Log("good");
+        if(!isStun)
+            SpawnManager.attack9();
+        isStun = false;
+        anim.SetBool("isBreak", true);
+        anim.SetInteger("AttackType", 0);
+        StartCoroutine(deley(3));
+        isAttack = false;
+        count = 0;
      }
     IEnumerator TurnHead()
     {
