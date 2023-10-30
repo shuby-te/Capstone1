@@ -13,9 +13,11 @@ public class Si_BossMovement : MonoBehaviour
     public bool isAttack = false; //�������� ���������� üũ
     public bool isActive = false; //������ �ൿ������ üū
     public bool boomActive = false; //��ź�� �۵������� üũ
+    public bool isFar = true;
     public bool move = false; //
     public int attackNum;
     public int lastAttack = 0;
+    public int count;
 
     Si_SpawnManeger SpawnManager;
     Animator anim;
@@ -30,64 +32,117 @@ public class Si_BossMovement : MonoBehaviour
     void FixedUpdate()
     {
         float dir = Vector3.Distance(transform.position, player.transform.position);
-        if (Input.GetKeyDown(KeyCode.Space) && dir < 4)
+
+        DisCheck();
+        if (!isActive && Input.GetKeyDown(KeyCode.Space) && dir < 4)
         {
             anim.SetBool("isActive", true);
-            StartCoroutine(deley(3));
+            StartCoroutine(deley(3f));
         }
-
-        if ((isActive && !isAttack) || move)
-        {
-            if (move && dir < 4)
+        if (move) {
+            if(dir<7)
             {
                 move = false;
-                StartCoroutine(Attack1());
             }
             anim.SetBool("isWalk", true);
             StartCoroutine(TurnHead());
         }
-        if(!isAttack&&isActive)
+        if (isActive && !isAttack&&!isBreak)
         {
-            StartCoroutine(Attack());
+
+            if (isFar)
+            {
+
+                StartCoroutine(TurnHead());
+            }
+            else
+            {
+                Debug.Log("aaa");
+
+                StartCoroutine(Attack());               
+            }
         }
     }
-    
+    void DisCheck()
+    {
+        float dir = Vector3.Distance(transform.position, player.transform.position);
+        if (dir < 7)
+        {
+            isFar = false;
+            anim.SetBool("isFar", false);
+        }
+        else
+        {
+            isFar = true;
+            anim.SetBool("isFar", true);
+        }
+
+    }
     IEnumerator Attack() // ���� ���� ������ ����
     {
         if (!isAttack && isActive)
         {
-            attackNum = UnityEngine.Random.Range(1, 6);
-            if (attackNum != lastAttack)
+            if (count == 3)
             {
+                attackNum = UnityEngine.Random.Range(9, 9);
                 isAttack = true;
+                yield return StartCoroutine(TurnHead());
+                yield return StartCoroutine(TurnHead());
                 anim.SetBool("isAttack", true);
                 switch (attackNum)
                 {
-                    case 1:
-                        yield return StartCoroutine(Attack1());
+                    case 9:
+                        StartCoroutine(ElementAttack1());
                         break;
-                    case 2:
-                        yield return StartCoroutine(Attack2());
+                    case 10:
                         break;
-                    case 3:
-                        if (!boomActive)
-                            yield return StartCoroutine(Attack3());
-                        else isAttack = false;
-                        break;
-                    case 4:
-                        yield return StartCoroutine(Attack4());
-                        break;
-                    case 5:
-                        yield return StartCoroutine(Attack5());
+                    case 11:
                         break;
                 }
-                lastAttack = attackNum;
             }
             else
-                isAttack = false;
+            {
+                attackNum = UnityEngine.Random.Range(1, 6);
+                if (attackNum != lastAttack)
+                {
+                    isAttack = true;
+                    yield return StartCoroutine(TurnHead());
+                    anim.SetBool("isAttack", true);
+                    switch (attackNum)
+                    {
+                        case 1:
+                            yield return StartCoroutine(Attack1());
+                            break;
+                        case 2:
+                            yield return StartCoroutine(Attack2());
+                            break;
+                        case 3:
+                            if (!boomActive)
+                                yield return StartCoroutine(Attack3());
+                            else isAttack = false;
+                            break;
+                        case 4:
+                            yield return StartCoroutine(Attack4());
+                            break;
+                        case 5:
+                            yield return StartCoroutine(Attack5());
+                            break;
+                        case 6:
+                            break;
+                        case 7:
+                            break;
+                        case 8:
+                            break;
+                    }
+                    lastAttack = attackNum;
+                    count++;
+                }
+                else
+                    isAttack = false;
+            }
         }
     }
-    IEnumerator deley(int i) //���� ���� ��
+    IEnumerator deley(float i) //���� ���� ��
     {
         if(!isActive)
         {
@@ -95,9 +150,9 @@ public class Si_BossMovement : MonoBehaviour
             isActive = true;
             yield break;
         }
-        anim.SetBool("isWalk", false);
         isBreak = true;
         yield return new WaitForSeconds(i);
+        DisCheck();
         anim.SetBool("isBreak", false);
         isBreak = false;
         anim.SetBool("isAttack", false);
@@ -106,25 +161,28 @@ public class Si_BossMovement : MonoBehaviour
 
     IEnumerator Attack1() //�տ�����
     {
-        anim.SetInteger("Attack", 1);
+        move = true;
+        while (isFar) {
+            yield return new WaitForFixedUpdate();
+                }
+        anim.SetInteger("AttackType", 1);
         yield return new WaitForSeconds(1.3f);
-        anim.SetInteger("Attack", 0);
-        anim.SetBool("isBreak", true);
+        anim.SetInteger("AttackType", 0);
         yield return new WaitForSeconds(1);
-        anim.SetBool("isBreak", false);
+        DisCheck();
         isAttack = false;
         yield break;
     }
 
     IEnumerator Attack2()//��� ��ȯ �� 8����
     {
-        anim.SetInteger("Attack", 2);
+        anim.SetInteger("AttackType", 2);
         yield return new WaitForSeconds(1);
         SpawnManager.attack2();
         yield return new WaitForSeconds(3);
-        anim.SetInteger("Attack", 0);
+        anim.SetInteger("AttackType", 0);
         anim.SetBool("isBreak", true);
-        yield return StartCoroutine(deley(2));
+        yield return StartCoroutine(deley(2f));
         isAttack = false;
         yield break;
     }
@@ -132,33 +190,34 @@ public class Si_BossMovement : MonoBehaviour
 
     IEnumerator Attack3()//��ź ���̱�
     {
-        anim.SetInteger("Attack", 3);
+        anim.SetInteger("AttackType", 3);
         yield return new WaitForSeconds(1);
         boomActive = true;
         SpawnManager.attack3(gameObject);
-        anim.SetInteger("Attack", 0);
+        anim.SetInteger("AttackType", 0);
         yield return new WaitForSeconds(1);
         yield return StartCoroutine(TurnHead());
+        DisCheck();
         yield return StartCoroutine(Attack1());
         yield break;
     }
 
     IEnumerator Attack4()//����ȯ �� ����߸�
     {
-        anim.SetInteger("Attack", 4);
+        anim.SetInteger("AttackType", 4);
         yield return new WaitForSeconds(1);
         SpawnManager.attack4();
         yield return new WaitForSeconds(0.3f);
-        anim.SetInteger("Attack", 0);
+        anim.SetInteger("AttackType", 0);
         anim.SetBool("isBreak", true);
-        yield return StartCoroutine(deley(2));
+        yield return StartCoroutine(deley(2f));
         isAttack = false;
         yield break;
     }
 
     IEnumerator Attack5()//���� �� �� ����߸�
     {
-        anim.SetInteger("Attack", 5);
+        anim.SetInteger("AttackType", 5);
         yield return new WaitForSeconds(1);
         SpawnManager.attack5(3, 0.15f);
         yield return new WaitForSeconds(1);
@@ -166,24 +225,51 @@ public class Si_BossMovement : MonoBehaviour
         yield return new WaitForSeconds(2); 
         SpawnManager.attack5(10, 0.15f);
         anim.SetBool("isBreak", true);
-        yield return StartCoroutine(deley(2));
+        anim.SetInteger("AttackType", 0);
+        yield return StartCoroutine(deley(1.5f));
         isAttack = false;
+
+        yield break;
+    }
+    IEnumerator Attack6()
+    {
+        isAttack = false;
+        yield break;
+    }
+    IEnumerator Attack7()
+    {
+        isAttack = false;
+        yield break;
+    }
+    IEnumerator Attack8()
+    {
 
         yield break;
     }
     IEnumerator ElementAttack1()
     {
-
+        anim.SetInteger("AttackType", 9);
         yield return new WaitForSeconds(1);
-    }
+
+        while (true)
+        {
+            if(!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern9_1"))
+            {
+                break;
+                Debug.Log("good");
+            }
+            yield return new FixedUpdate();
+        }
+        Debug.Log("good");
+     }
     IEnumerator TurnHead()
     {
         Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
         
-        for (float i = 0; i < 100; i ++)
+        for (float i = 0; i < 20; i ++)
         {
             Vector3 t_dir = (playerPos - transform.position).normalized;
-            transform.forward = Vector3.Lerp(transform.forward, t_dir, 0.03f);
+            transform.forward = Vector3.Lerp(transform.forward, t_dir, 0.1f);
             yield return new FixedUpdate();
         }
     }

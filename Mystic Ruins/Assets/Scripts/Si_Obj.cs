@@ -8,6 +8,7 @@ public class Si_Obj : MonoBehaviour
     Rigidbody rb;
     public int speed;
     public bool isActive = false;
+    public bool isDrop = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,10 +36,17 @@ public class Si_Obj : MonoBehaviour
             if (gameObject.CompareTag("DropGear"))
             {
                StartCoroutine(DropGear());
+                if (isDrop)
+                {
+                    rb.AddForce(Vector3.down * 300);
+                    rb.useGravity = true;
+                    Destroy(gameObject, 2);
+                }
             }
             if (gameObject.CompareTag("Rock"))
             {
                 rb.useGravity = true;
+                rb.AddForce(Vector3.down * 120);
                 Destroy(gameObject, 2f);
             }
     }
@@ -50,9 +58,7 @@ public class Si_Obj : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         yield return new WaitForSeconds(0.5f);
-        rb.useGravity = true;
-        Destroy(gameObject, 1);
-        yield break;
+
     }
     private void OnTriggerEnter(Collider other)
     {
