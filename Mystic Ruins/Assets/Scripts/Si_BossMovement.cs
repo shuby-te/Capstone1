@@ -53,13 +53,10 @@ public class Si_BossMovement : MonoBehaviour
 
             if (isFar)
             {
-
                 StartCoroutine(TurnHead());
             }
             else
             {
-                Debug.Log("aaa");
-
                 StartCoroutine(Attack());               
             }
         }
@@ -261,15 +258,21 @@ public class Si_BossMovement : MonoBehaviour
             if(isStun)
             {
                 anim.SetBool("isStun", true);
-                yield return new WaitForSeconds(3);
+                yield return new WaitForSeconds(0.3f);
                 anim.SetBool("isStun", false);
                 break;
             }
             yield return new FixedUpdate();
         }
-        if(!isStun)
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern9_2"))
+        {
+            yield return new WaitForSeconds(0.5f);
             SpawnManager.attack9();
-        isStun = false;
+        }
+        while(anim.GetCurrentAnimatorStateInfo(0).IsName("Stun"))
+        {
+            yield return new FixedUpdate();
+        }
         anim.SetBool("isBreak", true);
         anim.SetInteger("AttackType", 0);
         StartCoroutine(deley(3));
