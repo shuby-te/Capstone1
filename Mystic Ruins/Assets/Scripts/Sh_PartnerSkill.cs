@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Sh_GoGoMonsterBall : MonoBehaviour
+public class Sh_PartnerSkill : MonoBehaviour
 {
     public Transform player;
     public Transform partner;
