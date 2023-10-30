@@ -28,7 +28,7 @@ public class Si_Obj : MonoBehaviour
         if (gameObject.CompareTag("Rock"))
         {
             rb.useGravity = true;
-            rb.AddForce(Vector3.down * 100, ForceMode.Impulse);
+            rb.AddForce(Vector3.down * 70, ForceMode.Impulse);
             Destroy(gameObject, 2f);
         }
         if (gameObject.CompareTag("Fire"))
@@ -64,7 +64,7 @@ public class Si_Obj : MonoBehaviour
     {
         while (gameObject.transform.localScale.y < 5)
         { 
-            gameObject.transform.localScale += new Vector3(0.03f, 0.01f, 0.01f);
+            gameObject.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
             yield return new WaitForFixedUpdate();
         }
         yield return new WaitForSeconds(0.5f);
