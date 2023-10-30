@@ -60,6 +60,10 @@ public class Si_BossMovement : MonoBehaviour
                 StartCoroutine(Attack());               
             }
         }
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("walk"))
+        {
+            StartCoroutine(TurnHead());
+        }
     }
     void DisCheck()
     {
@@ -283,7 +287,7 @@ public class Si_BossMovement : MonoBehaviour
     {
         Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);
         
-        for (float i = 0; i < 20; i ++)
+        for (float i = 0; i < 10; i ++)
         {
             Vector3 t_dir = (playerPos - transform.position).normalized;
             transform.forward = Vector3.Lerp(transform.forward, t_dir, 0.1f);
