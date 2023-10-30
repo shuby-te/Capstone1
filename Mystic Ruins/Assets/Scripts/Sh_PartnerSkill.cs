@@ -13,7 +13,7 @@ public class Sh_PartnerSkill : MonoBehaviour
     public ParticleSystem fireBreath;
     public GameObject hydropump;
     public GameObject shield;
-    //public ParticleSystem takeDown;
+    public GameObject spark;
 
     bool isSkill = false;
     bool isPump = false;
@@ -156,11 +156,16 @@ public class Sh_PartnerSkill : MonoBehaviour
     {
         yield return new WaitForSeconds(0.4f);
 
-        //takeDown.Play();
+        
         Vector3 spawnPos = blinkPos + player.forward * 2;
         spawnPos = new Vector3(spawnPos.x, spawnPos.y + 3f, spawnPos.z);
         GameObject spawnShield = Instantiate(shield, spawnPos, player.rotation);
         spawnShield.GetComponent<Rigidbody>().AddForce(Vector3.down * takeDownForce, ForceMode.Impulse);
+        yield return new WaitForSeconds(0.14f);
+        spark.transform.position = new Vector3(spawnShield.transform.position.x,
+            spawnShield.transform.position.y - 1.2f, spawnShield.transform.position.z);
+        PlaySpark();
+        
         yield return new WaitForSeconds(1f);
 
         PlayBlink();
@@ -211,5 +216,16 @@ public class Sh_PartnerSkill : MonoBehaviour
         outW.Play();
         inW.Play();
         hitW.Play();
+    }
+
+    void PlaySpark()
+    {
+        ParticleSystem p1 = spark.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>();
+        ParticleSystem p2 = spark.transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
+        ParticleSystem p3 = spark.transform.GetChild(2).gameObject.GetComponent<ParticleSystem>();
+
+        p1.Play();
+        p2.Play();
+        p3.Play();
     }
 }
