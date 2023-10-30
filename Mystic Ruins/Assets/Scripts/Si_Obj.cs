@@ -28,7 +28,7 @@ public class Si_Obj : MonoBehaviour
         if (gameObject.CompareTag("Rock"))
         {
             rb.useGravity = true;
-            rb.AddForce(Vector3.down * 100, ForceMode.Impulse);
+            rb.AddForce(Vector3.down * 70, ForceMode.Impulse);
             Destroy(gameObject, 2f);
         }
         if (gameObject.CompareTag("Fire"))
