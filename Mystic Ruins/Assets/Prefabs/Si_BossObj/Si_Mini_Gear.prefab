@@ -11,13 +11,10 @@ GameObject:
   - component: {fileID: 440282144864350040}
   - component: {fileID: 3273174883848616044}
   - component: {fileID: 1796764527868470139}
-  - component: {fileID: 5513023633281250733}
-  - component: {fileID: -1124297203775227162}
-  - component: {fileID: 6191490120907973450}
-  - component: {fileID: 3512232894381736604}
+  - component: {fileID: 6481545714689698254}
   m_Layer: 0
-  m_Name: Si_Gear 1
-  m_TagString: DropGear
+  m_Name: Si_Mini_Gear
+  m_TagString: MiniGear
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29,14 +26,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4145334396530772629}
-  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.70710695, y: 0.00000035762798, z: 0.00000037561517, w: -0.70710665}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3273174883848616044
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -44,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4145334396530772629}
-  m_Mesh: {fileID: -3531946766418785785, guid: 2efb5044754b5614e8407753378ede8e, type: 3}
+  m_Mesh: {fileID: 5760465168522449586, guid: d2a23396431946849967a0828ea6e2b0, type: 3}
 --- !u!23 &1796764527868470139
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c7669d13178744e48bc75a6b742c8ce7, type: 2}
+  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -87,20 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5513023633281250733
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4145334396530772629}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0, y: 6, z: 6}
-  m_Center: {x: 0, y: 0.022709053, z: 0}
---- !u!114 &-1124297203775227162
+--- !u!114 &6481545714689698254
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,41 +96,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38fa24f199465294aa4222118832b4b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 15
   isActive: 0
---- !u!54 &6191490120907973450
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4145334396530772629}
-  serializedVersion: 2
-  m_Mass: 20
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 122
-  m_CollisionDetection: 0
---- !u!114 &3512232894381736604
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4145334396530772629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d2ae82d64e95b9438fd9b2106880e82, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dropGearSpawnPoint: {fileID: 0}
-  dropGearSpawnRotate: {fileID: 0}
-  spreadGearSpawnPoint: {fileID: 0}
-  bombSpawnPoint: {fileID: 0}
-  dropGear: {fileID: 0}
-  bigGear: {fileID: 0}
-  miniGear: {fileID: 0}
-  bomb: {fileID: 0}

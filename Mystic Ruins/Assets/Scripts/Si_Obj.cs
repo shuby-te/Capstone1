@@ -8,6 +8,7 @@ public class Si_Obj : MonoBehaviour
     Rigidbody rb;
     public int speed;
     public bool isActive = false;
+    public bool isDrop = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,7 +17,7 @@ public class Si_Obj : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
             if (gameObject.CompareTag("BigGear"))
             {
@@ -35,28 +36,33 @@ public class Si_Obj : MonoBehaviour
             if (gameObject.CompareTag("DropGear"))
             {
                StartCoroutine(DropGear());
+                if (isDrop)
+                {
+                    rb.AddForce(Vector3.down * 300);
+                    rb.useGravity = true;
+                    Destroy(gameObject, 2);
+                }
             }
             if (gameObject.CompareTag("Rock"))
             {
                 rb.useGravity = true;
+                rb.AddForce(Vector3.down * 120);
                 Destroy(gameObject, 2f);
             }
     }
     IEnumerator DropGear()
     {
-        while (gameObject.transform.localScale.y < 0.75)
+        while (gameObject.transform.localScale.y < 3)
         { 
-            gameObject.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+            gameObject.transform.localScale += new Vector3(0.03f, 0.01f, 0.01f);
             yield return new WaitForFixedUpdate();
         }
         yield return new WaitForSeconds(0.5f);
-        rb.useGravity = true;
-        Destroy(gameObject, 1);
-        yield break;
+
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
-            Debug.Log("¾ÆÇÄ");
+            Debug.Log("ï¿½ï¿½ï¿½ï¿½");
     }
 }
