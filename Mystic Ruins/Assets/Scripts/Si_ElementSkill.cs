@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Si_ElementSkill : MonoBehaviour
 {
-    int time=0;
-    bool isActive = false;
+    public int time=0;
+    public bool isActive = false;
     public GameObject boss;
     // Start is called before the first frame update
     void Start()
@@ -16,30 +17,41 @@ public class Si_ElementSkill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (time > 100)
+        if (Input.GetKey(KeyCode.Alpha1))
         {
-            //보스 그로기 애니메이션
+            StartCoroutine(on(6));
+        }
+        if (time > 1000)
+        {
+            boss.GetComponent<Si_BossMovement>().isStun=true;
         }
     }
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        if (isActive && gameObject.CompareTag("Water"))
+        if (other.gameObject.CompareTag("Boss"))
         {
-            //데미지 여기에 추가
-            //if보스가 패턴중일때
-                time++;
-        }
-    }
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(isActive && gameObject.CompareTag("Fire"))
-        {
-            //데미지랑 빨라짐
-        }
-        if(isActive && gameObject.CompareTag("Water"))
-        {
-            //함정과 닿으면 불 끄기
+            if (isActive && gameObject.CompareTag("Water"))
+            {
+                //데미지 여기에 추가
+                if (boss.GetComponent<Si_BossMovement>().attackNum == 9)
+                    time++;
+            }
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(isActive && gameObject.CompareTag("Fire"))
+        {
+            
+        }
+
+    }
+
+    IEnumerator on(int x)
+    {
+        isActive = true;
+        yield return new WaitForSeconds(x);
+        isActive = false;
+    }
 }

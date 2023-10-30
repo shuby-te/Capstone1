@@ -12,6 +12,7 @@ TagManager:
   - Rock
   - Fire
   - Water
+  - Boss
   layers:
   - Default
   - TransparentFX

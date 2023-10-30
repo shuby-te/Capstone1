@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Si_Obj : MonoBehaviour
@@ -49,6 +48,13 @@ public class Si_Obj : MonoBehaviour
                 rb.AddForce(Vector3.down * 120);
                 Destroy(gameObject, 2f);
             }
+            if(gameObject.CompareTag("Fire"))
+            {
+                rb.useGravity = true;
+                rb.AddForce(Vector3.down * 120);
+                Destroy(gameObject, 2.5f);
+                
+            }
     }
     IEnumerator DropGear()
     {
@@ -58,7 +64,6 @@ public class Si_Obj : MonoBehaviour
             yield return new WaitForFixedUpdate();
         }
         yield return new WaitForSeconds(0.5f);
-
     }
     private void OnTriggerEnter(Collider other)
     {
