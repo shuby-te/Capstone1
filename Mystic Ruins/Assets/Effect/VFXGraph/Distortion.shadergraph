@@ -43,9 +43,6 @@
             "m_Id": "0bb78cb8ad76428d89e78539864d2b24"
         },
         {
-            "m_Id": "ce7880cf9dc0448b912750d5fd410a79"
-        },
-        {
             "m_Id": "e754956b67514024ba127749b4f69467"
         },
         {
@@ -158,6 +155,9 @@
         },
         {
             "m_Id": "7e17ad2d9cbe42a39ecd5d547c23584a"
+        },
+        {
+            "m_Id": "f7db8e07cd2d4c2b8e6f47ccfd0a46ae"
         }
     ],
     "m_GroupDatas": [
@@ -720,7 +720,7 @@
                 "m_Id": "0bb78cb8ad76428d89e78539864d2b24"
             },
             {
-                "m_Id": "ce7880cf9dc0448b912750d5fd410a79"
+                "m_Id": "f7db8e07cd2d4c2b8e6f47ccfd0a46ae"
             }
         ]
     },
@@ -1601,6 +1601,21 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
+    "m_ObjectId": "27160c2e8f6c4fcbbc7518f9456f7b25",
+    "m_Id": 0,
+    "m_DisplayName": "Alpha",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Alpha",
+    "m_StageCapability": 2,
+    "m_Value": 1.0,
+    "m_DefaultValue": 1.0,
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "286814ee6c154c2381c3d880ec913a41",
     "m_Id": 2,
@@ -1851,21 +1866,6 @@
     "m_StageCapability": 3,
     "m_Value": 0.0,
     "m_DefaultValue": 0.0,
-    "m_Labels": []
-}
-
-{
-    "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
-    "m_ObjectId": "30867953ae5b498d815b8b4a2a527cee",
-    "m_Id": 0,
-    "m_DisplayName": "Alpha",
-    "m_SlotType": 0,
-    "m_Hidden": false,
-    "m_ShaderOutputName": "Alpha",
-    "m_StageCapability": 2,
-    "m_Value": 1.0,
-    "m_DefaultValue": 1.0,
     "m_Labels": []
 }
 
@@ -3129,9 +3129,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -31.333391189575197,
-            "y": 388.66668701171877,
-            "width": 139.33326721191407,
+            "x": 46.666648864746097,
+            "y": 386.6667175292969,
+            "width": 139.33334350585938,
             "height": 78.66665649414063
         }
     },
@@ -4786,39 +4786,6 @@
 
 {
     "m_SGVersion": 0,
-    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
-    "m_ObjectId": "ce7880cf9dc0448b912750d5fd410a79",
-    "m_Group": {
-        "m_Id": ""
-    },
-    "m_Name": "SurfaceDescription.Alpha",
-    "m_DrawState": {
-        "m_Expanded": true,
-        "m_Position": {
-            "serializedVersion": "2",
-            "x": 0.0,
-            "y": 0.0,
-            "width": 0.0,
-            "height": 0.0
-        }
-    },
-    "m_Slots": [
-        {
-            "m_Id": "30867953ae5b498d815b8b4a2a527cee"
-        }
-    ],
-    "synonyms": [],
-    "m_Precision": 0,
-    "m_PreviewExpanded": true,
-    "m_PreviewMode": 0,
-    "m_CustomColors": {
-        "m_SerializableColors": []
-    },
-    "m_SerializedDescriptor": "SurfaceDescription.Alpha"
-}
-
-{
-    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.DynamicVectorMaterialSlot",
     "m_ObjectId": "cf7ba7435918466b85b9ea8cbd5e918b",
     "m_Id": 0,
@@ -5528,6 +5495,39 @@
         "m_SerializableColors": []
     },
     "m_SerializedDescriptor": "VertexDescription.Normal"
+}
+
+{
+    "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.BlockNode",
+    "m_ObjectId": "f7db8e07cd2d4c2b8e6f47ccfd0a46ae",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "SurfaceDescription.Alpha",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": 0.0,
+            "y": 0.0,
+            "width": 0.0,
+            "height": 0.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "27160c2e8f6c4fcbbc7518f9456f7b25"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_SerializedDescriptor": "SurfaceDescription.Alpha"
 }
 
 {
