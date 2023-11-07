@@ -9108,6 +9108,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 4860344589389405530, guid: 8c3b6f9d6dabf0f4fab0d1f1ecc8581c,
         type: 3}
+      propertyPath: m_SortingFudge
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860344589389405530, guid: 8c3b6f9d6dabf0f4fab0d1f1ecc8581c,
+        type: 3}
       propertyPath: m_RenderAlignment
       value: 2
       objectReference: {fileID: 0}
@@ -9912,6 +9917,11 @@ PrefabInstance:
         type: 3}
       propertyPath: RotationModule.curve.minCurve.m_Curve.Array.data[1].outSlope
       value: -14.82595
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860344589389405530, guid: 8c3b6f9d6dabf0f4fab0d1f1ecc8581c,
+        type: 3}
+      propertyPath: m_SortingFudge
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4860344589389405531, guid: 8c3b6f9d6dabf0f4fab0d1f1ecc8581c,
         type: 3}
@@ -14256,6 +14266,11 @@ PrefabInstance:
         type: 3}
       propertyPath: RotationModule.curve.minCurve.m_Curve.Array.data[1].outSlope
       value: -5.572753
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860344589389405530, guid: 8c3b6f9d6dabf0f4fab0d1f1ecc8581c,
+        type: 3}
+      propertyPath: m_SortingFudge
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 4860344589389405531, guid: 8c3b6f9d6dabf0f4fab0d1f1ecc8581c,
         type: 3}

@@ -3235,6 +3235,7 @@ MonoBehaviour:
   fireBreath: {fileID: 1807567410}
   hydropump: {fileID: 0}
   shield: {fileID: 1220496600913886107, guid: cff9ba67dc3f21a45a3bf352536d3a72, type: 3}
+  spark: {fileID: 0}
 --- !u!4 &638585759
 Transform:
   m_ObjectHideFlags: 0
