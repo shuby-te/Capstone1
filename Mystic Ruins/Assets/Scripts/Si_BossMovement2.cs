@@ -2,11 +2,10 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Si_BossManager : MonoBehaviour
+public class Si_BossAttack : MonoBehaviour
 {
     public GameObject player;
     public GameObject spawnManager;
-
     public float hp;
     public float speed=1;
     public bool isBreak = false; //����� üũ
@@ -21,13 +20,17 @@ public class Si_BossManager : MonoBehaviour
     public int count;
     public bool isturnhead = false;
 
+
+    public IEnumerator[] normal = new IEnumerator[13];
+    public IEnumerator[] big = new IEnumerator[4];
+    public IEnumerator[] ele = new IEnumerator[3];
+
     Si_SpawnManeger SpawnManager;
     Animator anim;
 
     void Start()
     {
         SpawnManager = spawnManager.GetComponent<Si_SpawnManeger>();
-        Physics.gravity = Physics.gravity;
         anim = GetComponent<Animator>();
     }
 

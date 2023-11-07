@@ -48,21 +48,25 @@ public class Si_Obj : MonoBehaviour
             if (isDrop)
             {
                 rb.useGravity = true;
-                rb.AddForce(Vector3.down * 30,ForceMode.Impulse);
-                Destroy(gameObject, 2);
+                rb.AddForce(Vector3.down * 100,ForceMode.Impulse);
                 isDrop= false;
+            }
+            if (transform.position.y < -2.5f)
+            {
+                Destroy(gameObject);
+                //이팩트 추가 하기
             }
         }
         if (gameObject.CompareTag("MiniGear"))
         {
             transform.position += transform.right * Time.deltaTime * speed;
-            Destroy(gameObject, 3f);
+            Destroy(gameObject, 2f);
         }
     }
 
     IEnumerator DropGear()
     {
-        while (gameObject.transform.localScale.y < 3)
+        while (gameObject.transform.localScale.y < 10)
         { 
             gameObject.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
             yield return new WaitForFixedUpdate();
