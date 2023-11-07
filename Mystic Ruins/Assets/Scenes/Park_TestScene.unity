@@ -771,6 +771,12 @@ Transform:
   m_Father: {fileID: 377423481}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &105978608 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6632517899406007104, guid: f8426d7fb61d1be42924954cefd2a6ea,
+    type: 3}
+  m_PrefabInstance: {fileID: 1236872189}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &123990860 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4461601637721758917, guid: eba8fe9009fa9cd4b9ac4224979d553d,
@@ -2297,6 +2303,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   isActive: 0
+  isDrop: 0
 --- !u!1 &475792660
 GameObject:
   m_ObjectHideFlags: 0
@@ -3226,7 +3233,7 @@ MonoBehaviour:
   takeDownForce: 100
   blink: {fileID: 276825264}
   fireBreath: {fileID: 1807567410}
-  hydropump: {fileID: 1506220072}
+  hydropump: {fileID: 0}
   shield: {fileID: 1220496600913886107, guid: cff9ba67dc3f21a45a3bf352536d3a72, type: 3}
 --- !u!4 &638585759
 Transform:
@@ -5572,8 +5579,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 241615754}
-  y: 15
-  z: 15
+  y: 5
+  z: 5
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17458,18 +17465,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!1 &1506220072 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8371477933317259823, guid: f8426d7fb61d1be42924954cefd2a6ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 1236872189}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1506220073 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8371477933317259820, guid: f8426d7fb61d1be42924954cefd2a6ea,
-    type: 3}
-  m_PrefabInstance: {fileID: 1236872189}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1511377559
 GameObject:
   m_ObjectHideFlags: 0
@@ -23417,6 +23412,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   isActive: 0
+  isDrop: 0
 --- !u!1 &1793196676
 GameObject:
   m_ObjectHideFlags: 0
@@ -23521,7 +23517,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1506220073}
+  - {fileID: 105978608}
   - {fileID: 276825265}
   - {fileID: 1807567408}
   - {fileID: 638585759}
