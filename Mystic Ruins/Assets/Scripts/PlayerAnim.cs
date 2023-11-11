@@ -8,6 +8,7 @@ public class PlayerAnim : MonoBehaviour
     int keyN, mouseN;
     int isAttack;
     float time;
+    bool isRoll;
 
     private void Start()
     {
@@ -16,10 +17,19 @@ public class PlayerAnim : MonoBehaviour
 
     private void Update()
     {
-        if (isAttack == 0 && Input.GetMouseButtonDown(0))
+        if(Input.GetKeyDown(KeyCode.LeftShift)  && !isRoll)
         {
+            isRoll = true;
+            anim.SetBool("isRoll", true);
+            StartCoroutine("OffRolling");
+        }      
+               
+        if (!isRoll && isAttack == 0 && Input.GetMouseButtonDown(0))
+        {            
             time = 0;
             anim.SetInteger("isAttack", ++isAttack);
+            if(time > 0)
+                anim.SetBool("Attack", true);
         }
         else if (time < 0.7f && isAttack == 1 && Input.GetMouseButtonDown(0))
         {
@@ -33,6 +43,7 @@ public class PlayerAnim : MonoBehaviour
         }
         else if (time > 0.7f)
         {
+            anim.SetBool("Attack", false);
             anim.SetInteger("isAttack", 0);
             isAttack = 0;
             time = 0f;
@@ -93,4 +104,12 @@ public class PlayerAnim : MonoBehaviour
             anim.SetInteger("moveNum", num);
         }
     }   
+
+    IEnumerator OffRolling()
+    {
+        yield return new WaitForSeconds(1f);        
+        anim.SetBool("isRoll", false);
+        yield return new WaitForSeconds(2f);
+        isRoll = false;
+    }
 }
