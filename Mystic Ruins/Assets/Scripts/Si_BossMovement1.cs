@@ -2,7 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Si_BossManager : MonoBehaviour
+public class Si_BossMovement1 : MonoBehaviour
 {
     public GameObject player;
     public GameObject spawnManager;
@@ -54,7 +54,10 @@ public class Si_BossManager : MonoBehaviour
 
             if (isFar&&!isturnhead)
             {
-                StartCoroutine(TurnHead());
+                if (count == 3)
+                    StartCoroutine(Attack());           
+                else
+                    StartCoroutine(TurnHead());
             }
             else
             {
@@ -87,7 +90,7 @@ public class Si_BossManager : MonoBehaviour
         {
             if (count == 3)
             {
-                attackNum = UnityEngine.Random.Range(9, 9);
+                attackNum = UnityEngine.Random.Range(9, 11);
                 isAttack = true;
                 yield return StartCoroutine(TurnHead());
                 yield return StartCoroutine(TurnHead());
@@ -98,6 +101,7 @@ public class Si_BossManager : MonoBehaviour
                         StartCoroutine(ElementAttack1());
                         break;
                     case 10:
+                        StartCoroutine(ElementAttack2());
                         break;
                     case 11:
                         break;
@@ -108,27 +112,28 @@ public class Si_BossManager : MonoBehaviour
                 attackNum = UnityEngine.Random.Range(1, 6);
                 if (attackNum != lastAttack)
                 {
+                    Debug.Log("test");
                     isAttack = true;
                     yield return StartCoroutine(TurnHead());
                     anim.SetBool("isAttack", true);
                     switch (attackNum)
                     {
                         case 1:
-                            yield return StartCoroutine(Attack1());
+                            StartCoroutine(Attack1());
                             break;
                         case 2:
-                            yield return StartCoroutine(Attack2());
+                             StartCoroutine(Attack2());
                             break;
                         case 3:
                             if (!boomActive)
-                                yield return StartCoroutine(Attack3());
+                                StartCoroutine(Attack3());
                             else isAttack = false;
                             break;
                         case 4:
-                            yield return StartCoroutine(Attack4());
+                            StartCoroutine(Attack4());
                             break;
                         case 5:
-                            yield return StartCoroutine(Attack5());
+                            StartCoroutine(Attack5());
                             break;
                         case 6:
                             break;
@@ -169,10 +174,11 @@ public class Si_BossManager : MonoBehaviour
             yield return new WaitForFixedUpdate();
                 }
         anim.SetInteger("AttackType", 1);
+        yield return new WaitForSeconds(0.1f);
         while (true)
         {
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern1"))
-                break;
+                    break;
             yield return new WaitForEndOfFrame();
         }
         anim.SetInteger("AttackType", 0);
@@ -187,12 +193,20 @@ public class Si_BossManager : MonoBehaviour
         anim.SetInteger("AttackType", 2);
         while (true) 
         {
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern2")&&
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern2")&&
                 anim.GetCurrentAnimatorStateInfo(0).normalizedTime>=0.3f)
                 break;
             yield return new WaitForEndOfFrame();
         }        
         SpawnManager.attack2();
+        while (true)
+        {
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern2") &&
+                anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.93f)
+                break;
+            yield return new WaitForEndOfFrame();
+        }
+        SpawnManager.GearPiece();
         while (true)
         {
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern2"))
@@ -212,7 +226,7 @@ public class Si_BossManager : MonoBehaviour
         anim.SetInteger("AttackType", 3);
         while (true)
         {
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern3") &&
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern3") &&
                 anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f)
                 break;
             yield return new WaitForEndOfFrame();
@@ -237,7 +251,7 @@ public class Si_BossManager : MonoBehaviour
         anim.SetInteger("AttackType", 4);
         while (true)
         {
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern4") &&
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern4") &&
                 anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.4f)
                 break;
             yield return new WaitForEndOfFrame();
@@ -262,17 +276,18 @@ public class Si_BossManager : MonoBehaviour
         {
             while (true)
             {
-                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern5") &&
+                if (anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern5") &&
                     anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2f)
                     break;
                 yield return new WaitForEndOfFrame();
+                Debug.Log("a");
             }
         }
         SpawnManager.attack5(3, 0.15f);
         {
             while (true)
             {
-                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern5") &&
+                if (anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern5") &&
                     anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.45f)
                     break;
                 yield return new WaitForEndOfFrame();
@@ -281,7 +296,7 @@ public class Si_BossManager : MonoBehaviour
         SpawnManager.attack5(3, 0.15f);
         while (true)
         {
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern5")&&
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern5")&&
                 anim.GetCurrentAnimatorStateInfo(0).normalizedTime>=0.8f)
                 break;
             yield return new WaitForEndOfFrame();
@@ -316,7 +331,7 @@ public class Si_BossManager : MonoBehaviour
 
         while (true)
         {
-            if(!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern9_1"))
+            if(!anim.GetCurrentAnimatorStateInfo(0).IsName("Element1-1"))
             {
                 break;
             }
@@ -329,7 +344,7 @@ public class Si_BossManager : MonoBehaviour
             }
             yield return new FixedUpdate();
         }
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern9_2"))
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Element1-2"))
         {
             yield return new WaitForSeconds(0.5f);
             SpawnManager.attack9();
@@ -344,6 +359,32 @@ public class Si_BossManager : MonoBehaviour
         isAttack = false;
         count = 0;
      }
+    IEnumerator ElementAttack2()
+    {
+        anim.SetInteger("AttackType", 10);
+        yield return new WaitForSeconds(0.3f);
+        StartCoroutine(TurnHead());
+        while (true)
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Element2-1"))
+            {
+                for (int i = 0; i < 60; i++)
+                {
+                    transform.position += Vector3.Normalize(transform.forward) * 20 / 60;
+                    yield return new WaitForEndOfFrame();
+                }
+                break;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+
+        anim.SetBool("isBreak", true);
+        anim.SetInteger("AttackType", 0);
+        StartCoroutine(deley(3));
+        isAttack = false;
+        attackNum = 0;
+        count = 0;
+    }
     IEnumerator TurnHead()
     {
         if (!isturnhead)

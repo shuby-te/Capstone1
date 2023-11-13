@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Si_SpawnManeger : MonoBehaviour
 {
@@ -16,19 +17,20 @@ public class Si_SpawnManeger : MonoBehaviour
     public GameObject bomb;
     public GameObject rock;
     public GameObject fire;
+    Animator anim;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-  
+
     public void attack2()
     {
         StartCoroutine(SpreadGear());
@@ -49,19 +51,32 @@ public class Si_SpawnManeger : MonoBehaviour
     {
         StartCoroutine(SpawnFire());
     }
-    IEnumerator SpreadGear()
+    public void GearPiece()
     {
         Vector3 pos = gearSpawnPoint.transform.position;
-        Instantiate(bigGear, pos, Quaternion.identity);
-        yield return new WaitForSeconds(3.5f);
+
         for (int i = 0; i < 8; i++)
         {
             bigGear.transform.Rotate(Vector3.forward, 45);
             Quaternion gearRot = bigGear.transform.rotation;
             Instantiate(miniGear, pos, gearRot);
         }
+    }
+    IEnumerator SpreadGear()
+    {
+        Vector3 pos = gearSpawnPoint.transform.position;
+        GameObject a = Instantiate(bigGear, pos, Quaternion.identity);
+        while (true)
+        {
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern2") &&
+                anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f)
+                break;
+            yield return new WaitForEndOfFrame();
+        }
+        Destroy(a);
         yield break;
     }
+
     IEnumerator DropGear()
     {
         GameObject[] gear = new GameObject[9];
