@@ -5,32 +5,19 @@ using UnityEngine;
 
 public class Sh_PlayerAttack : MonoBehaviour
 {
-    public GameObject attackRange;
+    public GameObject hpManager;
 
-    bool isAttack;
+    public bool isOverlapped;
 
-    void Start()
+    private void OnTriggerStay(Collider other)
     {
-        attackRange.SetActive(false);
+        if(other.gameObject.CompareTag("Boss"))
+            isOverlapped = true;
     }
 
-    void Update()
+    private void OnTriggerExit(Collider other)
     {
-        attackRange.transform.position = transform.GetChild(0).position + transform.forward * 2f;
-        attackRange.transform.rotation = transform.rotation; 
-
-        if(Input.GetMouseButtonDown(0) && !isAttack)
-        {
-            isAttack = true;
-            StartCoroutine("Attack");
-        }
-    }
-
-    IEnumerator Attack()
-    {
-        attackRange.SetActive(true);
-        yield return new WaitForSeconds(1f);
-        attackRange.SetActive(false);
-        isAttack = false;
+        if (other.gameObject.CompareTag("Boss"))
+            isOverlapped = false;
     }
 }

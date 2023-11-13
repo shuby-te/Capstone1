@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class PlayerMovement2 : MonoBehaviour
 {
+    public GameObject hpManager;
+    public GameObject playerAttack;
+
     public float speed = 10f;
     public float dashSpeed = 2f;
     public float rotateSpeed = 7f;
@@ -98,5 +101,11 @@ public class PlayerMovement2 : MonoBehaviour
         isDash = false;
         yield return new WaitForSeconds(1.5f);
         dashCool = true;
+    }
+
+    void Attack()
+    {
+        if(playerAttack.GetComponent<Sh_PlayerAttack>().isOverlapped)
+            hpManager.GetComponent<Sh_HpManager>().AttackToBoss();
     }
 }
