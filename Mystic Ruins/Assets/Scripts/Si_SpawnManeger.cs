@@ -17,6 +17,9 @@ public class Si_SpawnManeger : MonoBehaviour
     public GameObject bomb;
     public GameObject rock;
     public GameObject fire;
+    public GameObject firePos1;
+    public GameObject firePos2;
+
     Animator anim;
 
     // Start is called before the first frame update
@@ -136,13 +139,18 @@ public class Si_SpawnManeger : MonoBehaviour
         int i = 0;
         while (i < 7)
         {
+            Transform tf = firePos1.transform;
             x = Random.Range(-0.12f, 0.12f);
             z = Random.Range(-0.12f, 0.12f);
 
             if (x * x + z * z < 0.12 * 0.12)
             {
                 i++;
-                GameObject fireBall=Instantiate(fire, bossRoomCenter.transform);
+                if (i / 2 == 0)
+                    tf = firePos1.transform;
+                else
+                    tf = firePos2.transform;
+                GameObject fireBall=Instantiate(fire, tf);
                 fireBall.transform.parent = bossRoomCenter.transform.parent;
                 fireBall.transform.localPosition = new Vector3(0, 0, 0);
                 fireBall.transform.localScale = new Vector3(0.007f, 0.007f, 0.007f);
