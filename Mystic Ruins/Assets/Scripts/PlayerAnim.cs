@@ -28,8 +28,6 @@ public class PlayerAnim : MonoBehaviour
         {            
             time = 0;
             anim.SetInteger("isAttack", ++isAttack);
-            if(time > 0)
-                anim.SetBool("Attack", true);
         }
         else if (time < 0.7f && isAttack == 1 && Input.GetMouseButtonDown(0))
         {
@@ -43,7 +41,6 @@ public class PlayerAnim : MonoBehaviour
         }
         else if (time > 0.7f)
         {
-            anim.SetBool("Attack", false);
             anim.SetInteger("isAttack", 0);
             isAttack = 0;
             time = 0f;

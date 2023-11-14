@@ -49,12 +49,9 @@ public class Sh_RotateFloor : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("colli");
-
         if (other.gameObject.CompareTag("Player"))
         {
             player = other.gameObject;
-            Debug.Log("taggi");
             isCol = true;
         }
     }
