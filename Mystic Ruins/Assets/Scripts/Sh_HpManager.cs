@@ -45,7 +45,6 @@ public class Sh_HpManager : MonoBehaviour
             else
                 StartCoroutine(RotateHpNeedle(gears[i], -1));
         }
-
     }
 
     IEnumerator RotateHpNeedle(GameObject gameObj, int reverse = 1)

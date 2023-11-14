@@ -3597,8 +3597,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 816110145}
   spawnManager: {fileID: 1539121798}
+  hp: 0
   speed: 5
-  lerpSpeed: 0
   isBreak: 0
   isAttack: 0
   isActive: 0
@@ -3609,6 +3609,7 @@ MonoBehaviour:
   attackNum: 0
   lastAttack: 0
   count: 0
+  isturnhead: 0
 --- !u!65 &176853382
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16367,7 +16368,7 @@ GameObject:
   - component: {fileID: 816110151}
   - component: {fileID: 816110149}
   - component: {fileID: 816110148}
-  - component: {fileID: 816110147}
+  - component: {fileID: 816110153}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -16441,19 +16442,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &816110147
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 816110145}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 3.4, z: 1}
-  m_Center: {x: 0, y: 1.7, z: 0}
 --- !u!114 &816110148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16520,6 +16508,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!136 &816110153
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816110145}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.6
+  m_Height: 3.4
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.7, z: 0}
 --- !u!1 &817986978
 GameObject:
   m_ObjectHideFlags: 0
@@ -31728,6 +31730,8 @@ MonoBehaviour:
   bomb: {fileID: 4145334396530772629, guid: c2f0b1d8f215d7c4887b95060dea2757, type: 3}
   rock: {fileID: 2947249743044153203, guid: f1d72d5a449b6b6459f12bd901f26b80, type: 3}
   fire: {fileID: 329131228205131467, guid: 1bbd1c8d5b3abec48a7016d9745eac7a, type: 3}
+  firePos1: {fileID: 0}
+  firePos2: {fileID: 0}
 --- !u!4 &1539121800
 Transform:
   m_ObjectHideFlags: 0
