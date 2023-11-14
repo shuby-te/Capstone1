@@ -86,7 +86,7 @@ public class Si_BossMovement : MonoBehaviour
         {
             if (count == 3)
             {
-                attackNum = UnityEngine.Random.Range(9, 9);
+                attackNum = UnityEngine.Random.Range(9, 10);
                 isAttack = true;
                 yield return StartCoroutine(TurnHead());
                 yield return StartCoroutine(TurnHead());
@@ -94,9 +94,10 @@ public class Si_BossMovement : MonoBehaviour
                 switch (attackNum)
                 {
                     case 9:
-                        StartCoroutine(ElementAttack1());
+                        yield return StartCoroutine(ElementAttack1());
                         break;
                     case 10:
+                        yield return StartCoroutine(ElementAttack2());
                         break;
                     case 11:
                         break;
@@ -104,9 +105,10 @@ public class Si_BossMovement : MonoBehaviour
             }
             else
             {
-                attackNum = UnityEngine.Random.Range(1, 6);
+                attackNum = Random.Range(1, 6);
                 if (attackNum != lastAttack)
                 {
+                    Debug.Log("attack!");
                     isAttack = true;
                     yield return StartCoroutine(TurnHead());
                     anim.SetBool("isAttack", true);
@@ -161,70 +163,134 @@ public class Si_BossMovement : MonoBehaviour
         yield break;
     }
 
-    IEnumerator Attack1() //�տ�����
+    IEnumerator Attack1()
     {
         move = true;
-        while (isFar) {
+        while (isFar)
+        {
             yield return new WaitForFixedUpdate();
-                }
+        }
         anim.SetInteger("AttackType", 1);
-        yield return new WaitForSeconds(1.3f);
+        while (true)
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern1"))
+            {
+                Debug.Log("a");
+                break;
+            }
+            yield return new WaitForEndOfFrame();
+        }
         anim.SetInteger("AttackType", 0);
         yield return new WaitForSeconds(1);
         DisCheck();
         isAttack = false;
         yield break;
-    }//끝
+    }
 
-    IEnumerator Attack2()//��� ��ȯ �� 8����
+    IEnumerator Attack2()
     {
         anim.SetInteger("AttackType", 2);
-        yield return new WaitForSeconds(1);
+        while (true)
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern2") &&
+                anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.3f)
+                break;
+            yield return new WaitForEndOfFrame();
+        }
         SpawnManager.attack2();
-        yield return new WaitForSeconds(3);
+        while (true)
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern2"))
+                break;
+            yield return new WaitForEndOfFrame();
+        }
         anim.SetInteger("AttackType", 0);
         anim.SetBool("isBreak", true);
         yield return StartCoroutine(deley(2f));
         isAttack = false;
         yield break;
-    }//0.3 끝
+    }
 
 
-    IEnumerator Attack3()//��ź ���̱�
+    IEnumerator Attack3()
     {
         anim.SetInteger("AttackType", 3);
-        yield return new WaitForSeconds(1);
+        while (true)
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern3") &&
+                anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f)
+                break;
+            yield return new WaitForEndOfFrame();
+        }
         boomActive = true;
         SpawnManager.attack3(gameObject);
         anim.SetInteger("AttackType", 0);
-        yield return new WaitForSeconds(1);
+        while (true)
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern3"))
+                break;
+            yield return new WaitForEndOfFrame();
+        }
         yield return StartCoroutine(TurnHead());
         DisCheck();
         yield return StartCoroutine(Attack1());
         yield break;
-    }//0.7
+    }
 
-    IEnumerator Attack4()//����ȯ �� ����߸�
+    IEnumerator Attack4()
     {
         anim.SetInteger("AttackType", 4);
-        yield return new WaitForSeconds(1);
+        while (true)
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern4") &&
+                anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.4f)
+                break;
+            yield return new WaitForEndOfFrame();
+        }
         SpawnManager.attack4();
-        yield return new WaitForSeconds(0.3f);
+        while (true)
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern4"))
+                break;
+            yield return new WaitForEndOfFrame();
+        }
         anim.SetInteger("AttackType", 0);
         anim.SetBool("isBreak", true);
         yield return StartCoroutine(deley(2f));
         isAttack = false;
         yield break;
-    }//0.4
+    }
 
-    IEnumerator Attack5()//���� �� �� ����߸�
+    IEnumerator Attack5()
     {
         anim.SetInteger("AttackType", 5);
-        yield return new WaitForSeconds(1);
+        {
+            while (true)
+            {
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern5") &&
+                    anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2f)
+                    break;
+                yield return new WaitForEndOfFrame();
+            }
+        }
         SpawnManager.attack5(3, 0.15f);
-        yield return new WaitForSeconds(1);
+        {
+            while (true)
+            {
+                if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern5") &&
+                    anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.45f)
+                    break;
+                yield return new WaitForEndOfFrame();
+            }
+        }
         SpawnManager.attack5(3, 0.15f);
-        yield return new WaitForSeconds(2); 
+        while (true)
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern5") &&
+                anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f)
+                break;
+            yield return new WaitForEndOfFrame();
+        }
         SpawnManager.attack5(10, 0.15f);
         anim.SetBool("isBreak", true);
         anim.SetInteger("AttackType", 0);
@@ -232,7 +298,7 @@ public class Si_BossMovement : MonoBehaviour
         isAttack = false;
 
         yield break;
-    }//0.2 0.45 0.8
+    }
     IEnumerator Attack6()
     {
         isAttack = false;
@@ -255,7 +321,7 @@ public class Si_BossMovement : MonoBehaviour
 
         while (true)
         {
-            if(!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern9_1"))
+            if(!anim.GetCurrentAnimatorStateInfo(0).IsName("Element1-1"))
             {
                 break;
             }
@@ -268,7 +334,7 @@ public class Si_BossMovement : MonoBehaviour
             }
             yield return new FixedUpdate();
         }
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern9_2"))
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Element1-2"))
         {
             yield return new WaitForSeconds(0.5f);
             SpawnManager.attack9();
@@ -281,8 +347,34 @@ public class Si_BossMovement : MonoBehaviour
         anim.SetInteger("AttackType", 0);
         StartCoroutine(deley(3));
         isAttack = false;
+        attackNum = 0;
         count = 0;
      }
+
+    IEnumerator ElementAttack2()
+    {
+        anim.SetInteger("AttackType", 10);
+        while (true)
+        {
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern6-1"))
+            {
+                for (int i = 0; i < 60; i++)
+                {
+                    transform.position += Vector3.Normalize(transform.forward) * 20 / 60;
+                    yield return new WaitForEndOfFrame();
+                }
+                break;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+        
+        anim.SetBool("isBreak", true);
+        anim.SetInteger("AttackType", 0);
+        StartCoroutine(deley(3));
+        isAttack = false;
+        attackNum = 0;
+        count = 0;
+    }
     IEnumerator TurnHead()
     {
         Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z);

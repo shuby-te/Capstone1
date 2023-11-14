@@ -36,18 +36,19 @@ public class Si_ElementSkill : MonoBehaviour
         {
             if (isActive && gameObject.CompareTag("Water"))
             {
-                //µ¥¹ÌÁö ¿©±â¿¡ Ãß°¡
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½â¿¡ ï¿½ß°ï¿½
                 if (boss.GetComponent<Si_BossMovement>().attackNum == 9)
                     time++;
             }
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnParticleCollision(GameObject other)
     {
         if(isActive && gameObject.CompareTag("Fire"))
         {
-            
+            GetComponent<Si_BossMovement>().speed *= 1.25f;
+            Debug.Log("aaaa");
         }
 
     }
