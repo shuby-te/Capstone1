@@ -6,8 +6,11 @@ using UnityEngine;
 
 public class PlayerMovement2 : MonoBehaviour
 {
+    public GameObject hpManager;
+    public GameObject playerAttack;
+
     public float speed = 10f;
-    public float dash = 7f;
+    public float dashSpeed = 2f;
     public float rotateSpeed = 7f;
 
     Rigidbody rb;
@@ -15,6 +18,7 @@ public class PlayerMovement2 : MonoBehaviour
     Animator anim;
 
     Vector3 dir = Vector3.zero;
+    bool dashCool;
     bool isDash;
     bool isMove;
     float xAxis = 1f, zAxis = -1f;
@@ -22,6 +26,7 @@ public class PlayerMovement2 : MonoBehaviour
 
     void Start()
     {
+        dashCool = true;
         rb = GetComponent<Rigidbody>();
         partner = this.transform.GetChild(1).gameObject;
         anim = GetComponent<Animator>();
@@ -59,11 +64,10 @@ public class PlayerMovement2 : MonoBehaviour
         }
 
         //dash
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !isDash)
+        if (Input.GetKeyDown(KeyCode.LeftShift) && dashCool)
         {
             isDash = true;
-            speed *= 2;
-
+            dashCool = false;
             StartCoroutine("OffTheDash");
         }
     }
@@ -83,7 +87,7 @@ public class PlayerMovement2 : MonoBehaviour
         }
 
         //move
-        if(isMove && anim.GetInteger("isAttack") == 0)
+        if(isMove && anim.GetInteger("isAttack") == 0 && !isDash)
             rb.MovePosition(gameObject.transform.position + dir * speed * Time.deltaTime);
 
         //partner move
@@ -93,8 +97,15 @@ public class PlayerMovement2 : MonoBehaviour
     
     IEnumerator OffTheDash()
     {
-        yield return new WaitForSeconds(0.4f);
-        speed /= 2;
+        yield return new WaitForSeconds(1.5f);
         isDash = false;
+        yield return new WaitForSeconds(1.5f);
+        dashCool = true;
+    }
+
+    void Attack()
+    {
+        if(playerAttack.GetComponent<Sh_PlayerAttack>().isOverlapped)
+            hpManager.GetComponent<Sh_HpManager>().AttackToBoss();
     }
 }
