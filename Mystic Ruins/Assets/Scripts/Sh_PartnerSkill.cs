@@ -162,7 +162,7 @@ public class Sh_PartnerSkill : MonoBehaviour
         
         Vector3 spawnPos = blinkPos + player.forward * 2;
         spawnPos = new Vector3(spawnPos.x, spawnPos.y + 3f, spawnPos.z);
-        GameObject spawnShield = Instantiate(shield, spawnPos, player.rotation);
+        GameObject spawnShield = Instantiate(shield, spawnPos, player.rotation); 
         spawnShield.GetComponent<Rigidbody>().AddForce(Vector3.down * takeDownForce, ForceMode.Impulse);
         yield return new WaitForSeconds(0.14f);
         spark.transform.position = new Vector3(spawnShield.transform.position.x,

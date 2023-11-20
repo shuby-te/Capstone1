@@ -3531,7 +3531,7 @@ GameObject:
   m_Component:
   - component: {fileID: 174210518}
   m_Layer: 0
-  m_Name: GameObject (2)
+  m_Name: skyViewPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3672,6 +3672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 816110145}
   spawnManager: {fileID: 1539121798}
+  attackTrigger: {fileID: 0}
   hp: 0
   speed: 5
   isBreak: 0
