@@ -1,4 +1,5 @@
     using System.Collections;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -6,7 +7,8 @@ public class Si_BossMovement : MonoBehaviour
 {
     public GameObject player;
     public GameObject spawnManager;
-
+    public GameObject attackTrigger;
+ 
     public float hp;
     public float speed=1;
     public bool isBreak = false; //����� üũ
@@ -23,14 +25,14 @@ public class Si_BossMovement : MonoBehaviour
 
     Si_SpawnManeger SpawnManager;
     Animator anim;
-
     void Start()
     {
         SpawnManager = spawnManager.GetComponent<Si_SpawnManeger>();
         Physics.gravity = Physics.gravity;
         anim = GetComponent<Animator>();
-        Debug.Log("맞았어요!");
     }
+
+
 
     void FixedUpdate()
     {
