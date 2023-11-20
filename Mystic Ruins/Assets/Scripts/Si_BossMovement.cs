@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -29,6 +29,7 @@ public class Si_BossMovement : MonoBehaviour
         SpawnManager = spawnManager.GetComponent<Si_SpawnManeger>();
         Physics.gravity = Physics.gravity;
         anim = GetComponent<Animator>();
+        Debug.Log("맞았어요!");
     }
 
     void FixedUpdate()
@@ -112,7 +113,6 @@ public class Si_BossMovement : MonoBehaviour
                 attackNum = UnityEngine.Random.Range(1, 7);
                 if (attackNum != lastAttack)
                 {
-                    Debug.Log("test");
                     isAttack = true;
                     yield return StartCoroutine(TurnHead());
                     anim.SetBool("isAttack", true);
@@ -179,7 +179,10 @@ public class Si_BossMovement : MonoBehaviour
         while (true)
         {
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern1"))
-                    break;
+            {
+                Debug.Log("맞았어요");
+                break;
+            }
             yield return new WaitForEndOfFrame();
         }
         anim.SetInteger("AttackType", 0);
