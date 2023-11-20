@@ -404,6 +404,7 @@ public class Si_BossMovement : MonoBehaviour
         anim.SetBool("isBreak", true);
         anim.SetInteger("AttackType", 0);
         StartCoroutine(deley(3));
+        StartCoroutine(TurnHead());
         isAttack = false;
         attackNum = 0;
         count = 0;

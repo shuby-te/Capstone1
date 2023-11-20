@@ -151,9 +151,8 @@ public class Si_SpawnManeger : MonoBehaviour
                 else
                     tf = firePos2.transform;
                 GameObject fireBall=Instantiate(fire, tf);
-                fireBall.transform.parent = bossRoomCenter.transform.parent;
                 fireBall.transform.localPosition = new Vector3(0, 0, 0);
-                fireBall.transform.localScale = new Vector3(0.007f, 0.007f, 0.007f);
+                fireBall.transform.localScale = new Vector3(1, 1, 1);
                 yield return new WaitForSeconds(0.3f);
             }
         }
