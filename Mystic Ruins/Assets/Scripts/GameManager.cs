@@ -5,23 +5,38 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    void Start()
+    public GameObject player;
+    public GameObject userInterface;
+
+    private void Start()
     {
         DataManager.Instance.LoadGameData();
+        player.transform.position = new Vector3(
+            DataManager.Instance.gameData.x, 
+            DataManager.Instance.gameData.y, 
+            DataManager.Instance.gameData.z);      
+
+        userInterface.SetActive(false);
     }
 
     private void OnApplicationQuit()
     {
         DataManager.Instance.SaveGameData();
-        Debug.Log(Application.persistentDataPath);
     }
 
     void Update()
     {
-        /*if(Input.GetKeyDown(KeyCode.P))
-            Application.Quit();*/
+        if (Input.GetKeyDown(KeyCode.R))
+            player.transform.position = new Vector3(-50, 0, -20);
 
-        if(Input.GetKeyDown(KeyCode.Escape))
-            SceneManager.LoadScene("TitleScene");
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(userInterface.activeSelf)
+                userInterface.SetActive(false);
+            else
+                userInterface.SetActive(true);
+        }
+
+
     }
 }

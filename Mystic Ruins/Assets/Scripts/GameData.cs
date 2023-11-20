@@ -1,19 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEngine;
+using System;
 
-public class GameData : MonoBehaviour
+[Serializable]
+public class GameData
 {
-    public string savePoint;
+    public float x = -50, y = 0, z = -20;
 
-    void Update()
-    {
-
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            Debug.Log(savePoint);
-        }
-        
-    }
+    public int[] items = new int[4];
 }

@@ -5,33 +5,36 @@ using UnityEngine;
 
 public class Save : MonoBehaviour
 {
-    public GameData gameData;
+    public Vector3 posWeight;
 
+    //GameData gameData = 
     bool isSave;
-
-    void Start()
-    {
-        
-    }
 
     void Update()
     {
         if (isSave && Input.GetKeyDown(KeyCode.E))
         {
-            gameData.savePoint = "fuck you";
-            Debug.Log("eeee");
+            DataManager.Instance.gameData.x = transform.position.x + posWeight.x;
+            DataManager.Instance.gameData.y = transform.position.y + posWeight.y;
+            DataManager.Instance.gameData.z = transform.position.z + posWeight.z;
         }           
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
+        {
             isSave = true;
+            Debug.Log("saved~");
+        }
     }
 
-    private void OnCollisionExit(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
+        {
             isSave = false;
+            Debug.Log("leave~");
+        }
     }
 }

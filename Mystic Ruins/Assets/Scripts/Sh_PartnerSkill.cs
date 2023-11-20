@@ -37,34 +37,37 @@ public class Sh_PartnerSkill : MonoBehaviour
             partner.position = blinkPos;
         }
 
-        if (Input.GetKeyDown(KeyCode.Alpha1)) 
-        {            
-            if(!isSkill)
-            {
-                isSkill = true;
-                partner.GetComponent<Sh_FollowPlayer>().isEnable = false;
-                
-                StartCoroutine(Blink(1));
-            }
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        if(!Input.GetKey(KeyCode.E))
         {
-            if (!isSkill)
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                isSkill = true;
-                partner.GetComponent<Sh_FollowPlayer>().isEnable = false;
+                if (!isSkill)
+                {
+                    isSkill = true;
+                    partner.GetComponent<Sh_FollowPlayer>().isEnable = false;
 
-                StartCoroutine(Blink(2));
+                    StartCoroutine(Blink(1));
+                }
             }
-        }
-        else if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            if (!isSkill)
+            else if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                isSkill = true;
-                partner.GetComponent<Sh_FollowPlayer>().isEnable = false;
+                if (!isSkill)
+                {
+                    isSkill = true;
+                    partner.GetComponent<Sh_FollowPlayer>().isEnable = false;
 
-                StartCoroutine(Blink(3));
+                    StartCoroutine(Blink(2));
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                if (!isSkill)
+                {
+                    isSkill = true;
+                    partner.GetComponent<Sh_FollowPlayer>().isEnable = false;
+
+                    StartCoroutine(Blink(3));
+                }
             }
         }
     }

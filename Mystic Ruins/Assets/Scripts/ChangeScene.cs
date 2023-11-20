@@ -9,4 +9,14 @@ public class ChangeScene : MonoBehaviour
     {
         SceneManager.LoadScene("MainScene");
     }
+
+    public void ToTitleScene()
+    {
+        SceneManager.LoadScene("Park_TitleScene");
+    }
+
+    public void ToEnd()
+    {
+        Application.Quit();
+    }
 }

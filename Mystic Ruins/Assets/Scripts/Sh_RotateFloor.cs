@@ -13,9 +13,9 @@ public class Sh_RotateFloor : MonoBehaviour
 
     private void Update()
     {
-        if(isCol)
+        if(isCol && Input.GetKey(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.U) && !isActivate)
+            if (Input.GetKeyDown(KeyCode.Alpha1) && !isActivate)
             {
                 if (player != null && player.transform.parent == null)
                     player.transform.SetParent(transform, true);
@@ -25,7 +25,7 @@ public class Sh_RotateFloor : MonoBehaviour
                 StartCoroutine(moveFloor(hourFloor, 1));
             }
 
-            else if (Input.GetKeyDown(KeyCode.I) && !isActivate)
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && !isActivate)
             {
                 if (player != null && player.transform.parent == null)
                     player.transform.SetParent(transform, true);
@@ -35,7 +35,7 @@ public class Sh_RotateFloor : MonoBehaviour
                 StartCoroutine(moveFloor(hourFloor, 1));
             }
 
-            else if (Input.GetKeyDown(KeyCode.O) && !isActivate)
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && !isActivate)
             {
                 if (player != null && player.transform.parent == null)
                     player.transform.SetParent(transform, true);
