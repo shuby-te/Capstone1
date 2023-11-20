@@ -5,7 +5,7 @@ using UnityEngine;
 public class TriggerManager : MonoBehaviour
 {
     public GameObject attackTrigger;
-
+    public float deal;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +24,7 @@ public class TriggerManager : MonoBehaviour
     void p1()
     {
         attackTrigger.SetActive(true);
+        deal = 5; //이렇게 보스 데미지 넣으면 될듯 ?
         attackTrigger.transform.localPosition = new Vector3(0, 0, 3);
         attackTrigger.transform.localScale = new Vector3(5, 1, 5);
     }
