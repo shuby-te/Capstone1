@@ -25,7 +25,6 @@ public class Save : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             isSave = true;
-            Debug.Log("saved~");
         }
     }
 
@@ -34,7 +33,6 @@ public class Save : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             isSave = false;
-            Debug.Log("leave~");
         }
     }
 }

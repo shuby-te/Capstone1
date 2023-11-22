@@ -7,19 +7,11 @@ using UnityEngine.UI;
 
 public class P_Title : MonoBehaviour
 {
-    public GameObject Title;
-    public GameObject TeamTitle;
-    public float destroyDelay = 3.0f;
+    public GameObject teamTitle;
+    public float destroyDelay;
 
     void Start()
     {
-        Destroy(Title, destroyDelay);
-        Destroy(TeamTitle, destroyDelay+2);
+        Destroy(teamTitle, destroyDelay);
     }
-
-    public void OnClickChageScene()
-    {
-        SceneManager.LoadScene("MainScene");
-    }
-
 }
