@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerManager : MonoBehaviour
+public class BossTriggerManager : MonoBehaviour
 {
     public GameObject attackTrigger;
     public float deal;
