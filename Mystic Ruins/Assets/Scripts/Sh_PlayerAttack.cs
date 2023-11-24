@@ -7,7 +7,13 @@ public class Sh_PlayerAttack : MonoBehaviour
 {
     public GameObject hpManager;
 
-    public bool isOverlapped;
+    bool isOverlapped;
+
+    void Attack()
+    {
+        if (isOverlapped)
+            hpManager.GetComponent<Sh_HpManager>().AttackToBoss();
+    }
 
     private void OnTriggerStay(Collider other)
     {

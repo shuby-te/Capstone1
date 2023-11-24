@@ -69305,7 +69305,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.76666665
-    functionName: disable
+    functionName: Disable
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -69319,7 +69319,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 3.3333333
-    functionName: disable
+    functionName: Disable
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

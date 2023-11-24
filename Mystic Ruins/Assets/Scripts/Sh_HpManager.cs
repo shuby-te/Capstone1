@@ -24,7 +24,6 @@ public class Sh_HpManager : MonoBehaviour
         playerHp = maxPlayerHp;
     }
 
-
     public void AttackToBoss()
     {
         bossHp -= playerDmg;
@@ -32,10 +31,14 @@ public class Sh_HpManager : MonoBehaviour
         MoveHpNeedle();
     }
 
-    public void MoveHpNeedle()
+    public void AttackToPlayer()
     {
-        //float angle = playerDmg / maxBossHp * 360;
-        
+        playerHp -= bossDmg;
+        Debug.Log(bossDmg + "?????");
+    }
+
+    public void MoveHpNeedle()
+    {        
         StartCoroutine(RotateHpNeedle(needle));
 
         for (int i = 0; i < gears.Count; i++)

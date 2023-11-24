@@ -6,10 +6,6 @@ using UnityEngine;
 
 public class PlayerMovement2 : MonoBehaviour
 {
-    public GameObject hpManager;
-    public GameObject playerAttack;
-    //public GameObject itemManager;
-
     public float speed = 10f;
     public float dashSpeed = 2f;
     public float rotateSpeed = 7f;
@@ -17,13 +13,11 @@ public class PlayerMovement2 : MonoBehaviour
     Rigidbody rb;
     GameObject partner;
     Animator anim;
-    //GameObject interactItem;
 
     Vector3 dir = Vector3.zero;
     bool dashCool;
     bool isDash;
     bool isMove;
-    //bool isItem;
 
     float xAxis = 1f, zAxis = -1f;
     float partnerSpeed = 4f;
@@ -75,16 +69,6 @@ public class PlayerMovement2 : MonoBehaviour
             StartCoroutine("OffTheDash");
         }
 
-        /*if (isItem && Input.GetKeyDown(KeyCode.E))
-        {
-            itemManager.GetComponent<ItemManager>().AddItem(interactItem);
-
-            ItemData id = interactItem.GetComponent<ItemData>();
-            if(id.isUnique)
-                id.ItemDestroy();
-        }*/
-
-
         //юс╫ц
         if(transform.position.y < -15)
         {
@@ -111,6 +95,8 @@ public class PlayerMovement2 : MonoBehaviour
         if(isMove && anim.GetInteger("isAttack") == 0 && !isDash)
             rb.MovePosition(gameObject.transform.position + dir * speed * Time.deltaTime);
 
+        Debug.Log(dir.x + ", " + dir.y + ", " + dir.z);
+
         //partner move
         partner.transform.position = new Vector3(transform.position.x - xAxis * 1.6f,
             transform.position.y + 2.5f, transform.position.z - zAxis * 1.6f);
@@ -123,28 +109,4 @@ public class PlayerMovement2 : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         dashCool = true;
     }
-
-    void Attack()
-    {
-        if(playerAttack.GetComponent<Sh_PlayerAttack>().isOverlapped)
-            hpManager.GetComponent<Sh_HpManager>().AttackToBoss();
-    }
-
-   /* private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.CompareTag("Item"))
-        {
-            isItem = true;
-            interactItem = other.gameObject;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Item"))
-        {
-            isItem = false;
-            interactItem = null;
-        }
-    }*/
 }
