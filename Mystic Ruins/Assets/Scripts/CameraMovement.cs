@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraMovement : MonoBehaviour
 {
+    public GameObject fade;
     public GameObject player;
     public bool boss;
+    public bool isFade=false;
     Vector3 t_pos;
     bool isMap;
     public float a = 40, b = 0, c = 0, x = 0, y = 15, z = -13;
@@ -45,6 +48,15 @@ public class CameraMovement : MonoBehaviour
     public void SetCamera(int a,int b,int c,int x, int y,int z)
     {
         this.a = a; this.b = b;this.c = c; this.x = x;this.y = y; this.z = z;
+    }
+    public IEnumerator Fade(bool state)
+    {
+        fade.GetComponent<FadeEffect>().Fade(state);
+        if (state)
+            yield return new WaitForSeconds(1.5f);
+        else
+            yield return new WaitForSeconds(3);
+
     }
 
 }
