@@ -8,6 +8,7 @@ public class PlayerMovement2 : MonoBehaviour
 {
     public GameObject hpManager;
     public GameObject playerAttack;
+    //public GameObject itemManager;
 
     public float speed = 10f;
     public float dashSpeed = 2f;
@@ -16,11 +17,14 @@ public class PlayerMovement2 : MonoBehaviour
     Rigidbody rb;
     GameObject partner;
     Animator anim;
+    //GameObject interactItem;
 
     Vector3 dir = Vector3.zero;
     bool dashCool;
     bool isDash;
     bool isMove;
+    //bool isItem;
+
     float xAxis = 1f, zAxis = -1f;
     float partnerSpeed = 4f;
 
@@ -70,6 +74,23 @@ public class PlayerMovement2 : MonoBehaviour
             dashCool = false;
             StartCoroutine("OffTheDash");
         }
+
+        /*if (isItem && Input.GetKeyDown(KeyCode.E))
+        {
+            itemManager.GetComponent<ItemManager>().AddItem(interactItem);
+
+            ItemData id = interactItem.GetComponent<ItemData>();
+            if(id.isUnique)
+                id.ItemDestroy();
+        }*/
+
+
+        //юс╫ц
+        if(transform.position.y < -15)
+        {
+            GameData gd = DataManager.Instance.gameData;
+            transform.position = new Vector3(gd.x, gd.y, gd.z);
+        }
     }
 
     private void FixedUpdate()
@@ -108,4 +129,22 @@ public class PlayerMovement2 : MonoBehaviour
         if(playerAttack.GetComponent<Sh_PlayerAttack>().isOverlapped)
             hpManager.GetComponent<Sh_HpManager>().AttackToBoss();
     }
+
+   /* private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Item"))
+        {
+            isItem = true;
+            interactItem = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Item"))
+        {
+            isItem = false;
+            interactItem = null;
+        }
+    }*/
 }

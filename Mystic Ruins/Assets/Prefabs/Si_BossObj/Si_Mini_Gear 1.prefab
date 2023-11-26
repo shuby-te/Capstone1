@@ -110,6 +110,7 @@ GameObject:
   - component: {fileID: 8304552692041775543}
   - component: {fileID: 5097078946809275040}
   - component: {fileID: 549446743405094933}
+  - component: {fileID: 6343755375246167429}
   m_Layer: 0
   m_Name: Si_Mini_Gear 1
   m_TagString: MiniGear
@@ -198,3 +199,17 @@ MonoBehaviour:
   speed: 25
   isActive: 0
   isDrop: 0
+--- !u!64 &6343755375246167429
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7481668866322713422}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 5760465168522449586, guid: d2a23396431946849967a0828ea6e2b0, type: 3}
