@@ -15,11 +15,26 @@ public class Sh_PartnerSkill : MonoBehaviour
     public GameObject shield;
     public GameObject spark;
 
+    public float FCool;
+    public float HCool;
+    public float SCool;
+
     bool isSkill = false;
     bool isPump = false;
     int waterLen = 1;
 
+    float fTime;
+    float hTime;
+    float sTime;
+
     Vector3 blinkPos;
+
+    private void Start()
+    {
+        float fTime = FCool;
+        float hTime = HCool;
+        float sTime = SCool;
+    }
 
     void Update()
     {
@@ -39,7 +54,7 @@ public class Sh_PartnerSkill : MonoBehaviour
 
         if(!Input.GetKey(KeyCode.E))
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1))
+            if (Input.GetKeyDown(KeyCode.Alpha1) && fTime >= FCool)
             {
                 if (!isSkill)
                 {
@@ -49,7 +64,7 @@ public class Sh_PartnerSkill : MonoBehaviour
                     StartCoroutine(Blink(1));
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2))
+            else if (Input.GetKeyDown(KeyCode.Alpha2) && hTime >= HCool)
             {
                 if (!isSkill)
                 {
@@ -59,7 +74,7 @@ public class Sh_PartnerSkill : MonoBehaviour
                     StartCoroutine(Blink(2));
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha3))
+            else if (Input.GetKeyDown(KeyCode.Alpha3) && sTime >= SCool)
             {
                 if (!isSkill)
                 {
@@ -70,6 +85,14 @@ public class Sh_PartnerSkill : MonoBehaviour
                 }
             }
         }
+
+        fTime += Time.deltaTime;
+        hTime += Time.deltaTime;
+        sTime += Time.deltaTime;
+
+        if (fTime > 100) fTime = 0;
+        if (hTime > 100) hTime = 0;
+        if (sTime > 100) sTime = 0;        
     }
 
     IEnumerator Blink(int num)
@@ -124,6 +147,7 @@ public class Sh_PartnerSkill : MonoBehaviour
 
         blink.transform.position = partner.position;
         PlayBlink();
+        fTime = 0;
     }
 
     IEnumerator Hydropump()
@@ -140,7 +164,6 @@ public class Sh_PartnerSkill : MonoBehaviour
         blink.transform.position = blinkPos;
         PlayBlink();
         isPump = false;
-
         
         partner.gameObject.SetActive(false);        
         partner.GetComponent<Sh_FollowPlayer>().isEnable = true;
@@ -153,6 +176,7 @@ public class Sh_PartnerSkill : MonoBehaviour
 
         blink.transform.position = partner.position;
         PlayBlink();
+        hTime = 0;
     }
 
     IEnumerator Shield()
@@ -186,6 +210,7 @@ public class Sh_PartnerSkill : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         Destroy(spawnShield);
+        sTime = 0;
     }
 
     IEnumerator DeleteWater()

@@ -18,6 +18,7 @@ public class PlayerMovement2 : MonoBehaviour
     bool dashCool;
     bool isDash;
     bool isMove;
+    bool isKnokback;
 
     float xAxis = 1f, zAxis = -1f;
     float partnerSpeed = 4f;
@@ -32,42 +33,49 @@ public class PlayerMovement2 : MonoBehaviour
 
     void Update()
     {
-        //key input
-        if (!isDash)
+        if(!isKnokback)
         {
-            dir.x = Input.GetAxisRaw("Horizontal");
-            dir.z = Input.GetAxisRaw("Vertical");
+            //key input
+            if (!isDash)
+            {
+                dir.x = Input.GetAxisRaw("Horizontal");
+                dir.z = Input.GetAxisRaw("Vertical");
 
-            dir.Normalize();
-        }
+                dir.Normalize();
+            }
 
-        if(Input.anyKey) isMove = true;
-        else isMove = false;
+            if (Input.anyKey) isMove = true;
+            else isMove = false;
 
-        if (Input.GetKey(KeyCode.W)){
-            zAxis += Time.deltaTime * partnerSpeed;
-            if (zAxis > 1f) zAxis = 1f;
-        }
-        if (Input.GetKey(KeyCode.S)){
-            zAxis -= Time.deltaTime * partnerSpeed;
-            if (zAxis < -1f) zAxis = -1f;
-        }
-        if (Input.GetKey(KeyCode.D)){
-            xAxis += Time.deltaTime * partnerSpeed;
-            if (xAxis > 1f) xAxis = 1f;
-        }
-        if (Input.GetKey(KeyCode.A)){
-            xAxis -= Time.deltaTime * partnerSpeed;
-            if (xAxis < -1f) xAxis = -1f;
-        }
+            if (Input.GetKey(KeyCode.W))
+            {
+                zAxis += Time.deltaTime * partnerSpeed;
+                if (zAxis > 1f) zAxis = 1f;
+            }
+            if (Input.GetKey(KeyCode.S))
+            {
+                zAxis -= Time.deltaTime * partnerSpeed;
+                if (zAxis < -1f) zAxis = -1f;
+            }
+            if (Input.GetKey(KeyCode.D))
+            {
+                xAxis += Time.deltaTime * partnerSpeed;
+                if (xAxis > 1f) xAxis = 1f;
+            }
+            if (Input.GetKey(KeyCode.A))
+            {
+                xAxis -= Time.deltaTime * partnerSpeed;
+                if (xAxis < -1f) xAxis = -1f;
+            }
 
-        //dash
-        if (Input.GetKeyDown(KeyCode.LeftShift) && dashCool)
-        {
-            isDash = true;
-            dashCool = false;
-            StartCoroutine("OffTheDash");
-        }
+            //dash
+            if (Input.GetKeyDown(KeyCode.LeftShift) && dashCool)
+            {
+                isDash = true;
+                dashCool = false;
+                StartCoroutine("OffTheDash");
+            }
+        }      
 
         //юс╫ц
         if(transform.position.y < -15)
@@ -79,23 +87,24 @@ public class PlayerMovement2 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //rotation
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+        if(!isKnokback)
         {
-            Vector3 point = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+            //rotation
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+            {
+                Vector3 point = new Vector3(hit.point.x, transform.position.y, hit.point.z);
 
-            Vector3 rotateDir = point - transform.position;
-            if (rotateDir != Vector3.zero)
-                transform.forward = rotateDir;
+                Vector3 rotateDir = point - transform.position;
+                if (rotateDir != Vector3.zero)
+                    transform.forward = rotateDir;
+            }
+
+            //move
+            if (isMove && anim.GetInteger("isAttack") == 0 && !isDash)
+                rb.MovePosition(gameObject.transform.position + dir * speed * Time.deltaTime);
         }
-
-        //move
-        if(isMove && anim.GetInteger("isAttack") == 0 && !isDash)
-            rb.MovePosition(gameObject.transform.position + dir * speed * Time.deltaTime);
-
-        Debug.Log(dir.x + ", " + dir.y + ", " + dir.z);
 
         //partner move
         partner.transform.position = new Vector3(transform.position.x - xAxis * 1.6f,
