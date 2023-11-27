@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8449371979328028926}
   - component: {fileID: -220539838228736848}
   m_Layer: 0
-  m_Name: Si_Gear 1
+  m_Name: DropGear
   m_TagString: DropGear
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
