@@ -26,8 +26,13 @@ public class MapTrigger : MonoBehaviour
     }
     private IEnumerator Move()
     {
+        player.GetComponent<Animator>().SetInteger("moveNum", 0);
+        player.GetComponent<Animator>().SetInteger("isAttack", 0);
+        player.GetComponent<Animator>().SetBool("isRoll", false);
+
         player.GetComponent<PlayerMovement2>().enabled = false;
-        //player.GetComponent<PlayerAnim>().enabled = false;
+        player.GetComponent<PlayerAnim>().enabled = false;
+        
         yield return StartCoroutine(camera.GetComponent<CameraMovement>().Fade(false));
         if (triggerTag == 1)//가운데>수조룸
         {
