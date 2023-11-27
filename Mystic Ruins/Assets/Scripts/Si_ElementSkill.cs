@@ -43,14 +43,9 @@ public class Si_ElementSkill : MonoBehaviour
         }
     }
 
-    private void OnParticleCollision(GameObject other)
+    private void OnParticleTrigger()
     {
-        if(isActive && gameObject.CompareTag("Fire"))
-        {
-            GetComponent<Si_BossMovement>().speed *= 1.25f;
-            Debug.Log("aaaa");
-        }
-
+        boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.25f);
     }
     IEnumerator wait(float x)
     {

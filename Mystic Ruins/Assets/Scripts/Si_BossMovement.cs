@@ -7,7 +7,6 @@ public class Si_BossMovement : MonoBehaviour
 {
     public GameObject player;
     public GameObject spawnManager;
-    public GameObject attackTrigger;
  
     public float hp;
     public float speed=1;

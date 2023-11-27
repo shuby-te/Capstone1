@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -4729151222593355011}
   - component: {fileID: -6847156933121957343}
   - component: {fileID: 8449371979328028926}
+  - component: {fileID: -220539838228736848}
   m_Layer: 0
   m_Name: Si_Gear 1
   m_TagString: DropGear
@@ -131,3 +132,18 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5760465168522449586, guid: d2a23396431946849967a0828ea6e2b0, type: 3}
+--- !u!114 &-220539838228736848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4145334396530772629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38fa24f199465294aa4222118832b4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  isActive: 0
+  isDrop: 0
