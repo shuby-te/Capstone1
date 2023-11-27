@@ -5,8 +5,6 @@ using UnityEngine.Rendering;
 
 public class ItemManager : MonoBehaviour
 {
-    
-
     public void AddItem(GameObject item)
     {         
         int[] items = DataManager.Instance.gameData.items;
