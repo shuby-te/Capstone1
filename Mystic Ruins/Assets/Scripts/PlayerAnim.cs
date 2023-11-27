@@ -84,8 +84,6 @@ public class PlayerAnim : MonoBehaviour
         else if (-67.5f < yAngle && yAngle <= -22.5f)
             mouseN = 8;
 
-        //Debug.Log(keyN + ", " + mouseN);
-
         time += Time.deltaTime;
     }
 
@@ -100,13 +98,23 @@ public class PlayerAnim : MonoBehaviour
             num = -num + 1;
             anim.SetInteger("moveNum", num);
         }
-    }   
+    }
 
     IEnumerator OffRolling()
     {
-        yield return new WaitForSeconds(1f);        
+        yield return new WaitForSeconds(1f);
         anim.SetBool("isRoll", false);
         yield return new WaitForSeconds(2f);
         isRoll = false;
+    }
+
+    public void KnockBacked()
+    {
+        anim.SetBool("isKnockback", true);
+    }
+
+    public void StandUp()
+    {
+        anim.SetBool("isKnockback", false);
     }
 }

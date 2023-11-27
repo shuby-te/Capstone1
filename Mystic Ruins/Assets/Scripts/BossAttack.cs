@@ -5,16 +5,21 @@ using UnityEngine;
 
 public class BossAttack : MonoBehaviour
 {
+    public GameObject playerAnim;
     public GameObject attackRange;
     public GameObject hpManager;
-    public float damage;
+    float damage;
 
     bool isOverlapped;
 
     void Attack()
     {
         if (isOverlapped)
+        {
             hpManager.GetComponent<Sh_HpManager>().AttackToPlayer();
+
+            playerAnim.GetComponent<PlayerAnim>().KnockBacked();
+        }
     }   
     
     void Disable()

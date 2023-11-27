@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public GameObject player;
-    public GameObject userInterface;
+    public GameObject titleB;
+    public GameObject quitB;
 
     private void Start()
     {
@@ -14,9 +15,10 @@ public class GameManager : MonoBehaviour
         player.transform.position = new Vector3(
             DataManager.Instance.gameData.x, 
             DataManager.Instance.gameData.y, 
-            DataManager.Instance.gameData.z);      
+            DataManager.Instance.gameData.z);
 
-        userInterface.SetActive(false);
+        titleB.SetActive(false);
+        quitB.SetActive(false);
     }
 
     private void OnApplicationQuit()
@@ -31,10 +33,16 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(userInterface.activeSelf)
-                userInterface.SetActive(false);
+            if (titleB.activeSelf && quitB.activeSelf)
+            {
+                titleB.SetActive(false);
+                quitB.SetActive(false);
+            }
             else
-                userInterface.SetActive(true);
+            {
+                titleB.SetActive(true);
+                quitB.SetActive(true);
+            }
         }
 
 
