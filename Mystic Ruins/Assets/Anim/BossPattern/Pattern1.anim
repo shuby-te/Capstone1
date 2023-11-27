@@ -95598,7 +95598,7 @@ AnimationClip:
   - time: 2.4666667
     functionName: p1
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: eb514043e409c024aad91e6593f2d78f,
+    objectReferenceParameter: {fileID: 11500000, guid: 40e984fb03db19d46ba21678ca7f24bf,
       type: 3}
     floatParameter: 0
     intParameter: 0
@@ -95606,7 +95606,7 @@ AnimationClip:
   - time: 2.6333334
     functionName: Attack
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: eb514043e409c024aad91e6593f2d78f,
+    objectReferenceParameter: {fileID: 11500000, guid: 40e984fb03db19d46ba21678ca7f24bf,
       type: 3}
     floatParameter: 0
     intParameter: 0
@@ -95614,7 +95614,7 @@ AnimationClip:
   - time: 2.6666667
     functionName: Disable
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: eb514043e409c024aad91e6593f2d78f,
+    objectReferenceParameter: {fileID: 11500000, guid: 40e984fb03db19d46ba21678ca7f24bf,
       type: 3}
     floatParameter: 0
     intParameter: 0

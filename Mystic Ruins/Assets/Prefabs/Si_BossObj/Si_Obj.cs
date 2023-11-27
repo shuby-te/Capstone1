@@ -14,14 +14,10 @@ public class Si_Obj : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         player = GameObject.Find("Player");
 
-        if (gameObject.CompareTag("BigGear"))
-        {
-            Destroy(gameObject, 3.5f);
-        }
+        
  
         if (gameObject.CompareTag("Bomb"))
         {
-
             Destroy(gameObject, 3f);
         }
 
@@ -29,13 +25,6 @@ public class Si_Obj : MonoBehaviour
         {
             rb.useGravity = true;
             rb.AddForce(Vector3.down * 70, ForceMode.Impulse);
-            Destroy(gameObject, 2f);
-        }
-        if (gameObject.CompareTag("Fire"))
-        {
-            rb.useGravity = true;
-            rb.AddForce(Vector3.down * 100, ForceMode.Impulse);
-            Destroy(gameObject, 2.5f);
         }
     }
 
@@ -61,6 +50,10 @@ public class Si_Obj : MonoBehaviour
         {
             transform.position += transform.right * Time.deltaTime * speed;
             Destroy(gameObject, 2f);
+        }
+        if (gameObject.transform.position.y < 0)
+        {
+            Destroy(gameObject);
         }
     }
 
