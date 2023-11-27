@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using System;
 
 public class DataManager : MonoBehaviour
 {
@@ -42,5 +43,16 @@ public class DataManager : MonoBehaviour
 
         File.WriteAllText(filePath, ToJsonData);
         Debug.Log("¿˙¿Â???");
+    }
+
+    public void ResetGameData()
+    {
+        gameData.x = 0;
+        gameData.y = 0;
+        gameData.z = 0;
+
+        Array.Fill(gameData.items, 0);
+
+        SaveGameData();
     }
 }

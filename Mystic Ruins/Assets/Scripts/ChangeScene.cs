@@ -18,5 +18,6 @@ public class ChangeScene : MonoBehaviour
     public void ToEnd()
     {
         Application.Quit();
+        Debug.Log("게임 종료");
     }
 }

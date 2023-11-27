@@ -68,7 +68,7 @@ public class PlayerAnim : MonoBehaviour
         else
             keyN = 0;
 
-        if (-22.5f < yAngle && yAngle <= 22.5f)
+        /*if (-22.5f < yAngle && yAngle <= 22.5f)
             mouseN = 1;
         else if (22.5f < yAngle && yAngle <= 67.5f)
             mouseN = 2;
@@ -83,7 +83,16 @@ public class PlayerAnim : MonoBehaviour
         else if (-112.5f < yAngle && yAngle <= -67.5f)
             mouseN = 7;
         else if (-67.5f < yAngle && yAngle <= -22.5f)
-            mouseN = 8;
+            mouseN = 8;*/
+
+        if (-22.5f < yAngle && yAngle <= 22.5f)
+            mouseN = 1;
+        else if (67.5f < yAngle && yAngle <= 112.5f)
+            mouseN = 3;
+        else if ((157.5f < yAngle && yAngle <= 180f) || (-180f < yAngle && yAngle <= -157.5f))
+            mouseN = 5;
+        else if (-112.5f < yAngle && yAngle <= -67.5f)
+            mouseN = 7;
 
         time += Time.deltaTime;
     }

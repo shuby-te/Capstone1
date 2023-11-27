@@ -7,7 +7,6 @@ public class Save : MonoBehaviour
 {
     public Vector3 posWeight;
 
-    //GameData gameData = 
     bool isSave;
 
     void Update()
@@ -17,6 +16,8 @@ public class Save : MonoBehaviour
             DataManager.Instance.gameData.x = transform.position.x + posWeight.x;
             DataManager.Instance.gameData.y = transform.position.y + posWeight.y;
             DataManager.Instance.gameData.z = transform.position.z + posWeight.z;
+
+            DataManager.Instance.SaveGameData();
         }           
     }
 

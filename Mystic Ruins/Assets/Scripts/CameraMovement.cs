@@ -13,6 +13,7 @@ public class CameraMovement : MonoBehaviour
     Vector3 t_pos;
     bool isMap;
     public float a = 40, b = 0, c = 0, x = 0, y = 15, z = -13;
+
     private void Start()
     {
         isMap = true;
@@ -45,10 +46,12 @@ public class CameraMovement : MonoBehaviour
             transform.position = new Vector3(-229.8252f, 150.901f, 144.0875f);
         }
     }
+
     public void SetCamera(int a,int b,int c,int x, int y,int z)
     {
         this.a = a; this.b = b;this.c = c; this.x = x;this.y = y; this.z = z;
     }
+
     public IEnumerator Fade(bool state)
     {
         fade.GetComponent<FadeEffect>().Fade(state);
@@ -56,7 +59,6 @@ public class CameraMovement : MonoBehaviour
             yield return new WaitForSeconds(1.5f);
         else
             yield return new WaitForSeconds(3);
-
     }
 
 }

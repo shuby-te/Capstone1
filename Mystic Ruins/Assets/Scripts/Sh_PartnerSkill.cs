@@ -182,7 +182,6 @@ public class Sh_PartnerSkill : MonoBehaviour
     IEnumerator Shield()
     {
         yield return new WaitForSeconds(0.4f);
-
         
         Vector3 spawnPos = blinkPos + player.forward * 2;
         spawnPos = new Vector3(spawnPos.x, spawnPos.y + 3f, spawnPos.z);

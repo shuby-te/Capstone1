@@ -9,6 +9,7 @@ public class PlayerMovement2 : MonoBehaviour
     public float speed = 10f;
     public float dashSpeed = 2f;
     public float rotateSpeed = 7f;
+    public float yAngle;
 
     Rigidbody rb;
     GameObject partner;
@@ -41,6 +42,10 @@ public class PlayerMovement2 : MonoBehaviour
                 dir.x = Input.GetAxisRaw("Horizontal");
                 dir.z = Input.GetAxisRaw("Vertical");
 
+                dir.Normalize();
+
+                Quaternion yRotation = Quaternion.Euler(0, yAngle, 0);
+                dir = yRotation * dir;
                 dir.Normalize();
             }
 
@@ -102,6 +107,7 @@ public class PlayerMovement2 : MonoBehaviour
             }
 
             //move
+            
             if (isMove && anim.GetInteger("isAttack") == 0 && !isDash)
                 rb.MovePosition(gameObject.transform.position + dir * speed * Time.deltaTime);
         }
@@ -110,7 +116,7 @@ public class PlayerMovement2 : MonoBehaviour
         partner.transform.position = new Vector3(transform.position.x - xAxis * 1.6f,
             transform.position.y + 2.5f, transform.position.z - zAxis * 1.6f);
     }
-    
+
     IEnumerator OffTheDash()
     {
         yield return new WaitForSeconds(1.5f);
