@@ -14649,7 +14649,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2658585447369127499}
   m_Layer: 0
-  m_Name: FireBall
+  m_Name: Spark
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

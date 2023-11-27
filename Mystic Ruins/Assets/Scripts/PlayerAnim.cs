@@ -13,6 +13,7 @@ public class PlayerAnim : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
+        anim.SetBool("isKnockback", false);
     }
 
     private void Update()
