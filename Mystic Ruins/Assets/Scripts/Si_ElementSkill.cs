@@ -45,10 +45,7 @@ public class Si_ElementSkill : MonoBehaviour
 
     private void OnParticleTrigger()
     {
-        float speed = boss.GetComponent<Animator>().GetFloat("AttackSpeed");
-            boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.25f);
-           
-
+        boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.25f);
     }
     IEnumerator wait(float x)
     {
