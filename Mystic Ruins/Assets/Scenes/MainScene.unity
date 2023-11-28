@@ -2865,7 +2865,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60a06abf0661e824eb929eb34ab18a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fadeTime: 3
+  fadeTime: 2
   fadeCurve:
     serializedVersion: 2
     m_Curve:
@@ -12066,9 +12066,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 474936907}
-  m_LocalRotation: {x: 0, y: 0.8660254, z: -0, w: -0.5}
-  m_LocalPosition: {x: -68.64, y: 0, z: -39.91}
-  m_LocalScale: {x: 5.7566476, y: 2, z: 2}
+  m_LocalRotation: {x: -0, y: 0.86602545, z: -0, w: -0.5}
+  m_LocalPosition: {x: -68.42, y: -0.000000029802322, z: -39.78}
+  m_LocalScale: {x: 5.7566466, y: 2, z: 1.9999998}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 848256884}
@@ -12088,7 +12088,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1659647759}
   player: {fileID: 2033952089}
-  triggerTag: 3
+  tpPoint:
+  - {fileID: 890903599}
+  - {fileID: 2002275809}
+  - {fileID: 1201277371}
+  - {fileID: 580892888}
+  - {fileID: 706813961}
+  - {fileID: 654709382}
+  triggerTag: 2
 --- !u!65 &474936910
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -13994,8 +14001,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 540591622}
   m_LocalRotation: {x: -0, y: 0.49276248, z: -0, w: 0.87016386}
-  m_LocalPosition: {x: -0.19, y: 0, z: -0.12}
-  m_LocalScale: {x: 2.464447, y: 2, z: 2}
+  m_LocalPosition: {x: -0.40000153, y: -0.000000029802322, z: -0.019996643}
+  m_LocalScale: {x: 3.37506, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 848256884}
@@ -14015,7 +14022,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1659647759}
   player: {fileID: 2033952089}
-  triggerTag: 1
+  tpPoint:
+  - {fileID: 890903599}
+  - {fileID: 2002275809}
+  - {fileID: 1201277371}
+  - {fileID: 580892888}
+  - {fileID: 706813961}
+  - {fileID: 654709382}
+  triggerTag: 0
 --- !u!65 &540591625
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14415,8 +14429,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553035643}
-  m_LocalRotation: {x: 0, y: 0.86602545, z: 0, w: 0.49999994}
-  m_LocalPosition: {x: 8.38, y: 0, z: -44.38}
+  m_LocalRotation: {x: -0, y: 0.86602545, z: -0, w: 0.49999994}
+  m_LocalPosition: {x: 9.010002, y: -0.000000029802322, z: -44.740005}
   m_LocalScale: {x: 3.6143954, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14437,7 +14451,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1659647759}
   player: {fileID: 2033952089}
-  triggerTag: 5
+  tpPoint:
+  - {fileID: 890903599}
+  - {fileID: 2002275809}
+  - {fileID: 1201277371}
+  - {fileID: 580892888}
+  - {fileID: 706813961}
+  - {fileID: 654709382}
+  triggerTag: 4
 --- !u!65 &553035646
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14748,6 +14769,37 @@ Transform:
   m_Father: {fileID: 1566470974}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &580892888
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 580892889}
+  m_Layer: 0
+  m_Name: TankToBridge
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &580892889
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 580892888}
+  m_LocalRotation: {x: 0, y: 0.8660254, z: -0, w: -0.5}
+  m_LocalPosition: {x: -1.17, y: 0, z: -0.68}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 748626348}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
 --- !u!1 &582018147
 GameObject:
   m_ObjectHideFlags: 0
@@ -16303,6 +16355,37 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 7.421646, y: 1.6508667, z: 4.331065}
   m_Center: {x: -1.6749038, y: -0.24554789, z: -0.000000013701772}
+--- !u!1 &654709382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 654709383}
+  m_Layer: 0
+  m_Name: MineToBridge
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &654709383
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 654709382}
+  m_LocalRotation: {x: 0, y: 0.5, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: -65.76, y: 0, z: -38.7}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 748626348}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 60, z: 0}
 --- !u!1 &656616354
 GameObject:
   m_ObjectHideFlags: 0
@@ -17589,6 +17672,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 702933816}
   m_Mesh: {fileID: 87725936435303105, guid: 47be3579894a5e84da24cb1c75302540, type: 3}
+--- !u!1 &706813961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 706813962}
+  m_Layer: 0
+  m_Name: StoveToBridge
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &706813962
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 706813961}
+  m_LocalRotation: {x: 0, y: -0.5, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 6.25, y: 0, z: -43.31}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 748626348}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: -60, z: 0}
 --- !u!1 &707769380
 GameObject:
   m_ObjectHideFlags: 0
@@ -18823,6 +18937,43 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 748118481}
   m_Mesh: {fileID: 3868671361854562809, guid: 47be3579894a5e84da24cb1c75302540, type: 3}
+--- !u!1 &748626347
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 748626348}
+  m_Layer: 0
+  m_Name: TpPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &748626348
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748626347}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 33.660694, y: -0.45241767, z: 85.924866}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 890903600}
+  - {fileID: 580892889}
+  - {fileID: 2002275810}
+  - {fileID: 706813962}
+  - {fileID: 1201277372}
+  - {fileID: 654709383}
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &748648411
 GameObject:
   m_ObjectHideFlags: 0
@@ -21247,6 +21398,37 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 7733717212360752527, guid: eba8fe9009fa9cd4b9ac4224979d553d, type: 3}
+--- !u!1 &890903599
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 890903600}
+  m_Layer: 0
+  m_Name: BridgeToTank
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &890903600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 890903599}
+  m_LocalRotation: {x: 0, y: 0.5, z: 0, w: 0.8660254}
+  m_LocalPosition: {x: 2.57, y: 0.62, z: 0.57}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 748626348}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 60, z: 0}
 --- !u!1 &891442651
 GameObject:
   m_ObjectHideFlags: 0
@@ -22057,9 +22239,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930252424}
-  m_LocalRotation: {x: 0, y: 0.8660254, z: -0, w: -0.5}
-  m_LocalPosition: {x: -69.76, y: -0.00999999, z: -40.559998}
-  m_LocalScale: {x: 5.7566476, y: 2, z: 2}
+  m_LocalRotation: {x: -0, y: 0.86602545, z: -0, w: -0.5}
+  m_LocalPosition: {x: -70.149994, y: -0.01000002, z: -40.79}
+  m_LocalScale: {x: 5.7566466, y: 2, z: 1.9999998}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 848256884}
@@ -22079,7 +22261,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1659647759}
   player: {fileID: 2033952089}
-  triggerTag: 6
+  tpPoint:
+  - {fileID: 890903599}
+  - {fileID: 2002275809}
+  - {fileID: 1201277371}
+  - {fileID: 580892888}
+  - {fileID: 706813961}
+  - {fileID: 654709382}
+  triggerTag: 5
 --- !u!65 &930252427
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -29185,6 +29374,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201143522}
   m_Mesh: {fileID: -6010047355802211462, guid: 47be3579894a5e84da24cb1c75302540, type: 3}
+--- !u!1 &1201277371
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1201277372}
+  m_Layer: 0
+  m_Name: BridgeToMine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1201277372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1201277371}
+  m_LocalRotation: {x: 0, y: 0.8660254, z: -0, w: -0.5}
+  m_LocalPosition: {x: -72.32, y: 0, z: -42.4}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 748626348}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 240, z: 0}
 --- !u!1001 &1202724265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30230,8 +30450,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1261411718}
   m_LocalRotation: {x: -0, y: 0.49276248, z: -0, w: 0.87016386}
-  m_LocalPosition: {x: 0.43800068, y: 0, z: 0.2579956}
-  m_LocalScale: {x: 2.464447, y: 2, z: 2}
+  m_LocalPosition: {x: 0.65999985, y: -0.000000029802322, z: 0.3899994}
+  m_LocalScale: {x: 2.4644475, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 848256884}
@@ -30251,7 +30471,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1659647759}
   player: {fileID: 2033952089}
-  triggerTag: 4
+  tpPoint:
+  - {fileID: 890903599}
+  - {fileID: 2002275809}
+  - {fileID: 1201277371}
+  - {fileID: 580892888}
+  - {fileID: 706813961}
+  - {fileID: 654709382}
+  triggerTag: 3
 --- !u!65 &1261411721
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -43229,8 +43456,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758068945}
-  m_LocalRotation: {x: 0, y: 0.86602545, z: 0, w: 0.49999994}
-  m_LocalPosition: {x: 7.63, y: 0, z: -44.01}
+  m_LocalRotation: {x: -0, y: 0.86602545, z: -0, w: 0.49999994}
+  m_LocalPosition: {x: 7.0599976, y: -0.000000029802322, z: -43.680004}
   m_LocalScale: {x: 3.8543272, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -43251,7 +43478,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camera: {fileID: 1659647759}
   player: {fileID: 2033952089}
-  triggerTag: 2
+  tpPoint:
+  - {fileID: 890903599}
+  - {fileID: 2002275809}
+  - {fileID: 1201277371}
+  - {fileID: 580892888}
+  - {fileID: 706813961}
+  - {fileID: 654709382}
+  triggerTag: 1
 --- !u!65 &1758068948
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -50124,6 +50358,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2000727347}
   m_Mesh: {fileID: 2006463734286399825, guid: 47be3579894a5e84da24cb1c75302540, type: 3}
+--- !u!1 &2002275809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2002275810}
+  m_Layer: 0
+  m_Name: BridgeToStove
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2002275810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2002275809}
+  m_LocalRotation: {x: 0, y: 0.86602545, z: 0, w: 0.49999994}
+  m_LocalPosition: {x: 12.27, y: 0, z: -46.62}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 748626348}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 120, z: 0}
 --- !u!1 &2006143845
 GameObject:
   m_ObjectHideFlags: 0
@@ -50835,7 +51100,7 @@ BoxCollider:
   m_GameObject: {fileID: 2026216381}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Size: {x: 3, y: 2, z: 2}
   m_Center: {x: 0, y: 1, z: 0}
