@@ -27,14 +27,14 @@ public class Sh_HpManager : MonoBehaviour
     public void AttackToBoss()
     {
         bossHp -= playerDmg;
-        Debug.Log(playerDmg + "!!!!!");
+        Debug.Log("player attacked: " + playerDmg + "!!!!!");
         MoveHpNeedle();
     }
 
     public void AttackToPlayer()
     {
         playerHp -= bossDmg;
-        Debug.Log(bossDmg + "?????");
+        Debug.Log("boss attacked: " + bossDmg + "?????");
     }
 
     public void MoveHpNeedle()

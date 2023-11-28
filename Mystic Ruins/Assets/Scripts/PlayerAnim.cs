@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerAnim : MonoBehaviour
-{    
+{
     Animator anim;
+    PlayerMovement2 pm;
+
     int keyN, mouseN;
     int isAttack;
     float time;
@@ -14,10 +16,25 @@ public class PlayerAnim : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         anim.SetBool("isKnockback", false);
+        pm = this.gameObject.GetComponent<PlayerMovement2>();
     }
 
     private void Update()
     {
+        if(pm.isClimb)
+        {
+            anim.SetFloat("climbF", 0f);
+
+            if(Input.GetKey(KeyCode.W))
+            {
+                anim.SetFloat("climbF", 1f);
+            }
+            else if (Input.GetKey(KeyCode.S))
+            {
+                anim.SetFloat("climbF", -1f);
+            }
+        }
+
         if(Input.GetKeyDown(KeyCode.LeftShift)  && !isRoll)
         {
             isRoll = true;
@@ -85,14 +102,18 @@ public class PlayerAnim : MonoBehaviour
         else if (-67.5f < yAngle && yAngle <= -22.5f)
             mouseN = 8;*/
 
-        if (-22.5f < yAngle && yAngle <= 22.5f)
-            mouseN = 1;
-        else if (67.5f < yAngle && yAngle <= 112.5f)
-            mouseN = 3;
-        else if ((157.5f < yAngle && yAngle <= 180f) || (-180f < yAngle && yAngle <= -157.5f))
-            mouseN = 5;
-        else if (-112.5f < yAngle && yAngle <= -67.5f)
-            mouseN = 7;
+        if(pm.isActive)
+        {
+            Debug.Log("asef");
+            if (-22.5f < yAngle && yAngle <= 22.5f)
+                mouseN = 1;
+            else if (67.5f < yAngle && yAngle <= 112.5f)
+                mouseN = 3;
+            else if ((157.5f < yAngle && yAngle <= 180f) || (-180f < yAngle && yAngle <= -157.5f))
+                mouseN = 5;
+            else if (-112.5f < yAngle && yAngle <= -67.5f)
+                mouseN = 7;
+        }
 
         time += Time.deltaTime;
     }
@@ -126,5 +147,10 @@ public class PlayerAnim : MonoBehaviour
     public void StandUp()
     {
         anim.SetBool("isKnockback", false);
+    }
+
+    public void JustClimbing()
+    {
+        anim.SetBool("isClimb", false);
     }
 }
