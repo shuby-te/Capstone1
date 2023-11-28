@@ -28,12 +28,16 @@ public class Sh_PartnerSkill : MonoBehaviour
     float sTime;
 
     Vector3 blinkPos;
+    PlayerMovement2 pm;
 
     private void Start()
     {
         float fTime = FCool;
         float hTime = HCool;
         float sTime = SCool;
+
+        pm = player.parent.gameObject.GetComponent<PlayerMovement2>();
+        //pm = player.gameObject.GetComponent<PlayerMovement2>();
     }
 
     void Update()
@@ -52,7 +56,7 @@ public class Sh_PartnerSkill : MonoBehaviour
             partner.position = blinkPos;
         }
 
-        if(!Input.GetKey(KeyCode.E))
+        if(pm.isActive)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1) && fTime >= FCool)
             {

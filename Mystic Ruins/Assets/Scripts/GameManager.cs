@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.R))
-            player.transform.position = new Vector3(-50, 0, -20);
+            player.transform.position = new Vector3(0, 0, 0);
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {

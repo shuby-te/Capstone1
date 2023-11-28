@@ -22,13 +22,16 @@ public class Sh_RotateFloor : MonoBehaviour
                 isWork = false;
                 player.GetComponent<PlayerMovement2>().isActive = true;
                 player.GetComponent<PlayerAnim>().enabled = true;
-                //mainCamera.GetComponent<CameraMovement>().SetCamera();
+                mainCamera.GetComponent<CameraMovement>().isRotate = false;
             }
             else
             {
                 isWork = true;
                 player.GetComponent<PlayerMovement2>().isActive = false;
                 player.GetComponent<PlayerAnim>().enabled = false;
+                mainCamera.GetComponent<CameraMovement>().isRotate = true;
+                mainCamera.transform.position = new Vector3(-0.2f, 27.6f, 30);
+                mainCamera.transform.rotation = Quaternion.Euler(49, 0, 0);
             }
         }
 

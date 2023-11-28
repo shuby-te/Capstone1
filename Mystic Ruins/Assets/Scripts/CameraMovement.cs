@@ -9,10 +9,13 @@ public class CameraMovement : MonoBehaviour
     public GameObject fade;
     public GameObject player;
     public bool boss;
-    public bool isFade=false;
+    public bool isFade = false;
     Vector3 t_pos;
     bool isMap;
     public float a = 40, b = 0, c = 0, x = 0, y = 15, z = -13;
+
+    //юс╫ц
+    public bool isRotate;
 
     private void Start()
     {
@@ -27,7 +30,11 @@ public class CameraMovement : MonoBehaviour
             else isMap = true;
         }
 
-        if (isMap)
+        if(isRotate)
+        {
+
+        }
+        else if (isMap)
         {
             if (boss)
             {
@@ -40,7 +47,7 @@ public class CameraMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(a, b, c);
             transform.position = Vector3.Lerp(transform.position, t_pos, Time.deltaTime * 2);
         }
-        else
+        else 
         {
             transform.rotation = Quaternion.Euler(43.067f, 81.555f, -0.081f);
             transform.position = new Vector3(-229.8252f, 150.901f, 144.0875f);
