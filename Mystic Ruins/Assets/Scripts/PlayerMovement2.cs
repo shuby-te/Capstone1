@@ -11,6 +11,8 @@ public class PlayerMovement2 : MonoBehaviour
     public float rotateSpeed = 7f;
     public float yAngle;
 
+    public bool isActive;
+
     Rigidbody rb;
     GameObject partner;
     Animator anim;
@@ -27,6 +29,7 @@ public class PlayerMovement2 : MonoBehaviour
     void Start()
     {
         dashCool = true;
+        isActive = true;
         rb = GetComponent<Rigidbody>();
         partner = this.transform.GetChild(1).gameObject;
         anim = GetComponent<Animator>();
@@ -49,7 +52,7 @@ public class PlayerMovement2 : MonoBehaviour
                 dir.Normalize();
             }
 
-            if (Input.anyKey) isMove = true;
+            if (isActive && Input.anyKey) isMove = true;
             else isMove = false;
 
             if (Input.GetKey(KeyCode.W))

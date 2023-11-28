@@ -6,20 +6,36 @@ public class Sh_RotateFloor : MonoBehaviour
 {
     public GameObject hourFloor;
     public GameObject minuteFloor;
+    public GameObject mainCamera;
+    public GameObject player;
 
-    private GameObject player;
     [SerializeField] bool isActivate;
     [SerializeField] bool isCol;
+    [SerializeField] bool isWork;
 
     private void Update()
     {
-        if(isCol && Input.GetKey(KeyCode.E))
+        if (isCol && Input.GetKeyDown(KeyCode.E))
+        {
+            if(isWork)
+            {
+                isWork = false;
+                player.GetComponent<PlayerMovement2>().isActive = true;
+                player.GetComponent<PlayerAnim>().enabled = true;
+                //mainCamera.GetComponent<CameraMovement>().SetCamera();
+            }
+            else
+            {
+                isWork = true;
+                player.GetComponent<PlayerMovement2>().isActive = false;
+                player.GetComponent<PlayerAnim>().enabled = false;
+            }
+        }
+
+        if(isWork)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1) && !isActivate)
             {
-                if (player != null && player.transform.parent == null)
-                    player.transform.SetParent(transform, true);
-
                 isActivate = true;
                 StartCoroutine(moveFloor(minuteFloor, 1));
                 StartCoroutine(moveFloor(hourFloor, 1));
@@ -27,9 +43,6 @@ public class Sh_RotateFloor : MonoBehaviour
 
             else if (Input.GetKeyDown(KeyCode.Alpha2) && !isActivate)
             {
-                if (player != null && player.transform.parent == null)
-                    player.transform.SetParent(transform, true);
-
                 isActivate = true;
                 StartCoroutine(moveFloor(minuteFloor, 2));
                 StartCoroutine(moveFloor(hourFloor, 1));
@@ -37,9 +50,6 @@ public class Sh_RotateFloor : MonoBehaviour
 
             else if (Input.GetKeyDown(KeyCode.Alpha3) && !isActivate)
             {
-                if (player != null && player.transform.parent == null)
-                    player.transform.SetParent(transform, true);
-
                 isActivate = true;
                 StartCoroutine(moveFloor(minuteFloor, 3));
                 StartCoroutine(moveFloor(hourFloor, 1));
@@ -51,7 +61,6 @@ public class Sh_RotateFloor : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            player = other.gameObject;
             isCol = true;
         }
     }
@@ -60,7 +69,6 @@ public class Sh_RotateFloor : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.gameObject.transform.SetParent(null, true);
             isCol = false;
         }
     }
