@@ -38,8 +38,8 @@ public class fireball : MonoBehaviour
         while (transform.position.y >= startPos.y)
         {
             timer += Time.deltaTime;
-            Vector3 tempPos = Parabola(startPos, endPos, 25, timer/2);
-            transform.position = tempPos;
+            Vector3 tempPos = Parabola(startPos, endPos, 18, timer/2);
+            transform.localPosition = tempPos;
             yield return new WaitForEndOfFrame();
         }
     }
@@ -50,14 +50,15 @@ public class fireball : MonoBehaviour
         {
             for (int i = 0; i < UnityEngine.Random.Range(1, 25); i++)
             {
-                x = UnityEngine.Random.Range(-25f, 25f);
-                z = UnityEngine.Random.Range(-25f, 25f);
+                x = UnityEngine.Random.Range(-30f, 30f);
+                z = UnityEngine.Random.Range(-40f, 20f);
             }
-            if (x * x + z * z < 50 * 50)
+            if (x * x + z * z < 30 * 30)
                 break;
         }
-        startPos = transform.position;
-        endPos = new Vector3(x-214.3f, 7, 257-z);
+        startPos = transform.localPosition;
+        endPos = new Vector3(x, -5, z);
+
         StartCoroutine("BulletMove");
     }
 }

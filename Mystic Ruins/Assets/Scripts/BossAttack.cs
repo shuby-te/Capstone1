@@ -5,11 +5,12 @@ using UnityEngine;
 
 public class BossAttack : MonoBehaviour
 {
-    public GameObject playerAnim;
+    public GameObject player;
     public GameObject attackRange;
     public GameObject hpManager;
+    public GameObject dropRange;
     float damage;
-
+    int count = 0;
     bool isOverlapped;
 
     void Attack()
@@ -18,7 +19,7 @@ public class BossAttack : MonoBehaviour
         {
             hpManager.GetComponent<Sh_HpManager>().AttackToPlayer();
 
-            playerAnim.GetComponent<PlayerAnim>().KnockBacked();
+            player.GetComponent<PlayerAnim>().KnockBacked();
         }
     }   
     
@@ -26,7 +27,16 @@ public class BossAttack : MonoBehaviour
     {
         attackRange.SetActive(false);
     }
-
+    void Disable1()
+    {
+        dropRange.GetComponent<MeshCollider>().enabled = false;
+        dropRange.SetActive(false);
+    }
+    void on()
+    {
+        gameObject.transform.position=player.transform.position;
+        dropRange.SetActive(true);
+    }
     void p1()
     {
         attackRange.SetActive(true);
@@ -70,6 +80,26 @@ public class BossAttack : MonoBehaviour
         attackRange.SetActive(true);
         attackRange.transform.localPosition = new Vector3(0, 4, 3);
         attackRange.transform.localScale = new Vector3(5, 8, 1);
+    }
+    void sp1()
+    {
+        dropRange.GetComponent<MeshCollider>().enabled = true;
+    }
+
+    void Stun()
+    {
+        gameObject.GetComponent<Animator>().SetFloat("StunMultiplier", 0);
+    }
+
+    void Rock()
+    {
+        gameObject.GetComponent<Si_BossMovement>().SpawnManager.attack5(5, 0.15f);
+        count++;
+        if (count%3==2)
+        {
+            gameObject.GetComponent<Si_BossMovement>().SpawnManager.DropBomb();
+            Debug.Log("aaa");
+        }
     }
 
     private void OnTriggerStay(Collider other)

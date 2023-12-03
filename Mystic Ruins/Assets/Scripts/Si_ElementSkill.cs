@@ -27,7 +27,6 @@ public class Si_ElementSkill : MonoBehaviour
         if (time > 1000&& !boss.GetComponent<Si_BossMovement>().isStun)
         {
             boss.GetComponent<Si_BossMovement>().isStun=true;
-            StartCoroutine(wake());
         }
     }
     private void OnTriggerStay(Collider other)
@@ -45,7 +44,18 @@ public class Si_ElementSkill : MonoBehaviour
 
     private void OnParticleTrigger()
     {
-        boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.25f);
+        float bossSpeed = boss.GetComponent<Animator>().GetFloat("AttackSpeed");
+        if (bossSpeed == 1)
+        {
+            boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.25f);
+            boss.GetComponent<Si_BossMovement>().bossSpeed = 1.25f;
+        }
+        else
+        {
+            boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.5f);
+            boss.GetComponent<Si_BossMovement>().bossSpeed = 1.5f;
+            StartCoroutine(boss.GetComponent<Si_BossMovement>().OverHeat());
+        }
     }
     IEnumerator wait(float x)
     {

@@ -18,6 +18,7 @@ public class Si_SpawnManeger : MonoBehaviour
     public GameObject fire;
     public GameObject firePos1;
     public GameObject firePos2;
+    public GameObject dropbomb;
 
     Animator anim;
 
@@ -37,9 +38,10 @@ public class Si_SpawnManeger : MonoBehaviour
     {
         StartCoroutine(SpreadGear());
     }
-    public void attack3(GameObject obj)
+    public void attack3()
     {
-        StartCoroutine(Bomb(obj));
+        StartCoroutine(Bomb());
+        Debug.Log("1");
     }
     public void attack4()
     {
@@ -63,6 +65,10 @@ public class Si_SpawnManeger : MonoBehaviour
             Quaternion gearRot = bigGear.transform.rotation;
             Instantiate(miniGear, pos, gearRot);
         }
+    }
+    public void DropBomb()
+    {
+        StartCoroutine(SpawnBomb());
     }
     IEnumerator SpreadGear()
     {
@@ -98,10 +104,9 @@ public class Si_SpawnManeger : MonoBehaviour
         gearSpawnRotate.transform.rotation = new Quaternion(0,0,0,0);
     }
 
-    IEnumerator Bomb(GameObject obj)
+    IEnumerator Bomb()
     {
-        GameObject Bomb = Instantiate(bomb, bombSpawnPoint.transform);
-        obj.GetComponent<Si_BossMovement>().boomActive = false;
+        Instantiate(bomb);
         yield return null;
     }
 
@@ -136,23 +141,43 @@ public class Si_SpawnManeger : MonoBehaviour
     {
         float x, z;
         int i = 0;
+        Transform tf;
+
         while (i < 7)
         {
-            Transform tf = firePos1.transform;
-            x = Random.Range(-0.12f, 0.12f);
-            z = Random.Range(-0.12f, 0.12f);
-
-            if (x * x + z * z < 0.12 * 0.12)
-            {
                 i++;
                 if (i / 2 == 0)
                     tf = firePos1.transform;
                 else
                     tf = firePos2.transform;
-                GameObject fireBall=Instantiate(fire, tf);
-                fireBall.transform.localPosition = new Vector3(0, 0, 0);
-                fireBall.transform.localScale = new Vector3(1, 1, 1);
+                Instantiate(fire, tf);
+
                 yield return new WaitForSeconds(0.3f);
+        }
+        yield break;
+    }
+    IEnumerator SpawnBomb()
+    {
+        float x, z, r= 0.15f;
+        float rx, ry, rz, rw;
+        while (true)
+        {
+            x = Random.Range(-0.12f, 0.12f);
+            z = Random.Range(-0.12f, 0.12f);
+
+            rx = Random.Range(-1, 1);
+            ry = Random.Range(-1, 1);
+            rz = Random.Range(-1, 1);
+            rw = Random.Range(-1, 1);
+
+            if (x * x + z * z < r * r)
+            {
+                GameObject bb = Instantiate(dropbomb, bossRoomCenter.transform);
+                //GameObject Rock=Instantiate(rock, rockSpawnPoint.transform);
+                bb.transform.parent = bossRoomCenter.transform.parent;
+                bb.transform.localPosition = new Vector3(x, 0.3f, z);
+                bb.transform.localScale = new Vector3(0.007f, 0.007f, 0.007f);
+                break;
             }
         }
         yield break;

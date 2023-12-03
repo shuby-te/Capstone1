@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapTrigger : MonoBehaviour
 {
-    public GameObject camera;
+    public GameObject Camera;
     public GameObject player;
     public GameObject[] tpPoint;
 
@@ -15,7 +15,7 @@ public class MapTrigger : MonoBehaviour
 
     void Start()
     {
-        CM = camera.GetComponent<CameraMovement>();
+        CM = Camera.GetComponent<CameraMovement>();
         PM = player.GetComponent<PlayerMovement2>();
     }
 
