@@ -1,31 +1,60 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Sh_PipeController : MonoBehaviour
 {
+    public GameObject[] pipes = new GameObject[24];
     public Camera cameraObj;
+    public Camera player;
+
+    Animator anim;
+    Vector3 cPos = new Vector3(-33.6f, 14.5f, 153f);
+    Vector3 cRot = new Vector3(90, -90, -90);
 
     bool isActive;
-    Vector3 pos = new Vector3(-75, 13, 146);
-    Vector3 rot = new Vector3(90, 45, 45);   
+    bool isControl;
+
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
+    }
 
     private void FixedUpdate()
     {
-       if(isActive)
+        if(isActive && Input.GetKeyDown(KeyCode.E))
+        {
+            if (!isControl)
+            {
+                cameraObj.GetComponent<CameraMovement>().enabled = false;
+                cameraObj.transform.position = cPos;
+                cameraObj.transform.rotation = Quaternion.Euler(cRot);
+                player.GetComponent<PlayerAnim>().enabled = false;
+                isControl = true;
+            }
+            else if (isControl)
+            {
+                cameraObj.GetComponent<CameraMovement>().enabled = true;
+                player.GetComponent<PlayerAnim>().enabled = true;
+                isControl = false;
+            }
+        }
+
+       if(isControl)
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Pipe")))
             {
-                if(!hit.transform.gameObject.GetComponent<Sh_RotatePipe>().isSelect)
+                Sh_RotatePipe hitPipe = hit.transform.gameObject.GetComponent<Sh_RotatePipe>();
+                if (!hitPipe.isSelect)
                 {
-                    hit.transform.gameObject.GetComponent<Sh_RotatePipe>().isSelect = true;
-                    hit.transform.gameObject.GetComponent<Sh_RotatePipe>().time = 0f;
+                    hitPipe.isSelect = true;
+                    hitPipe.time = 0f;
                 }    
-                //hit.transform.gameObject.SetActive(false);
             }
             else
                 hit.transform.gameObject.GetComponent<Sh_RotatePipe>().isSelect = false;
@@ -37,20 +66,31 @@ public class Sh_PipeController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            cameraObj.GetComponent<CameraMovement>().enabled = false;
-            cameraObj.transform.position = pos;
-            cameraObj.transform.rotation = Quaternion.Euler(rot);
-            collision.gameObject.GetComponent<PlayerAnim>().enabled = false;
-
+            
             isActive = true;
         }
     }
 
     private void OnCollisionExit(Collision collision)
-    {
-        cameraObj.GetComponent<CameraMovement>().enabled = true;
-        collision.gameObject.GetComponent<PlayerAnim>().enabled = true;
+    {        
+        
         if (collision.gameObject.CompareTag("Player"))
             isActive = false;
+    }
+
+    public void ResetPipes()
+    {
+        for (int i = 0; i < pipes.Length; i++)
+        {
+            pipes[i].GetComponent<Sh_RotatePipe>().ResetPipe();
+        }
+    }
+
+    public void ClearPipes()
+    {
+        for (int i = 0; i < pipes.Length; i++)
+        {
+            pipes[i].GetComponent<Sh_RotatePipe>().ClearPipe();
+        }
     }
 }

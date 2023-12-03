@@ -15,6 +15,7 @@ TagManager:
   - Boss
   - Item
   - Ladder
+  - Ground
   layers:
   - Default
   - TransparentFX

@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Sh_RotatePipe : MonoBehaviour
 {
+    public float resetAngle;
+    public float clearAngle;
+
     public bool isSelect;
     public float time;
 
@@ -33,6 +36,20 @@ public class Sh_RotatePipe : MonoBehaviour
             n += 1;
         }
         isSelect = false;
+    }
+
+    public void ResetPipe()
+    {
+        Quaternion newRot = Quaternion.Euler(-90, 0, resetAngle);
+
+        transform.rotation = newRot;
+    }
+
+    public void ClearPipe()
+    {
+        Quaternion newRot = Quaternion.Euler(-90, 0, clearAngle);
+
+        transform.rotation = newRot;
     }
 
 }

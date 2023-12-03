@@ -21,7 +21,7 @@ public class PlayerAnim : MonoBehaviour
 
     private void Update()
     {
-        if(pm.isClimb)
+        if(pm.isClimb == 1)
         {
             anim.SetFloat("climbF", 0f);
 
@@ -151,6 +151,6 @@ public class PlayerAnim : MonoBehaviour
 
     public void JustClimbing()
     {
-        anim.SetBool("isClimb", false);
+        anim.SetInteger("isClimb", 0);
     }
 }

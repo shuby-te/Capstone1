@@ -8,6 +8,10 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject titleB;
     public GameObject quitB;
+    public GameObject pipeController;
+    public GameObject script;
+
+    public int mapValue;
 
     private void Start()
     {
@@ -45,6 +49,10 @@ public class GameManager : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.I))
+            pipeController.GetComponent<Sh_PipeController>().ResetPipes();
 
+        if (Input.GetKeyDown(KeyCode.O))
+            pipeController.GetComponent<Sh_PipeController>().ClearPipes();
     }
 }

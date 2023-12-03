@@ -5,19 +5,20 @@ using UnityEditor;
 using UnityEngine;
 
 public class PlayerMovement2 : MonoBehaviour
-{  
+{
     public float speed = 10f;
     public float dashSpeed = 2f;
     public float rotateSpeed = 7f;
     public float yAngle;
+    public float climbToTopLen;
 
     public bool isActive;
-    public bool isClimb;
+    public int isClimb;
 
     GameObject partner;
     GameObject attackRange;
     GameObject ladder;
-    Rigidbody rb;    
+    Rigidbody rb;
     Animator anim;
 
     Vector3 dir = Vector3.zero;
@@ -25,6 +26,7 @@ public class PlayerMovement2 : MonoBehaviour
     bool isDash;
     bool isMove;
     bool isKnokback;
+    bool isGround;
     bool isLadder;
 
     float xAxis = 1f, zAxis = -1f;
@@ -35,7 +37,7 @@ public class PlayerMovement2 : MonoBehaviour
         dashCool = true;
         isActive = true;
 
-        partner = this.transform.GetChild(1).gameObject;
+        partner = transform.GetChild(1).gameObject;
         attackRange = transform.GetChild(2).gameObject;
 
         rb = GetComponent<Rigidbody>();        
@@ -44,40 +46,42 @@ public class PlayerMovement2 : MonoBehaviour
 
     void Update()
     {
-        //check climbing ladder
-        if(isLadder)
+        //climb ladder
+        if(isLadder && isGround)
         {
             if(Input.GetKeyDown(KeyCode.E))
             {
-                isClimb = true;
-                anim.SetBool("isClimb", true);
+                isClimb = 1;
 
-                //사다리의 각도와 상관없이 사다리를 타는 방향으로부터 y축을 생각하지 않고 1만큼 떨어진 위치에 플레이어를 고정시킨 뒤,
-                //사다리 방향으로 회전시켜야함
-                transform.position = new Vector3(ladder.transform.GetChild(0).position.x, 
-                    transform.position.y, ladder.transform.GetChild(0).position.z);
+                transform.position = new Vector3(ladder.transform.position.x,
+                    transform.position.y, ladder.transform.position.z - 0.2f);
 
                 transform.forward = new Vector3(ladder.transform.position.x - transform.position.x, 
                     0, ladder.transform.position.z - transform.position.z);
+
+                anim.SetInteger("isClimb", 1);
+
+                isGround = false;
             }
         }
-
-        /*//climb behavior
-        if(isClimb)
+        else if(isClimb == 1 && (Input.GetKeyDown(KeyCode.E) || isGround))
         {
-            dir.x = dir.z = 0f;
-            dir.y = Input.GetAxisRaw("Vertical");
+            anim.SetInteger("isClimb", -1);
+        }
 
-            NormalizeDirection();
+        //left from ladder
+        if (isGround)
+            isClimb = 0;
 
-            isMove = false;
-        }*/
+        if(isClimb == 2)
+        {
+            anim.SetInteger("isClimb", 2);
+        }    
 
-        //common behavior
         if(!isKnokback)
         {
             //key input
-            if (!isDash && !isClimb)
+            if (!isDash && isClimb == 0)
             {
                 dir.x = Input.GetAxisRaw("Horizontal");
                 dir.z = Input.GetAxisRaw("Vertical");
@@ -86,7 +90,7 @@ public class PlayerMovement2 : MonoBehaviour
             }
 
             //move only keying
-            if (!isClimb && isActive && Input.anyKey) isMove = true;
+            if (isClimb == 0 && isActive && Input.anyKey) isMove = true;
             else isMove = false;
 
             //patnerNav movement
@@ -112,7 +116,7 @@ public class PlayerMovement2 : MonoBehaviour
             }
 
             //dash
-            if (!isClimb && Input.GetKeyDown(KeyCode.LeftShift) && dashCool)
+            if (isClimb == 0 && Input.GetKeyDown(KeyCode.LeftShift) && dashCool)
             {
                 isDash = true;
                 dashCool = false;
@@ -130,7 +134,7 @@ public class PlayerMovement2 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!isKnokback && !isClimb)
+        if(!isKnokback && isClimb == 0)
         {
             //rotation
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -154,6 +158,12 @@ public class PlayerMovement2 : MonoBehaviour
             transform.position.y + 2.5f, transform.position.z - zAxis * 1.6f);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+            isGround = true;
+    }
+
     void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Ladder"))
@@ -168,7 +178,14 @@ public class PlayerMovement2 : MonoBehaviour
         if (collision.gameObject.CompareTag("Ladder"))
         {
             isLadder = false;
-            ladder = null;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Ladder"))
+        {
+            isClimb = 2;
         }
     }
 
