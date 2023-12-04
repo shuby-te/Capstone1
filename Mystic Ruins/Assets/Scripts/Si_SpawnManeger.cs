@@ -132,7 +132,6 @@ public class Si_SpawnManeger : MonoBehaviour
                 //GameObject Rock=Instantiate(rock, rockSpawnPoint.transform);
                 Rock.transform.parent = bossRoomCenter.transform.parent;
                 Rock.transform.localPosition = new Vector3(x, 0.3f, z);
-                Rock.transform.localScale = new Vector3(0.007f, 0.007f, 0.007f);
             }   
         }
         yield break;
