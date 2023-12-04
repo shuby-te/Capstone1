@@ -50,18 +50,12 @@ public class GameManager : MonoBehaviour
             player.transform.position = new Vector3(0, 0, 0);
 
         if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (titleB.activeSelf && quitB.activeSelf)
-            {
-                titleB.SetActive(false);
-                quitB.SetActive(false);
-            }
-            else
-            {
-                titleB.SetActive(true);
-                quitB.SetActive(true);
-            }
-        }
+            PrintMenu();
+
+        if (Input.GetKeyDown(KeyCode.I))
+            pipeController.GetComponent<Sh_PipeController>().ResetPipes();
+        if (Input.GetKeyDown(KeyCode.O))
+            pipeController.GetComponent<Sh_PipeController>().ClearPipes();
     }
 
     public void PrintHint()
@@ -105,23 +99,37 @@ public class GameManager : MonoBehaviour
 
     void setHint()
     {
-        hintData.Add(0, "qwe");
-        hintData.Add(10, "");
-        hintData.Add(20, "");
-        hintData.Add(21, "");
-        hintData.Add(30, "");
-        hintData.Add(31, "");
-        hintData.Add(40, "");
-        hintData.Add(41, "");
-        hintData.Add(50, "");
-        hintData.Add(51, "");
-        hintData.Add(60, "");
-        hintData.Add(61, "");
-        hintData.Add(70, "");
-        hintData.Add(71, "");
-        hintData.Add(72, "");
-        hintData.Add(80, "");
-        hintData.Add(81, "");
-        hintData.Add(82, "");
+        hintData.Add(0, "q");
+        hintData.Add(10, "q");
+        hintData.Add(20, "q");
+        hintData.Add(21, "q");
+        hintData.Add(30, "q");
+        hintData.Add(31, "q");
+        hintData.Add(40, "q");
+        hintData.Add(41, "q");
+        hintData.Add(50, "q");
+        hintData.Add(51, "q");
+        hintData.Add(60, "q");
+        hintData.Add(61, "q");
+        hintData.Add(70, "q");
+        hintData.Add(71, "q");
+        hintData.Add(72, "q");
+        hintData.Add(80, "q");
+        hintData.Add(81, "q");
+        hintData.Add(82, "q");
+    }
+
+    public void PrintMenu()
+    {
+        if (titleB.activeSelf && quitB.activeSelf)
+        {
+            titleB.SetActive(false);
+            quitB.SetActive(false);
+        }
+        else
+        {
+            titleB.SetActive(true);
+            quitB.SetActive(true);
+        }
     }
 }
