@@ -425,9 +425,12 @@ public class Si_BossMovement : MonoBehaviour
     }
     IEnumerator SpecialAttack1()
     {
-            anim.SetInteger("SpacialAttack", 1);
-            yield return new WaitForSeconds(0.2f);
-            anim.SetInteger("SpacialAttack", 0);    
+        StopCoroutine(OverHeat());
+        overheating = false;
+        anim.SetFloat("AttackSpeed", 1);
+        anim.SetInteger("SpacialAttack", 1);
+        yield return new WaitForSeconds(0.2f);
+        anim.SetInteger("SpacialAttack", 0);
     }
     IEnumerator TurnHead()
     {
@@ -445,19 +448,26 @@ public class Si_BossMovement : MonoBehaviour
             isturnhead = false;
         }
     }
-    public IEnumerator OverHeat()
+    public IEnumerator Stun(float i)
     {
-        overheating = true;
-        yield return new WaitForSeconds(15);
-        //boss damage
         isStun = true;
         anim.SetFloat("AttackSpeed", 1);
         anim.SetBool("isStun", true);
         yield return new WaitForSeconds(0.3f);
         anim.SetBool("isStun", false);
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(i);
         anim.SetFloat("StunMultiplier", 1);
-        bossSpeed = 1;
         overheating = false;
+        isAttack = false;
+        isStun = false;
+        attackNum = 0;
+        bossSpeed = 1;
+    }
+    public IEnumerator OverHeat()
+    {
+        overheating = true;
+        yield return new WaitForSeconds(15);
+        //boss damage
+        StartCoroutine(Stun(5));
     }
 }
