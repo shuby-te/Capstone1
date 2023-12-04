@@ -60,4 +60,5 @@ public class BossTriggerManager : MonoBehaviour
         attackTrigger.transform.localPosition = new Vector3(0, 4, 3);
         attackTrigger.transform.localScale = new Vector3(5, 8, 1);
     }
+ 
 }

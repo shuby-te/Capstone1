@@ -40,7 +40,7 @@ public class Si_Obj : MonoBehaviour
                 rb.AddForce(Vector3.down * 50,ForceMode.Impulse);
                 isDrop= false;
             }
-            if (transform.position.y < 5f)
+            if (transform.position.y < -1f)
             {
                 Destroy(gameObject);
                 //이팩트 추가 하기
