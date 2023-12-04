@@ -8,7 +8,7 @@ public class Si_ElementSkill : MonoBehaviour
     public int time=0;
     public bool isActive = false;
     public bool isSkil = false;
-    public int skillNum;
+    public int skillNum; // fire = 1 water = 2 metal = 3 
     public GameObject boss;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +21,7 @@ public class Si_ElementSkill : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Alpha1))
         {
-            isSkil = true;
+            isActive = true;
         }
         if (Input.GetKey(KeyCode.Alpha2)&&!isActive&&!isSkil)
         {
@@ -37,7 +37,7 @@ public class Si_ElementSkill : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Boss"))
         {
-            if (isActive && gameObject.CompareTag("Water"))
+            if (isActive && skillNum == 2) 
             {
                 //������ ���⿡ �߰�
                 if (boss.GetComponent<Si_BossMovement>().attackNum == 9)
@@ -48,20 +48,30 @@ public class Si_ElementSkill : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         float bossSpeed = boss.GetComponent<Animator>().GetFloat("AttackSpeed");
-        if (isActive)
+        if (other.CompareTag("Boss"))
         {
-            if (bossSpeed == 1)
+            if (isActive && skillNum == 1)
             {
-                boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.25f);
-                boss.GetComponent<Si_BossMovement>().bossSpeed = 1.25f;
+                if (bossSpeed == 1)
+                {
+                    boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.25f);
+                    boss.GetComponent<Si_BossMovement>().bossSpeed = 1.25f;
+                }
+                else
+                {
+                    boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.5f);
+                    boss.GetComponent<Si_BossMovement>().bossSpeed = 1.5f;
+                    StartCoroutine(boss.GetComponent<Si_BossMovement>().OverHeat());
+                }
+                isActive = false;
             }
-            else
+        }
+        else if (other.CompareTag("Object"))
+        {
+            if(other.GetComponent<DropBomb>() != null)
             {
-                boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.5f);
-                boss.GetComponent<Si_BossMovement>().bossSpeed = 1.5f;
-                StartCoroutine(boss.GetComponent<Si_BossMovement>().OverHeat());
+                other.GetComponent<DropBomb>().isFire = true;
             }
-            isActive = false;
         }
     }
 
