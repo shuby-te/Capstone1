@@ -68,10 +68,10 @@ public class Si_ElementSkill : MonoBehaviour
         }
         else if (other.CompareTag("Object"))
         {
-            if(other.GetComponent<DropBomb>() != null)
+            /*if(other.GetComponent<DropBomb>() != null)
             {
                 other.GetComponent<DropBomb>().isFire = true;
-            }
+            }*/
         }
     }
 

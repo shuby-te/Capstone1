@@ -11,6 +11,7 @@ public class Sh_RotatePipe : MonoBehaviour
     public bool isSelect;
     public float time;
 
+    public bool minusType;
     public bool correct;
 
     int currentAngle;
@@ -33,7 +34,9 @@ public class Sh_RotatePipe : MonoBehaviour
         }
 
         currentAngle %= 360;
-        if (currentAngle == answerAngle)
+        if (minusType && (currentAngle == answerAngle || currentAngle == answerAngle + 180))
+            correct = true;
+        else if (!minusType && currentAngle == answerAngle)
             correct = true;
         else
             correct = false;

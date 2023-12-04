@@ -30,11 +30,12 @@ public class GameManager : MonoBehaviour
         else
             pipeController.GetComponent<Sh_PipeController>().ClearPipes();
 
+        if (DataManager.Instance.gameData.currentMapValue == 8)
+            FadeHintText();
+
         titleB.SetActive(false);
         quitB.SetActive(false);
 
-        Color color = script.GetComponent<TextMeshProUGUI>().color;
-        color = new Color(color.r, color.g, color.b, 0f);
         setHint();
     }
 

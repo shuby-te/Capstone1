@@ -224,12 +224,12 @@ public class Sh_PartnerSkill : MonoBehaviour
         partner.gameObject.SetActive(true);
         yield return null;
 
+        sTime = 0;
         blink.transform.position = partner.position;
         PlayBlink();
         yield return new WaitForSeconds(5f);
 
-        Destroy(spawnShield);
-        sTime = 0;
+        Destroy(spawnShield);        
     }
 
     IEnumerator DeleteWater()

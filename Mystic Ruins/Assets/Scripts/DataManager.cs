@@ -53,6 +53,9 @@ public class DataManager : MonoBehaviour
 
         Array.Fill(gameData.items, 0);
 
+        gameData.currentMapValue = 0;
+        Array.Fill(gameData.mapProgress, 0);        
+
         SaveGameData();
     }
 }

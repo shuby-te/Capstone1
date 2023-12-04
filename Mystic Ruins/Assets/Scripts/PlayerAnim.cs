@@ -104,7 +104,6 @@ public class PlayerAnim : MonoBehaviour
 
         if(pm.isActive)
         {
-            Debug.Log("asef");
             if (-22.5f < yAngle && yAngle <= 22.5f)
                 mouseN = 1;
             else if (67.5f < yAngle && yAngle <= 112.5f)
