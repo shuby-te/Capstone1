@@ -8,7 +8,7 @@ public class Si_ElementSkill : MonoBehaviour
     public int time=0;
     public bool isActive = false;
     public bool isSkil = false;
-
+    public int skillNum;
     public GameObject boss;
     // Start is called before the first frame update
     void Start()
@@ -19,6 +19,10 @@ public class Si_ElementSkill : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.Alpha1))
+        {
+            isSkil = true;
+        }
         if (Input.GetKey(KeyCode.Alpha2)&&!isActive&&!isSkil)
         {
             isSkil = true;
@@ -41,22 +45,26 @@ public class Si_ElementSkill : MonoBehaviour
             }
         }
     }
-
-    private void OnParticleTrigger()
+    private void OnTriggerEnter(Collider other)
     {
         float bossSpeed = boss.GetComponent<Animator>().GetFloat("AttackSpeed");
-        if (bossSpeed == 1)
+        if (isActive)
         {
-            boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.25f);
-            boss.GetComponent<Si_BossMovement>().bossSpeed = 1.25f;
-        }
-        else
-        {
-            boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.5f);
-            boss.GetComponent<Si_BossMovement>().bossSpeed = 1.5f;
-            StartCoroutine(boss.GetComponent<Si_BossMovement>().OverHeat());
+            if (bossSpeed == 1)
+            {
+                boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.25f);
+                boss.GetComponent<Si_BossMovement>().bossSpeed = 1.25f;
+            }
+            else
+            {
+                boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.5f);
+                boss.GetComponent<Si_BossMovement>().bossSpeed = 1.5f;
+                StartCoroutine(boss.GetComponent<Si_BossMovement>().OverHeat());
+            }
+            isActive = false;
         }
     }
+
     IEnumerator wait(float x)
     {
         yield return new WaitForSeconds(x);
