@@ -32,4 +32,6 @@ public class ItemManager : MonoBehaviour
         if (!isSaved)
             Debug.Log("it`s full!");
     }
+
+    //아이템 사용시의 데이터 수정 기능 및 UI 수정 기능 구현 필요
 }
