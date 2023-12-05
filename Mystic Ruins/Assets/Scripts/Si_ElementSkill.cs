@@ -66,13 +66,13 @@ public class Si_ElementSkill : MonoBehaviour
                 isActive = false;
             }
         }
-        else if (other.CompareTag("Object"))
-        {
-            if(other.GetComponent<DropBomb>() != null)
-            {
-                other.GetComponent<DropBomb>().isFire = true;
-            }
-        }
+        //else if (other.CompareTag("Object"))
+        //{
+        //    if(other.GetComponent<DropBomb>() != null)
+        //    {
+        //        other.GetComponent<DropBomb>().isFire = true;
+        //    }
+        //}
     }
 
     IEnumerator wait(float x)

@@ -27,7 +27,7 @@ public class BossAttack : MonoBehaviour
     {
         attackRange.SetActive(false);
     }
-    void Disable1()
+    public void Disable1()
     {
         dropRange.GetComponent<MeshCollider>().enabled = false;
         dropRange.SetActive(false);
@@ -40,7 +40,7 @@ public class BossAttack : MonoBehaviour
     void p1()
     {
         attackRange.SetActive(true);
-        damage = 5; //ÀÌ·¸°Ô º¸½º µ¥¹ÌÁö ³ÖÀ¸¸é µÉµí ?
+        damage = 5; //ï¿½Ì·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Éµï¿½ ?
         attackRange.transform.localPosition = new Vector3(0, 0, 3);
         attackRange.transform.localScale = new Vector3(5, 1, 5);
     }

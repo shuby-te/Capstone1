@@ -451,6 +451,7 @@ public class Si_BossMovement : MonoBehaviour
     public IEnumerator Stun(float i)
     {
         isStun = true;
+        transform.GetComponent<BossAttack>().Disable1();
         anim.SetFloat("AttackSpeed", 1);
         anim.SetBool("isStun", true);
         yield return new WaitForSeconds(0.3f);
