@@ -20,6 +20,12 @@ public class Si_SpawnManeger : MonoBehaviour
     public GameObject firePos2;
     public GameObject dropbomb;
 
+    GameObject[] Rock = new GameObject[15];
+    GameObject[] DropGear = new GameObject[6];
+    GameObject[] SmallRock = new GameObject[6];
+
+    GameObject BigRock;
+
     Animator anim;
 
     // Start is called before the first frame update
@@ -129,7 +135,6 @@ public class Si_SpawnManeger : MonoBehaviour
             {
                 i++;
                 GameObject Rock = Instantiate(rock, bossRoomCenter.transform.localPosition, new Quaternion(rx, ry, rz, rw));
-                //GameObject Rock=Instantiate(rock, rockSpawnPoint.transform);
                 Rock.transform.parent = bossRoomCenter.transform.parent;
                 Rock.transform.localPosition = new Vector3(x, 0.3f, z);
             }   

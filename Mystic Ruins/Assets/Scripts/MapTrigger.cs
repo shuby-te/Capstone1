@@ -21,7 +21,10 @@ public class MapTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(Move());
+        if (other.transform.CompareTag("Player"))
+        {
+            StartCoroutine(Move());
+        }
     }
     private IEnumerator Move()
     {
