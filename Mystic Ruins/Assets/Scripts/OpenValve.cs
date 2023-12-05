@@ -24,6 +24,9 @@ public class OpenValve : MonoBehaviour
                 if(CountCorrecting())
                 {
                     //ÆÛÁñ Å¬¸®¾î
+
+                    DataManager.Instance.gameData.mapProgress[5] = 1;
+
                     Debug.Log("Pipe Clear~~");
                 }
             }

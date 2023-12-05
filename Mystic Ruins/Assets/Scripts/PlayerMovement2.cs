@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class PlayerMovement2 : MonoBehaviour
 {
+    public GameObject cart;
+
     public float speed = 10f;
     public float dashSpeed = 2f;
     public float rotateSpeed = 7f;
@@ -14,6 +16,9 @@ public class PlayerMovement2 : MonoBehaviour
 
     public bool isActive;
     public int isClimb;
+    public bool setCart;
+
+    public bool isInteract;
 
     GameObject partner;
     GameObject attackRange;
@@ -28,6 +33,7 @@ public class PlayerMovement2 : MonoBehaviour
     bool isKnokback;
     bool isGround;
     bool isLadder;
+    public bool isCart;
 
     float xAxis = 1f, zAxis = -1f;
     float partnerSpeed = 4f;
@@ -49,8 +55,9 @@ public class PlayerMovement2 : MonoBehaviour
         //climb ladder
         if(isLadder && isGround)
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if(!isInteract && Input.GetKeyDown(KeyCode.E))
             {
+                isInteract = true;
                 isClimb = 1;
 
                 transform.position = new Vector3(ladder.transform.position.x,
@@ -66,7 +73,24 @@ public class PlayerMovement2 : MonoBehaviour
         }
         else if(isClimb == 1 && (Input.GetKeyDown(KeyCode.E) || isGround))
         {
+            isInteract = false;
             anim.SetInteger("isClimb", -1);
+        }
+
+        //move cart
+        if(!isInteract && !setCart && isCart && Input.GetKeyDown(KeyCode.E))
+        {
+            isInteract = true;
+            setCart = true;
+            cart.transform.SetParent(transform, false);
+            cart.transform.localPosition = new Vector3(0, 0, 2);
+            cart.transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (setCart && Input.GetKeyDown(KeyCode.E))
+        {
+            isInteract = false;
+            setCart = false;
+            cart.transform.parent = null;
         }
 
         //left from ladder
@@ -171,6 +195,11 @@ public class PlayerMovement2 : MonoBehaviour
             isLadder = true;
             ladder = collision.gameObject;
         }
+
+        if (collision.gameObject.CompareTag("Cart"))
+        {
+            isCart = true;
+        }
     }
 
     private void OnCollisionExit(Collision collision)
@@ -178,6 +207,11 @@ public class PlayerMovement2 : MonoBehaviour
         if (collision.gameObject.CompareTag("Ladder"))
         {
             isLadder = false;
+        }
+
+        if (collision.gameObject.CompareTag("Cart"))
+        {
+            isCart = false;
         }
     }
 

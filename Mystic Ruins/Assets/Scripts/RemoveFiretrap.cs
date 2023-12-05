@@ -34,6 +34,7 @@ public class RemoveFiretrap : MonoBehaviour
     {
         ParticleSystem particle = particleObj.GetComponent<ParticleSystem>();
         var mainModule = particle.main;
+        this.GetComponent<BoxCollider>().enabled = false;
         mainModule.loop = false;
     }
 

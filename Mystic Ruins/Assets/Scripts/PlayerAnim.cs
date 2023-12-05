@@ -35,7 +35,16 @@ public class PlayerAnim : MonoBehaviour
             }
         }
 
-        if(Input.GetKeyDown(KeyCode.LeftShift)  && !isRoll)
+        if(pm.setCart)
+        {
+            anim.SetBool("isCart", true);
+        }
+        else if (!pm.setCart)
+        {
+            anim.SetBool("isCart", false );
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift)  && !isRoll)
         {
             isRoll = true;
             anim.SetBool("isRoll", true);

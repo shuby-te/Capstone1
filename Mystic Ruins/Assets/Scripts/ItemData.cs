@@ -14,25 +14,25 @@ public class ItemData : MonoBehaviour
 
     private void Update()
     {
-        if (isInteract && Input.GetKeyDown(KeyCode.E))
+        if (isInteract && Input.GetKeyDown(KeyCode.F))
         {
-            itemManager.GetComponent<ItemManager>().AddItem(this.gameObject);
+            itemManager.GetComponent<ItemManager>().AddItem(this.gameObject, itemValue);
             if(isUnique)
                 Destroy(this.gameObject);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             isInteract = true;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnCollisionExit(Collision collision)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             isInteract = false;
         }

@@ -1,22 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Rendering;
 
 public class ItemManager : MonoBehaviour
 {
-    public void AddItem(GameObject item)
+    public GameObject[] itemImages = new GameObject[4];
+
+    public Sprite[] itemSprites = new Sprite[3];
+    //(0)¹ÙÄû / (1)¼®Åº / (2)»ç´Ù¸®
+
+    public void AddItem(GameObject item, int itemValue)
     {         
         int[] items = DataManager.Instance.gameData.items;
         bool isSaved = false;
         int i = 0;
         while(i < items.Length) 
         {
-            Debug.Log("i: " + i);
             if (items[i] == 0)
             {
                 DataManager.Instance.gameData.items[i] = item.GetComponent<ItemData>().itemValue;
-                Debug.Log("save: " + i);
+                itemImages[i].GetComponent<Image>().sprite = itemSprites[itemValue - 1];
+                itemImages[i].GetComponent<Image>().enabled = true;
                 isSaved = true;
                 break;
             }
