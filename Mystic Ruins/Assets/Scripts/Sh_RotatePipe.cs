@@ -5,11 +5,22 @@ using UnityEngine;
 
 public class Sh_RotatePipe : MonoBehaviour
 {
-    public float resetAngle;
-    public float clearAngle;
+    public int resetAngle;
+    public int clearAngle;
 
     public bool isSelect;
     public float time;
+
+    public bool minusType;
+    public bool correct;
+
+    int currentAngle;
+    int answerAngle;
+
+    private void Start()
+    {
+        answerAngle = (clearAngle - resetAngle + 360) % 360;
+    }
 
     void Update()
     {   
@@ -21,6 +32,14 @@ public class Sh_RotatePipe : MonoBehaviour
             else if(time >= 0.1f)
                 isSelect = false;
         }
+
+        currentAngle %= 360;
+        if (minusType && (currentAngle == answerAngle || currentAngle == answerAngle + 180))
+            correct = true;
+        else if (!minusType && currentAngle == answerAngle)
+            correct = true;
+        else
+            correct = false;
     }
 
     IEnumerator Push()
@@ -35,6 +54,7 @@ public class Sh_RotatePipe : MonoBehaviour
             yield return null;
             n += 1;
         }
+        currentAngle += 90;
         isSelect = false;
     }
 

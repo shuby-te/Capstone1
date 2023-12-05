@@ -9,7 +9,7 @@ public class Sh_PipeController : MonoBehaviour
 {
     public GameObject[] pipes = new GameObject[24];
     public Camera cameraObj;
-    public Camera player;
+    public GameObject player;
 
     Animator anim;
     Vector3 cPos = new Vector3(-33.6f, 14.5f, 153f);
@@ -23,7 +23,7 @@ public class Sh_PipeController : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         if(isActive && Input.GetKeyDown(KeyCode.E))
         {
@@ -33,12 +33,14 @@ public class Sh_PipeController : MonoBehaviour
                 cameraObj.transform.position = cPos;
                 cameraObj.transform.rotation = Quaternion.Euler(cRot);
                 player.GetComponent<PlayerAnim>().enabled = false;
+                player.GetComponent<PlayerMovement2>().isActive = false;
                 isControl = true;
             }
             else if (isControl)
             {
                 cameraObj.GetComponent<CameraMovement>().enabled = true;
                 player.GetComponent<PlayerAnim>().enabled = true;
+                player.GetComponent<PlayerMovement2>().isActive = true;
                 isControl = false;
             }
         }
@@ -57,24 +59,31 @@ public class Sh_PipeController : MonoBehaviour
                 }    
             }
             else
-                hit.transform.gameObject.GetComponent<Sh_RotatePipe>().isSelect = false;
+            {
+                Sh_RotatePipe pipe = hit.transform?.gameObject.GetComponent<Sh_RotatePipe>();
+                if (pipe != null)
+                {
+                    pipe.isSelect = false;
+                }
+            }
 
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
-        {            
+        if (other.gameObject.CompareTag("Player"))
+        {
             isActive = true;
         }
     }
 
-    private void OnCollisionExit(Collision collision)
-    {        
-        
-        if (collision.gameObject.CompareTag("Player"))
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
             isActive = false;
+        }
     }
 
     public void ResetPipes()

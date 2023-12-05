@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Sh_PartnerSkill : MonoBehaviour
 {
@@ -19,6 +21,10 @@ public class Sh_PartnerSkill : MonoBehaviour
     public float HCool;
     public float SCool;
 
+    public GameObject fireUI;
+    public GameObject hydroUI;
+    public GameObject shieldUI;
+
     bool isSkill = false;
     bool isPump = false;
     int waterLen = 1;
@@ -29,6 +35,9 @@ public class Sh_PartnerSkill : MonoBehaviour
 
     Vector3 blinkPos;
     PlayerMovement2 pm;
+    TextMeshProUGUI fireCoolText;
+    TextMeshProUGUI hydroCoolText;
+    TextMeshProUGUI shieldCoolText;
 
     private void Start()
     {
@@ -37,12 +46,19 @@ public class Sh_PartnerSkill : MonoBehaviour
         float sTime = SCool;
 
         pm = player.parent.gameObject.GetComponent<PlayerMovement2>();
-        //pm = player.gameObject.GetComponent<PlayerMovement2>();
+
+        fireCoolText = fireUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        hydroCoolText = hydroUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+        shieldCoolText = shieldUI.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
     }
 
     void Update()
     {
-        if(!isSkill)
+        ActivateUIWithCool(fireUI, fireCoolText, fTime, FCool);
+        ActivateUIWithCool(hydroUI, hydroCoolText, hTime, HCool);
+        ActivateUIWithCool(shieldUI, shieldCoolText, sTime, SCool);
+
+        if (!isSkill)
             blinkPos = player.position + (player.forward * gapToPlayer);
 
         if (isPump)
@@ -208,12 +224,12 @@ public class Sh_PartnerSkill : MonoBehaviour
         partner.gameObject.SetActive(true);
         yield return null;
 
+        sTime = 0;
         blink.transform.position = partner.position;
         PlayBlink();
         yield return new WaitForSeconds(5f);
 
-        Destroy(spawnShield);
-        sTime = 0;
+        Destroy(spawnShield);        
     }
 
     IEnumerator DeleteWater()
@@ -258,5 +274,16 @@ public class Sh_PartnerSkill : MonoBehaviour
         p1.Play();
         p2.Play();
         p3.Play();
+    }
+
+    void ActivateUIWithCool(GameObject ui, TextMeshProUGUI textMesh, float time, float cool)
+    {
+        if(time < cool)
+        {
+            ui.SetActive(true);
+            textMesh.text = (cool - time).ToString("F2");
+        }
+        else
+            ui.SetActive(false);
     }
 }
