@@ -14,7 +14,7 @@ public class CameraMovement : MonoBehaviour
     bool isMap;
     public float a = 40, b = 0, c = 0, x = 0, y = 15, z = -13;
 
-    //юс╫ц
+    //О©╫с╫О©╫
     public bool isRotate;
 
     private void Start()

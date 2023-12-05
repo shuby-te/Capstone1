@@ -432,6 +432,17 @@ public class Si_BossMovement : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         anim.SetInteger("SpacialAttack", 0);
     }
+
+    IEnumerator SpecialAttack2()
+    {
+        StopCoroutine(OverHeat());
+        overheating = false;
+        anim.SetFloat("AttackSpeed", 1);
+        anim.SetInteger("SpacialAttack", 1);
+        yield return new WaitForSeconds(0.2f);
+        anim.SetInteger("SpacialAttack", 0);
+    }
+
     IEnumerator TurnHead()
     {
         if (!isturnhead)
@@ -451,6 +462,7 @@ public class Si_BossMovement : MonoBehaviour
     public IEnumerator Stun(float i)
     {
         isStun = true;
+        transform.GetComponent<BossAttack>().Disable1();
         anim.SetFloat("AttackSpeed", 1);
         anim.SetBool("isStun", true);
         yield return new WaitForSeconds(0.3f);

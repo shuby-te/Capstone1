@@ -21,7 +21,10 @@ public class MapTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(Move());
+        if (other.transform.CompareTag("Player"))
+        {
+            StartCoroutine(Move());
+        }
     }
     private IEnumerator Move()
     {
@@ -35,27 +38,27 @@ public class MapTrigger : MonoBehaviour
 
         yield return StartCoroutine(CM.Fade(false));
 
-        if (triggerTag == 0)//°¡¿îµ¥>¼öÁ¶·ë
+        if (triggerTag == 0)//ï¿½ï¿½ï¿½îµ¥>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             CM.SetCamera(40, 56, 0, -7, 15, -6);
         }
-        else if (triggerTag == 1)//°¡¿îµ¥>È­·Î¹æ
+        else if (triggerTag == 1)//ï¿½ï¿½ï¿½îµ¥>È­ï¿½Î¹ï¿½
         {
             CM.SetCamera(40, 120, 0, -10, 15, 6);
         }
-        else if (triggerTag == 2)//°¡¿îµ¥>±¤»ê
+        else if (triggerTag == 2)//ï¿½ï¿½ï¿½îµ¥>ï¿½ï¿½ï¿½ï¿½
         {
             CM.SetCamera(40, 240, 0, 10, 15, 3);
         }
-        else if (triggerTag == 3)//¼öÁ¶·ë>°¡¿îµ¥
+        else if (triggerTag == 3)//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½>ï¿½ï¿½ï¿½îµ¥
         {
             CM.SetCamera(40, 0, 0, 0, 15, -13);
         }
-        else if (triggerTag == 4)//È­·Î¹æ>°¡¿îµ¥
+        else if (triggerTag == 4)//È­ï¿½Î¹ï¿½>ï¿½ï¿½ï¿½îµ¥
         {
             CM.SetCamera(40, 0, 0, 0, 15, -13);
         }
-        else if (triggerTag == 5)//±¤»ê>°¡¿îµ¥
+        else if (triggerTag == 5)//ï¿½ï¿½ï¿½ï¿½>ï¿½ï¿½ï¿½îµ¥
         {
             CM.SetCamera(40, 0, 0, 0, 15, -13);
         }
