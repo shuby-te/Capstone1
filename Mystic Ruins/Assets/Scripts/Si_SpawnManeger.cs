@@ -21,7 +21,6 @@ public class Si_SpawnManeger : MonoBehaviour
     public GameObject dropbomb;
 
     GameObject[] Rock = new GameObject[15];
-    GameObject[] DropGear = new GameObject[6];
     GameObject[] SmallRock = new GameObject[6];
 
     GameObject BigRock;
