@@ -41,9 +41,9 @@ public class Sh_PartnerSkill : MonoBehaviour
 
     private void Start()
     {
-        float fTime = FCool;
-        float hTime = HCool;
-        float sTime = SCool;
+        fTime = FCool;
+        hTime = HCool;
+        sTime = SCool;
 
         pm = player.parent.gameObject.GetComponent<PlayerMovement2>();
 

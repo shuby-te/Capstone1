@@ -7,6 +7,8 @@ public class GameData
 
     public int[] items = new int[4];
 
+    public int[] pulleyState = new int[4];
+
     public int currentMapValue;
 
     public int[] mapProgress = new int[9];

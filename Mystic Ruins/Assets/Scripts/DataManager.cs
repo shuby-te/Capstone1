@@ -52,6 +52,7 @@ public class DataManager : MonoBehaviour
         gameData.z = 0;
 
         Array.Fill(gameData.items, 0);
+        Array.Fill(gameData.pulleyState, 0);
 
         gameData.currentMapValue = 0;
         Array.Fill(gameData.mapProgress, 0);        

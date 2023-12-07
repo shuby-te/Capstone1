@@ -85,12 +85,14 @@ public class PlayerMovement2 : MonoBehaviour
             cart.transform.SetParent(transform, false);
             cart.transform.localPosition = new Vector3(0, 0, 2);
             cart.transform.localRotation = Quaternion.Euler(0, 0, 0);
+            speed = 8f;
         }
         else if (setCart && Input.GetKeyDown(KeyCode.E))
         {
             isInteract = false;
             setCart = false;
             cart.transform.parent = null;
+            speed = 10f;
         }
 
         //left from ladder
