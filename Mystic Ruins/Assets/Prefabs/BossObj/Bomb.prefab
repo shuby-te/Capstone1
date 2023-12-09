@@ -178,7 +178,7 @@ GameObject:
   - component: {fileID: 8189196369435072177}
   m_Layer: 0
   m_Name: Bomb
-  m_TagString: Bomb
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -213,3 +213,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: {fileID: 1017935332129336355}
+  bombPos: {fileID: 0}
+  particle:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

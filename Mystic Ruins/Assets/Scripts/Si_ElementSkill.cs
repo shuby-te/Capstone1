@@ -28,9 +28,9 @@ public class Si_ElementSkill : MonoBehaviour
             isSkil = true;
             StartCoroutine(on(6));
         }
-        if (time > 1000&& !boss.GetComponent<Si_BossMovement>().isStun)
+        if (time > 1000&& !boss.GetComponent<BossMovement>().isStun)
         {
-            boss.GetComponent<Si_BossMovement>().isStun=true;
+            boss.GetComponent<BossMovement>().isStun=true;
         }
     }
     private void OnTriggerStay(Collider other)
@@ -40,7 +40,7 @@ public class Si_ElementSkill : MonoBehaviour
             if (isActive && skillNum == 2) 
             {
                 //������ ���⿡ �߰�
-                if (boss.GetComponent<Si_BossMovement>().attackNum == 9)
+                if (boss.GetComponent<BossMovement>().attackNum == 9)
                     time++;
             }
         }
@@ -55,24 +55,24 @@ public class Si_ElementSkill : MonoBehaviour
                 if (bossSpeed == 1)
                 {
                     boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.25f);
-                    boss.GetComponent<Si_BossMovement>().bossSpeed = 1.25f;
+                    boss.GetComponent<BossMovement>().bossSpeed = 1.25f;
                 }
                 else
                 {
                     boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.5f);
-                    boss.GetComponent<Si_BossMovement>().bossSpeed = 1.5f;
-                    StartCoroutine(boss.GetComponent<Si_BossMovement>().OverHeat());
+                    boss.GetComponent<BossMovement>().bossSpeed = 1.5f;
+                    StartCoroutine(boss.GetComponent<BossMovement>().OverHeat());
                 }
                 isActive = false;
             }
         }
-        //else if (other.CompareTag("Object"))
-        //{
-        //    if(other.GetComponent<DropBomb>() != null)
-        //    {
-        //        other.GetComponent<DropBomb>().isFire = true;
-        //    }
-        //}
+        else if (other.CompareTag("Object"))
+        {
+            if (other.GetComponent<DropBomb>() != null)
+            {
+                other.GetComponent<DropBomb>().isFire = true;
+            }
+        }
     }
 
     IEnumerator wait(float x)
@@ -82,7 +82,7 @@ public class Si_ElementSkill : MonoBehaviour
     IEnumerator wake()
     {
         yield return new WaitForSeconds(3);
-        boss.GetComponent<Si_BossMovement>().isStun = false;
+        boss.GetComponent<BossMovement>().isStun = false;
     }
     IEnumerator on(int x)
     {

@@ -59,11 +59,7 @@ public class Si_Obj : MonoBehaviour
 
     IEnumerator DropGear()
     {
-        while (gameObject.transform.localScale.y < 10)
-        { 
-            gameObject.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
-            yield return new WaitForFixedUpdate();
-        }
+        
         yield return new WaitForSeconds(0.5f);
     }
     private void OnTriggerEnter(Collider other)
