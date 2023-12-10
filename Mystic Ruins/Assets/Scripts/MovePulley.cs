@@ -49,12 +49,17 @@ public class MovePulley : MonoBehaviour
             }
         }
     }
-    //지금은 발판을 떼면 다시 내려가지 않도록 했는데, 고치는게 맞을지도...? (처음에만 내려가고 그다음은 안내려가는게 말이 안됨)
+
     void ResetUpState()
     {
         anim.SetBool("upState", false);
         //여기에 restrict 블록이나 다른 것들을 리셋시키는 내용 들어가야 할지도
     }
+    //도르래룸 분기 변경
+    //도르래 상태 데이터 변경
+    //도르래 시야 가리는 거 없애기
+    //벽 고민
+
 
     private void OnTriggerStay(Collider other)
     {
