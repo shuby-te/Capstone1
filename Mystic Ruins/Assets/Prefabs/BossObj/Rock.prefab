@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 7737495880983197857}
   - component: {fileID: 6687493703772288772}
   - component: {fileID: 8874966894987363278}
-  - component: {fileID: 5896840328579529839}
+  - component: {fileID: 2200485738434611377}
   m_Layer: 0
   m_Name: Rock
-  m_TagString: BigGear
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5896840328579529839
+--- !u!114 &2200485738434611377
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,9 +93,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 6929574377906070043}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38fa24f199465294aa4222118832b4b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 5f5a4ae8c261cff4fabc6814df08922d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
-  isActive: 0
-  isDrop: 0

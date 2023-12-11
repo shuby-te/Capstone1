@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 7737495880983197857}
   - component: {fileID: 6687493703772288772}
   - component: {fileID: 8874966894987363278}
-  - component: {fileID: -6041361986070611616}
+  - component: {fileID: -1236764747779797516}
   m_Layer: 0
   m_Name: MiniRock
-  m_TagString: MiniGear
+  m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,7 +84,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &-6041361986070611616
+--- !u!114 &-1236764747779797516
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,9 +93,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 6929574377906070043}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 38fa24f199465294aa4222118832b4b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 620a54f5f159af24aa8434b842e5c77e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 20
-  isActive: 0
-  isDrop: 0
+  rotationSpeed: 5

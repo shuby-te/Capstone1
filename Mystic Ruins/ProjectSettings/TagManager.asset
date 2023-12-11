@@ -5,10 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Tetris
-  - BigGear
-  - MiniGear
-  - Bomb
-  - Rock
   - Fire
   - Water
   - Boss
@@ -16,8 +12,8 @@ TagManager:
   - Ladder
   - Ground
   - Object
-  - DropGear
   - Cart
+  - Rock
   layers:
   - Default
   - TransparentFX
