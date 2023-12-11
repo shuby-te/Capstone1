@@ -7,6 +7,11 @@ public class GameData
 
     public int[] items = new int[4];
 
+    public int coalNum;
+    public int wheelNum;
+
+    public float[] cartPos = new float[3];
+
     public int[] pulleyState = new int[4];
 
     public int currentMapValue;

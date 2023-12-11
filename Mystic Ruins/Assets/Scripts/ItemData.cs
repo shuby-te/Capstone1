@@ -16,8 +16,9 @@ public class ItemData : MonoBehaviour
     {
         if (isInteract && Input.GetKeyDown(KeyCode.F))
         {
-            itemManager.GetComponent<ItemManager>().AddItem(this.gameObject, itemValue);
-            if(isUnique)
+            bool isSaved = itemManager.GetComponent<ItemManager>().AddItem(itemValue);
+
+            if (isSaved && isUnique)
                 Destroy(this.gameObject);
         }
     }
