@@ -20,7 +20,7 @@ public class FireBall : BossObject
         pos = Vector3.zero;
         rot = Vector3.zero;
         gameObject.SetActive(true);
-        gameObject.SetActive(false);
+        Disable();
     }
 
     // Update is called once per frame
@@ -54,7 +54,7 @@ public class FireBall : BossObject
     IEnumerator disable(float i)
     {
         yield return new WaitForSeconds(i);
-        gameObject.SetActive(false);
+        Disable();
     }
     protected static Vector3 Parabola(Vector3 start, Vector3 end, float height, float t)
     {

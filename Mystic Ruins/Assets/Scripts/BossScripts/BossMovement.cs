@@ -1,6 +1,4 @@
-    using System.Collections;
-using Unity.Mathematics;
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 
 public class BossMovement : MonoBehaviour
@@ -12,6 +10,8 @@ public class BossMovement : MonoBehaviour
     public bool isBreak = false;
     public bool isAttack = false;
     public bool isActive = false;
+    public bool isBlocking = false;
+
     bool overheating = false;
     bool isFar = true;
     bool move = false;
@@ -26,7 +26,7 @@ public class BossMovement : MonoBehaviour
     public bool isturnhead = false;
     public float bossSpeed = 1f;
     public int isSpecial = 0;
-
+    bool sp = false;
     public ObjManager Objmanager;
     Animator anim;
     void Start()
@@ -336,10 +336,7 @@ public class BossMovement : MonoBehaviour
         while (true)
         {
             if(!anim.GetCurrentAnimatorStateInfo(0).IsName("Element1-1"))
-            {
-                Debug.Log("break");
                 break;
-            }
             if(isStun)
             {
                 anim.SetBool("isStun", true);
@@ -347,7 +344,7 @@ public class BossMovement : MonoBehaviour
                 anim.SetBool("isStun", false);
                 break;
             }
-            yield return new FixedUpdate();
+            yield return new WaitForFixedUpdate();
         }
         while (true)
         {
@@ -377,6 +374,8 @@ public class BossMovement : MonoBehaviour
      }
     IEnumerator ElementAttack2()
     {
+        yield return new WaitForSeconds(1);
+
         anim.SetInteger("AttackType", 10);
         yield return new WaitForSeconds(0.5f);
 
@@ -411,6 +410,8 @@ public class BossMovement : MonoBehaviour
     IEnumerator SpecialAttack1()
     {
         StopCoroutine(OverHeat());
+        sp = true;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
         overheating = false;
         anim.SetFloat("AttackSpeed", 1);
         anim.SetInteger("SpacialAttack", 1);
@@ -420,9 +421,11 @@ public class BossMovement : MonoBehaviour
     IEnumerator SpecialAttack2()
     {
         StopCoroutine(OverHeat());
+        sp = true;
+        gameObject.GetComponent<BoxCollider>().enabled = false;
         overheating = false;
         anim.SetFloat("AttackSpeed", 1);
-        anim.SetInteger("SpacialAttack", 1);
+        anim.SetInteger("SpacialAttack", 2);
         yield return new WaitForSeconds(0.2f);
         anim.SetInteger("SpacialAttack", 0);
     }
@@ -437,7 +440,7 @@ public class BossMovement : MonoBehaviour
             {
                 Vector3 t_dir = (playerPos - transform.position).normalized;
                 transform.forward = Vector3.Lerp(transform.forward, t_dir, 0.04f);
-                yield return new FixedUpdate();
+                yield return new WaitForFixedUpdate();
             }
             isturnhead = false;
         }
@@ -457,6 +460,11 @@ public class BossMovement : MonoBehaviour
         isStun = false;
         attackNum = 0;
         bossSpeed = 1;
+        if (sp)
+        {
+            gameObject.GetComponent<BoxCollider>().enabled = true;
+            sp = false;
+        }
     }
     public IEnumerator OverHeat()
     {

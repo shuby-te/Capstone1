@@ -10,10 +10,14 @@ public class Si_ElementSkill : MonoBehaviour
     public bool isSkil = false;
     public int skillNum; // fire = 1 water = 2 metal = 3 
     public GameObject boss;
+    BossMovement bm;
+    Animator anim;
+    bool run = false;
     // Start is called before the first frame update
     void Start()
     {
-        
+        bm=boss.GetComponent<BossMovement>();
+        anim=boss.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -28,70 +32,89 @@ public class Si_ElementSkill : MonoBehaviour
             isSkil = true;
             StartCoroutine(on(6));
         }
-        if (time > 1000&& !boss.GetComponent<BossMovement>().isStun)
+        if (time > 60&& !bm.isStun)
         {
-            boss.GetComponent<BossMovement>().isStun=true;
+            bm.isStun=true;
         }
     }
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.CompareTag("Boss"))
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Element1-1") && !run)
         {
-            if (isActive && skillNum == 2) 
-            {
-                //������ ���⿡ �߰�
-                if (boss.GetComponent<BossMovement>().attackNum == 9)
-                    time++;
-            }
+            StartCoroutine(WaterAttack());
+            run = true;
+            Debug.Log("enter");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (run)
+        {
+            Debug.Log("exit");
+            run = false;
         }
     }
     private void OnTriggerEnter(Collider other)
     {
-        float bossSpeed = boss.GetComponent<Animator>().GetFloat("AttackSpeed");
+        float bossSpeed = anim.GetFloat("AttackSpeed");
         if (other.CompareTag("Boss"))
         {
             if (isActive && skillNum == 1)
             {
                 if (bossSpeed == 1)
                 {
-                    boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.25f);
-                    boss.GetComponent<BossMovement>().bossSpeed = 1.25f;
+                    anim.SetFloat("AttackSpeed", 1.25f);
+                    bm.bossSpeed = 1.25f;
                 }
                 else
                 {
-                    boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1.5f);
+                    anim.SetFloat("AttackSpeed", 1.5f);
                     boss.GetComponent<BossMovement>().bossSpeed = 1.5f;
-                    StartCoroutine(boss.GetComponent<BossMovement>().OverHeat());
+                    StartCoroutine(bm.OverHeat());
                 }
                 isActive = false;
+            }
+            else if (isActive && skillNum == 2)
+            {
+                if (anim.GetCurrentAnimatorStateInfo(0).IsName("Element1-1")&&!run)
+                {
+                    StartCoroutine(WaterAttack());
+                    run = true;
+                    Debug.Log("enter");
+                }
             }
         }
         else if (other.CompareTag("Object"))
         {
-            if (other.GetComponent<DropBomb>() != null)
+            if (other.GetComponent<DropBomb>() != null && skillNum == 1)
             {
                 other.GetComponent<DropBomb>().isFire = true;
             }
         }
     }
 
-    IEnumerator wait(float x)
+    IEnumerator WaterAttack()
     {
-        yield return new WaitForSeconds(x);
+            time++;
+            Debug.Log("attack");
+        yield return new WaitForEndOfFrame();
+        run = false;
+        Debug.Log("stop");
     }
     IEnumerator wake()
     {
         yield return new WaitForSeconds(3);
-        boss.GetComponent<BossMovement>().isStun = false;
+        bm.isStun = false;
     }
     IEnumerator on(int x)
     {
-        yield return StartCoroutine(wait(0.4f));
+        yield return new WaitForSeconds(0.4f);
         isActive = true;
         yield return new WaitForSeconds(x);
         isActive = false;
         time = 0;
-        yield return StartCoroutine(wait(1.3f));
+        yield return new WaitForSeconds(1.3f);
         isSkil = false;
     }
 }

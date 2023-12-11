@@ -35,7 +35,7 @@ public class ObjManager : MonoBehaviour
     }
     public void BigRockInactive()
     {
-        bigRock.SetActive(false);
+        bigRock.GetComponent<Rock>().Disable();
         for (int i = 0; i < 8; i++)
         {
             miniRock[i].SetActive(true);
@@ -76,17 +76,27 @@ public class ObjManager : MonoBehaviour
     }
     public void DropBombActive()
     {
-        float x, z, r = 0.15f;
+        float x, z, r = 30f;
         while (true)
         {
-            x = Random.Range(-0.12f, 0.12f);
-            z = Random.Range(-0.12f, 0.12f);
+            x = Random.Range(-30f, 30f);
+            z = Random.Range(-30f, 30f);
             if (x * x + z * z < r * r)
             {
-                dropBomb[bombNum].transform.localPosition = new Vector3(x, 0.2f, z);
                 dropBomb[bombNum].SetActive(true);
+                dropBomb[bombNum++].transform.localPosition = new Vector3(x, 0.2f, z);
+                if(bombNum==4)
+                {
+                    bombNum = 0;
+                }
                 break;
             }
         }
     }
+    public void DropBombInactive()
+    {
+        for(int i= 0; i < 4; i++)
+            dropBomb[i].GetComponent<DropBomb>().Disable();
+    }
+
 }
