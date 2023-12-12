@@ -54,6 +54,23 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
+    void LateUpdate()
+    {
+        Vector3 direction = (player.transform.position - transform.position).normalized;
+        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, Mathf.Infinity,
+                            1 << LayerMask.NameToLayer("Wall"));
+
+        for (int i = 0; i < hits.Length; i++)
+        {
+            TransParentWall[] obj = hits[i].transform.GetComponentsInChildren<TransParentWall>();
+
+            for (int j = 0; j < obj.Length; j++)
+            {
+                obj[j]?.BecomeTransparent();
+            }
+        }
+    }
+
     public void SetCamera(int a,int b,int c,int x, int y,int z)
     {
         this.a = a; this.b = b;this.c = c; this.x = x;this.y = y; this.z = z;

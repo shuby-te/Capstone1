@@ -48,7 +48,7 @@ public class Sh_RotatePipe : MonoBehaviour
 
         while (n < 90)
         {
-            yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(Time.deltaTime);
 
             transform.Rotate(0, 0, 1);
             yield return null;
