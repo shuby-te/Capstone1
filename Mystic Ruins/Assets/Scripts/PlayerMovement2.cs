@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerMovement2 : MonoBehaviour
 {
-    public GameObject cart;
+    public GameObject cart;    
 
     public float speed = 10f;
     public float dashSpeed = 2f;
@@ -23,6 +23,7 @@ public class PlayerMovement2 : MonoBehaviour
     GameObject partner;
     GameObject attackRange;
     GameObject ladder;
+    AssembleCart cartWheel;
     Rigidbody rb;
     Animator anim;
 
@@ -34,6 +35,7 @@ public class PlayerMovement2 : MonoBehaviour
     bool isGround;
     bool isLadder;
     public bool isCart;
+    bool isCoal;
 
     float xAxis = 1f, zAxis = -1f;
     float partnerSpeed = 4f;
@@ -48,6 +50,7 @@ public class PlayerMovement2 : MonoBehaviour
 
         rb = GetComponent<Rigidbody>();        
         anim = GetComponent<Animator>();
+        cartWheel = cart.GetComponent<AssembleCart>();
     }
 
     void Update()
@@ -78,7 +81,7 @@ public class PlayerMovement2 : MonoBehaviour
         }
 
         //move cart
-        if(!isInteract && !setCart && isCart && Input.GetKeyDown(KeyCode.E))
+        if(!isInteract && !setCart && isCart && Input.GetKeyDown(KeyCode.E) && cartWheel.wheelNum == 2)
         {
             isInteract = true;
             setCart = true;
@@ -167,11 +170,18 @@ public class PlayerMovement2 : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
             {
-                Vector3 point = new Vector3(hit.point.x, transform.position.y, hit.point.z);
+                /*Vector3 point = new Vector3(hit.point.x, transform.position.y, hit.point.z);
 
                 Vector3 rotateDir = point - transform.position;
                 if (rotateDir != Vector3.zero)
-                    transform.forward = rotateDir;
+                    transform.forward = rotateDir;*/
+
+                Vector3 projectedPoint = Vector3.ProjectOnPlane(hit.point - transform.position, Vector3.up);
+
+                Vector3 ignoreHeightPoint = new Vector3(projectedPoint.x, 0, projectedPoint.z);
+
+                if (ignoreHeightPoint != Vector3.zero)
+                    transform.forward = ignoreHeightPoint.normalized;
             }
 
             //move            

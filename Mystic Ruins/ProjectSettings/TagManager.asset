@@ -14,6 +14,7 @@ TagManager:
   - Object
   - Cart
   - Rock
+  - Coal
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - Boss
   - SwordInvisible
   - 
-  - 
+  - Wall
   - 
   - 
   - 

@@ -7,6 +7,7 @@ public class MiniRock : BossObject
 {
     public float speed;
     public float rotationSpeed;
+    public GameObject Rock;
 
     // Start is called before the first frame update
     new void Start()
@@ -26,11 +27,12 @@ public class MiniRock : BossObject
     new private void OnEnable()
     {
         base.OnEnable();
-        StartCoroutine(temp());
+        transform.position=Rock.transform.position;
     }
-    IEnumerator temp()
+
+    private void OnTriggerEnter(Collider other)
     {
-        yield return new WaitForSeconds(3);
-        gameObject.SetActive(false);
+        if (other.gameObject.CompareTag("wall"))
+            Disable();
     }
 }

@@ -22,10 +22,14 @@ public class BossObject : MonoBehaviour
         if (setParent)
             transform.parent = null;
     }
-    protected void OnDisable()
+    public void Disable()
     {
         if (setParent)
             transform.parent = parent;
+        gameObject.SetActive(false);
+    }
+    protected void OnDisable()
+    {
         transform.localPosition = pos;
         transform.eulerAngles = rot;
     }

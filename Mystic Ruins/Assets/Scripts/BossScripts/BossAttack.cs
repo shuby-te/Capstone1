@@ -1,47 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Build;
+﻿
 using UnityEngine;
 
 public class BossAttack : MonoBehaviour
 {
-    public GameObject player;
+    public GameObject[] landingPos; //0.player 1.center 2.east 3.west 4.south 5.north
     public GameObject attackRange;
     public GameObject hpManager;
     public GameObject dropRange;
-    float damage;
+    public GameObject dropParticle;
+    MeshCollider mc;
+    ParticleSystem ps;
+    BossMovement bm;
     int count = 0;
-    bool isOverlapped;
 
-    void Attack()
+    private void Start()
     {
-        if (isOverlapped)
-        {
-            hpManager.GetComponent<Sh_HpManager>().AttackToPlayer();
+        mc=dropRange.GetComponent<MeshCollider>();
+        ps=dropParticle.GetComponent<ParticleSystem>();
+        bm=dropRange.transform.parent.GetComponent<BossMovement>();
+        dropParticle.SetActive(false);
+    }
 
-            player.GetComponent<PlayerAnim>().KnockBacked();
-        }
-    }   
-    
     void Disable()
     {
         attackRange.SetActive(false);
     }
     public void Disable1()
     {
-        dropRange.GetComponent<MeshCollider>().enabled = false;
-        dropRange.SetActive(false);
+        mc.enabled = false;
+        dropParticle.gameObject.SetActive(false);
+        ps.Stop();
     }
-    void on()
+    void Landing(int i)
     {
-        gameObject.transform.position=player.transform.position;
-        dropRange.SetActive(true);
+        gameObject.transform.position = landingPos[i].transform.position;
+        dropParticle.gameObject.SetActive(true);
+        ps.Play();
     }
     void p1()
     {
         attackRange.SetActive(true);
-        damage = 5; //�̷��� ���� ������ ������ �ɵ� ?
         attackRange.transform.localPosition = new Vector3(0, 0, 3);
         attackRange.transform.localScale = new Vector3(5, 1, 5);
     }
@@ -50,7 +48,7 @@ public class BossAttack : MonoBehaviour
     {
         attackRange.SetActive(true);
         attackRange.transform.localPosition = new Vector3(0, 0, 1);
-        attackRange.transform.localScale = new Vector3(3, 1, 3);
+        attackRange.transform.localScale = new Vector3(2, 0.7f, 2);
     }
 
     void p6_1()
@@ -84,7 +82,7 @@ public class BossAttack : MonoBehaviour
     }
     void sp1()
     {
-        dropRange.GetComponent<MeshCollider>().enabled = true;
+        mc.enabled = true;
     }
 
     void Stun()
@@ -94,24 +92,12 @@ public class BossAttack : MonoBehaviour
 
     void Rock()
     {
-        gameObject.GetComponent<BossMovement>().Objmanager.DropRockActive(5, 0.15f);
-        if (count==2)
+        bm.Objmanager.DropRockActive(5, 0.15f);
+        if (count == 2)
         {
-            gameObject.GetComponent<BossMovement>().Objmanager.DropBombActive();
-            count = 0; 
+            bm.Objmanager.DropBombActive();
+            count = 0;
         }
         count++;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-            isOverlapped = true;
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-            isOverlapped = false;
     }
 }

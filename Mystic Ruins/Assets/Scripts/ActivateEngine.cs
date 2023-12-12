@@ -8,7 +8,7 @@ public class ActivateEngine : MonoBehaviour
     public GameObject cart;
 
     GameObject coal;
-    GameObject cartCoal;
+    PlayerMovement2 pm;
 
     bool isCart;
     bool isPlayer;
@@ -16,27 +16,25 @@ public class ActivateEngine : MonoBehaviour
 
     void Start()
     {
-        /*
         coal = this.transform.GetChild(0).gameObject;
-        cartCoal = cart.transform.GetChild(0).gameObject;
+        pm = player.GetComponent<PlayerMovement2>();
 
         if(DataManager.Instance.gameData.mapProgress[7] == 0)
             coal.SetActive(false);
         else if(DataManager.Instance.gameData.mapProgress[7] == 1)
             coal.SetActive(true);
-            각종 이펙트 실행
-        else
-            각종 이펙트 실행
-         */
+            //각종 이펙트 실행
+        //else
+            //각종 이펙트 실행
     }
 
     void Update()
     {
-        if(isCart && isPlayer && Input.GetKeyDown(KeyCode.E) && DataManager.Instance.gameData.mapProgress[7] == 0)
+        if(isCart && pm.setCart && Input.GetKeyDown(KeyCode.F) && DataManager.Instance.gameData.mapProgress[7] == 0)
         {
             DataManager.Instance.gameData.mapProgress[7] = 1;
-            /*coal.SetActive(true);
-            cartCoal.SetActive(false);*/
+            coal.SetActive(true);
+            cart.GetComponent<AssembleCart>().EngineBehaviour();
         }     
         
         if(isFire && DataManager.Instance.gameData.mapProgress[7] == 1)
@@ -47,8 +45,9 @@ public class ActivateEngine : MonoBehaviour
         }
 
         /*
-        if(){}  //진행도가 2이고 파이프룸 및 수조룸이 모두 해결되었을때를 조건으로, 
-                //물이 끓거나 증기가 나오는 이펙트 실행하고 해결된 도르래에 한하여 증기 피스톤 애니메이션 재생
+        if(){}  
+        //진행도가 2이고 파이프룸 및 수조룸이 모두 해결되었을때를 조건으로, 
+        //물이 끓거나 증기가 나오는 이펙트 실행하고 해결된 도르래에 한하여 증기 피스톤 애니메이션 재생
         */
     }
 
@@ -56,9 +55,6 @@ public class ActivateEngine : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Cart"))
             isCart = true;
-
-        if (other.gameObject.CompareTag("Player"))
-            isPlayer = true;
 
         if (other.gameObject.CompareTag("Fire"))
             isFire = true;
@@ -68,8 +64,5 @@ public class ActivateEngine : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Cart"))
             isCart = false;
-
-        if (other.gameObject.CompareTag("Player"))
-            isPlayer = false;
     }
 }
