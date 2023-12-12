@@ -6,12 +6,13 @@ public class FireBall : BossObject
 {
 
     private Vector3 startPos, endPos;
-    //¶¥¿¡ ´Ý±â±îÁö °É¸®´Â ½Ã°£
+    //ï¿½ï¿½ï¿½ï¿½ ï¿½Ý±ï¿½ï¿½ï¿½ï¿½ ï¿½É¸ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
     protected float timer;
     protected float timeToFloor;
     public float t;
-
+    public GameObject rock;
     public ParticleSystem[] particle = new ParticleSystem[4];
+    bool isActive = true;
     // Start is called before the first frame update
     new void Start()
     {
@@ -26,29 +27,25 @@ public class FireBall : BossObject
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y < 0.3) 
+        if (transform.position.y < 0.3 && isActive)
         {
-            if (gameObject.GetComponent<MeshRenderer>().enabled)
-            {
-                gameObject.GetComponent<MeshRenderer>().enabled = false;
-                t = particle[2].main.startLifetime.constantMax;
-                for (int i = 0; i < particle.Length; i++)
-                {
-                    particle[i].Play();
-                }
-                StartCoroutine(disable(t + 1));
-            }
+            isActive = false;
+            rock.SetActive(false);
+            t = particle[2].main.startLifetime.constantMax;
+            for (int i = 0; i < particle.Length; i++)
+                particle[i].Play();
+            StartCoroutine(disable(t + 1));
         }
     }
     new private void OnEnable()
     {
         transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        rock.SetActive(true);
         base.OnEnable();
         launch();
     }
     new private void OnDisable()
     {
-        gameObject.GetComponent<MeshRenderer>().enabled = true;
         base.OnDisable();
     }
     IEnumerator disable(float i)
@@ -83,8 +80,8 @@ public class FireBall : BossObject
         {
             for (int i = 0; i < UnityEngine.Random.Range(1, 25); i++)
             {
-                x = UnityEngine.Random.Range(-35f, 35f);
-                z = UnityEngine.Random.Range(345f, 415f);
+                x = UnityEngine.Random.Range(-40f, 40f);
+                z = UnityEngine.Random.Range(320f, 400f);
             }
             if (x * x + (z - 380) * (z - 380) < 35 * 35)
                 break;

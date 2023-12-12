@@ -352,10 +352,10 @@ public class BossMovement : MonoBehaviour
                 anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.4f)
             {
                 anim.SetInteger("AttackType", 0);
-                for (int i = 0; i < 8; i++)
+                for (int i = 0; i < 16; i++)
                 {
                     Objmanager.SpawnFire(i);
-                    yield return new WaitForSeconds(0.2f / bossSpeed);
+                    yield return new WaitForSeconds(0.1f / bossSpeed);
                 }
                 break;
             }
