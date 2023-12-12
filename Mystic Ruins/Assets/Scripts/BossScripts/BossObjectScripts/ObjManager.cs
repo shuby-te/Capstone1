@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjManager : MonoBehaviour
@@ -35,11 +33,12 @@ public class ObjManager : MonoBehaviour
     }
     public void BigRockInactive()
     {
-        bigRock.GetComponent<Rock>().Disable();
         for (int i = 0; i < 8; i++)
         {
             miniRock[i].SetActive(true);
+            miniRock[i].transform.position=bigRock.transform.position;
         }
+        bigRock.GetComponent<Rock>().Disable();
     }
     public void DropGear(int i)
     {

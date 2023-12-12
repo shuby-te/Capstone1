@@ -1,5 +1,4 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BossAttack : MonoBehaviour
 {
@@ -92,7 +91,7 @@ public class BossAttack : MonoBehaviour
 
     void Rock()
     {
-        bm.Objmanager.DropRockActive(5, 0.15f);
+        bm.Objmanager.DropRockActive(5, 0.12f);
         if (count == 2)
         {
             bm.Objmanager.DropBombActive();

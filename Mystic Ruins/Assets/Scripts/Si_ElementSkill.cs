@@ -94,8 +94,8 @@ public class Si_ElementSkill : MonoBehaviour
 
     IEnumerator WaterAttack()
     {
-            time++;
-            Debug.Log("attack");
+        time++;
+        Debug.Log("attack");
         yield return new WaitForEndOfFrame();
         run = false;
         Debug.Log("stop");

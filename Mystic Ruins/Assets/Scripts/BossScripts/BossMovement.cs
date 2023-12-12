@@ -11,7 +11,7 @@ public class BossMovement : MonoBehaviour
     public bool isAttack = false;
     public bool isActive = false;
     public bool isBlocking = false;
-
+    bool isDash = true;
     bool overheating = false;
     bool isFar = true;
     bool move = false;
@@ -82,6 +82,12 @@ public class BossMovement : MonoBehaviour
             isSpecial = 0;
             isAttack = true;
             StartCoroutine(SpecialAttack1());
+        }
+        else if (isSpecial == 2)
+        {
+            isSpecial = 0;
+            isAttack = true;
+            StartCoroutine(SpecialAttack2());
         }
     }
     void DisCheck()
@@ -384,17 +390,15 @@ public class BossMovement : MonoBehaviour
             StartCoroutine(TurnHead());
             yield return new WaitForEndOfFrame();
         }
-        while (true)
+        isDash = true;
+        int i = 0;
+        while (i<30/bossSpeed)
         {
-            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Element2-1"))
+            if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Element2-1")&&isDash)
             {
-                for (int i = 0; i < 30/bossSpeed; i++)
-                {
                     transform.position += Vector3.Normalize(transform.forward) * 20 / 30 / bossSpeed;
-                    yield return new WaitForEndOfFrame();
-                }
-                break;
             }
+            i++;
             yield return new WaitForEndOfFrame();
         }
 
@@ -472,5 +476,10 @@ public class BossMovement : MonoBehaviour
         yield return new WaitForSeconds(15);
         //boss damage
         StartCoroutine(Stun(5));
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("wall"))
+            isDash = false;
     }
 }
