@@ -5,6 +5,7 @@ using UnityEngine;
 public class SwitchUI : MonoBehaviour
 {
     public GameObject itemsUI;
+    public GameObject itemPointer;
     public GameObject battleUI;
 
     public float duration;
@@ -19,6 +20,8 @@ public class SwitchUI : MonoBehaviour
 
     IEnumerator UISwitching()
     {
+        itemPointer.transform.SetParent(itemsUI.transform, true);
+
         Transform openUI = itemsUI.transform;
         Transform closeUI = battleUI.transform;
 
@@ -43,9 +46,14 @@ public class SwitchUI : MonoBehaviour
         {
             float t = timeElapsed / duration;
             openUI.position = Vector3.Lerp(openUI.position, new Vector3(openUI.position.x, 0f, openUI.position.z), t);
+            openUI.position = Vector3.Lerp(openUI.position, new Vector3(openUI.position.x, 0f, openUI.position.z), t);
 
             timeElapsed += Time.deltaTime;
             yield return null;
         }
+
+        itemPointer.transform.SetParent(itemsUI.transform.parent, true);
+        /*itemPointer.transform.position = new Vector3(itemPointer.transform.position.x,
+            itemsUI.transform.position.y + 59, itemPointer.transform.position.z);*/
     }
 }

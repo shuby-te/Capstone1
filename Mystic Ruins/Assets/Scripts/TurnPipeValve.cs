@@ -16,7 +16,7 @@ public class TurnPipeValve : MonoBehaviour
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity) && Input.GetMouseButtonDown(0))
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity, ~LayerMask.GetMask("Ground")) && Input.GetMouseButtonDown(0))
         {
             if (hit.transform.gameObject == this.gameObject)
             {
