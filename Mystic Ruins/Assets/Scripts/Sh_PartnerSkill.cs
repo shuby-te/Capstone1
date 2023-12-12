@@ -72,6 +72,7 @@ public class Sh_PartnerSkill : MonoBehaviour
             partner.position = blinkPos;
         }
 
+        //skillState 활용해서 스킬 사용 상태 수정
         if(pm.isActive)
         {
             if (Input.GetKeyDown(KeyCode.Alpha1) && fTime >= FCool)
@@ -149,7 +150,8 @@ public class Sh_PartnerSkill : MonoBehaviour
     }
 
     IEnumerator FireBreath()
-    {        
+    {
+        fTime = 0;
         yield return new WaitForSeconds(0.4f);
         
         fireBreath.Play();
@@ -167,17 +169,18 @@ public class Sh_PartnerSkill : MonoBehaviour
 
         blink.transform.position = partner.position;
         PlayBlink();
-        fTime = 0;
+        //원위치      
     }
 
     IEnumerator Hydropump()
     {
+        hTime = 0;
         yield return new WaitForSeconds(0.4f);
 
         hydropump.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.SetFloat("_MainTime", waterLen);
         hydropump.transform.GetChild(1).gameObject.GetComponent<Renderer>().material.SetFloat("_MainTime", waterLen);
         PlayHydropump();
-        yield return new WaitForSeconds(6f);    //���� ���� �ð��� 7f (���� 6f + �Ҹ� 1f)
+        yield return new WaitForSeconds(3f);    //���� ���� �ð��� 7f (���� 6f + �Ҹ� 1f)
 
         StartCoroutine("DeleteWater");
         yield return new WaitForSeconds(1.3f);
@@ -196,11 +199,12 @@ public class Sh_PartnerSkill : MonoBehaviour
 
         blink.transform.position = partner.position;
         PlayBlink();
-        hTime = 0;
+        //원위치     
     }
 
     IEnumerator Shield()
     {
+        sTime = 0;
         yield return new WaitForSeconds(0.4f);
         
         Vector3 spawnPos = blinkPos + player.forward * 2;
@@ -224,7 +228,7 @@ public class Sh_PartnerSkill : MonoBehaviour
         partner.gameObject.SetActive(true);
         yield return null;
 
-        sTime = 0;
+        //원위치        
         blink.transform.position = partner.position;
         PlayBlink();
         yield return new WaitForSeconds(5f);

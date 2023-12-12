@@ -58,7 +58,7 @@ public class Sh_HpManager : MonoBehaviour
         while (n < angle)
         {
             yield return new WaitForSeconds(0.001f);
-            gameObj.transform.Rotate(new Vector3(transform.rotation.x, transform.rotation.y, 0.1f * reverse));
+            gameObj.transform.Rotate(new Vector3(transform.rotation.x, 0.1f * reverse, transform.rotation.z));
             yield return null;
             n++;
         }

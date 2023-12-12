@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Rendering;
+using static UnityEditor.Progress;
 
 public class ItemManager : MonoBehaviour
 {
@@ -10,6 +11,20 @@ public class ItemManager : MonoBehaviour
 
     public Sprite[] itemSprites = new Sprite[3];
     //(0)¹ÙÄû / (1)¼®Åº / (2)»ç´Ù¸®
+
+    public void SetItems()
+    {
+        int i = 0;
+        while (i < DataManager.Instance.gameData.items.Length)
+        {
+            if (DataManager.Instance.gameData.items[i] != 0)
+            {                
+                itemImages[i].GetComponent<Image>().sprite = itemSprites[DataManager.Instance.gameData.items[i] - 1];
+                itemImages[i].GetComponent<Image>().enabled = true;
+            }
+            i++;
+        }
+    }
 
     public bool AddItem(int itemValue)
     {         

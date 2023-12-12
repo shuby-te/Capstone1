@@ -16,11 +16,6 @@ public class AssembleCart : MonoBehaviour
     public int coalNum;
     public int wheelNum;
 
-    void Start()
-    {
-        
-    }
-
     void Update()
     {
         if (isActive && Input.GetKeyDown(KeyCode.F))

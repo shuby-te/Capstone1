@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class RestrictFromPulley : MonoBehaviour
 {
+    public GameObject player;
     public GameObject pulley;
 
     MovePulley pulleyScript;
     BoxCollider boxCollider;
+    PlayerMovement2 pm;
 
     bool isDetect;
 
@@ -16,11 +18,12 @@ public class RestrictFromPulley : MonoBehaviour
     {
         pulleyScript = pulley.GetComponent<MovePulley>();
         boxCollider = GetComponent<BoxCollider>();
+        pm = player.GetComponent<PlayerMovement2>();
     }
 
     void Update()
     {
-        if (isDetect)
+        if (pm.setCart && isDetect)
         {
             boxCollider.isTrigger = false;
             pulleyScript.isDetect = true;

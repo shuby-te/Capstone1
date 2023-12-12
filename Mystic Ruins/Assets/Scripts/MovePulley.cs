@@ -7,11 +7,13 @@ public class MovePulley : MonoBehaviour
 {
     public GameObject player;
     public GameObject cart;
+    public GameObject wall;
+    public Animator anim;
 
     public bool isDetect;
     public int value;
 
-    Animator anim;
+    
     PlayerMovement2 pm;
 
     int state;
@@ -19,7 +21,6 @@ public class MovePulley : MonoBehaviour
     void Start()
     {
         state = DataManager.Instance.gameData.pulleyState[value - 1];
-        anim = GetComponent<Animator>();
         pm = player.GetComponent<PlayerMovement2>();
     }
 
@@ -42,39 +43,42 @@ public class MovePulley : MonoBehaviour
                 DataManager.Instance.gameData.pulleyState[value - 1] = 1;
 
                 anim.SetInteger("downState", 1);
-            }
-            else
-            {
-                anim.SetInteger("downState", 2);
+
+                if (value == 1)
+                    DataManager.Instance.gameData.mapProgress[6] = 1;
             }
         }
     }
 
-    void ResetUpState()
+    public void ResetClearedState()
+    {
+        anim.SetFloat("upSpeed", 20);
+        anim.SetInteger("downState", 2);
+
+        wall.SetActive(false);
+    }
+
+    public void ResetUpState()
     {
         anim.SetBool("upState", false);
-        //여기에 restrict 블록이나 다른 것들을 리셋시키는 내용 들어가야 할지도
-    }
-    //도르래룸 분기 변경
-    //도르래 상태 데이터 변경
-    //도르래 시야 가리는 거 없애기
-    //벽 고민
+        cart.transform.parent = null;
 
+        wall.SetActive(false);
+        state = 2;
+        DataManager.Instance.gameData.pulleyState[value - 1] = 2;
+    }
 
     private void OnTriggerStay(Collider other)
     {
-        Debug.Log("www");
         if (other.gameObject.CompareTag("Player"))
         {
             anim.SetBool("upState", true);
             anim.SetFloat("upSpeed", 1);
-            anim.SetInteger("downState", 0);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Debug.Log("weee");
         if (other.gameObject.CompareTag("Player"))
         {
             anim.SetFloat("upSpeed", 0);

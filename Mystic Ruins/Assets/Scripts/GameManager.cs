@@ -8,10 +8,12 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public GameObject[] uniqueItems = new GameObject[3];
+    public GameObject[] pulleys = new GameObject[4];
 
     public GameObject player;    
     public GameObject cart;    
     public GameObject pipeController;
+    public GameObject itemManager;
 
     AssembleCart cartScript;
 
@@ -37,7 +39,7 @@ public class GameManager : MonoBehaviour
             uniqueItems[i].SetActive(false);
         }
 
-        if (DataManager.Instance.gameData.mapProgress[3] == 1)
+        if (DataManager.Instance.gameData.mapProgress[2] == 1)
             cart.transform.position = new Vector3(
                 DataManager.Instance.gameData.cartPos[0],
                 DataManager.Instance.gameData.cartPos[1],
@@ -48,7 +50,16 @@ public class GameManager : MonoBehaviour
         else
             pipeController.GetComponent<Sh_PipeController>().ClearPipes();
 
+        if (DataManager.Instance.gameData.mapProgress[6] == 1)
+        {
+            for (int i = 0; i < 1; i++)
+            {
+                if ((DataManager.Instance.gameData.pulleyState[i] == 2))
+                    pulleys[i].GetComponent<MovePulley>().ResetClearedState();
+            }
+        }
 
+        itemManager.GetComponent<ItemManager>().SetItems();
     }
 
     private void OnApplicationQuit()
@@ -59,7 +70,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (DataManager.Instance.gameData.mapProgress[3] == 1)
+        if (DataManager.Instance.gameData.mapProgress[2] == 1)
         {
             DataManager.Instance.gameData.cartPos[0] = cart.transform.position.x;
             DataManager.Instance.gameData.cartPos[1] = cart.transform.position.y;
