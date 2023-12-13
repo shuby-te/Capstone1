@@ -36,6 +36,7 @@ public class BossAttack : MonoBehaviour
     void Landing(int i)
     {
         gameObject.transform.position = landingPos[i].transform.position;
+        gameObject.transform.rotation = landingPos[i].transform.rotation;
         dropParticle.gameObject.SetActive(true);
         ps.Play();
     }
@@ -95,11 +96,25 @@ public class BossAttack : MonoBehaviour
     void sp2_4()//orb enable
     {
         StartCoroutine(om.EnableOrb());
+        sp2_4_1();
+    }
+
+    void sp2_4_1()
+    {
+        if (bm.remainAttack != 0)
+            StartCoroutine(om.TurnHead()); 
+        else
+            GetComponent<Animator>().SetBool("throw", false);
+    }
+
+    void sp2_5()
+    {
+        om.CheckBarrier();
     }
 
     void Stun()
     {
-        gameObject.GetComponent<Animator>().SetFloat("StunMultiplier", 0);
+        GetComponent<Animator>().SetFloat("StunMultiplier", 0);
     }
 
     void Rock()
@@ -111,5 +126,17 @@ public class BossAttack : MonoBehaviour
             count = 0;
         }
         count++;
+    }
+
+    void ThrowPipe()
+    {
+        om.ThrowPipe();
+    }
+
+    void SetAnimSpeed(float speed)
+    {
+        if (speed == -1) speed = 0;
+        GetComponent<Animator>().SetFloat("AttackSpeed", speed);
+        Debug.Log(speed);
     }
 }

@@ -125,23 +125,44 @@ public class ObjManager : MonoBehaviour
         }   
     }
 
-    public IEnumerator ThrowPipe()
+    public IEnumerator TurnHead()
     {
-        while (true)
+        Debug.Log("turnturn");
+        turn = true;
+        throwPipe[--bm.remainAttack].SetActive(true);
+        StartCoroutine(Timer(5));
+        while (turn)
         {
-            turn = true;
-            throwPipe[--bm.remainAttack].SetActive(true);
-            StartCoroutine(Timer(5));
-            while (turn)
-            {
-                StartCoroutine(bm.TurnHead());
-                yield return new WaitForEndOfFrame();
-            }
-            yield return new WaitForSeconds(1.5f);
-            //throwPipe의 bool값하나 만들어서 on
+            StartCoroutine(bm.TurnHead());
+            yield return new WaitForEndOfFrame();
         }
+        throwPipe[bm.remainAttack].transform.parent = null;
+        boss.GetComponent<Animator>().SetFloat("AttackSpeed", 1);
     }
 
+    public void ThrowPipe()
+    {
+        throwPipe[bm.remainAttack].GetComponent<ThrowPipe>().isThrow = true;
+        throwPipe[bm.remainAttack].GetComponent<ThrowPipe>().orbNum = boss.GetComponent<BossMovement>().barrierNum;
+    }
+
+    public void CheckBarrier()
+    {
+        bool remain = false;
+        for (int i = 0; i < bossBarrier.Length; i++) 
+        {
+            if (bossBarrier[i] != null)
+                remain = true;
+        }
+        if(remain)
+        {
+            Debug.Log("뒤짐");
+        }
+        else
+        {
+            Debug.Log("안뒤짐");
+        }
+    }
     IEnumerator Timer(int i)
     {
         yield return new WaitForSeconds(i);
