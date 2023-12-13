@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class SwordTypeA : MonoBehaviour
@@ -11,8 +9,11 @@ public class SwordTypeA : MonoBehaviour
     bool wait = false;
     Vector3 movement;
 
+    Animator anim;
+
     private void Start()
     {
+        anim= GetComponent<Animator>();
         transform.LookAt(player.position);
         transform.eulerAngles = new Vector3(90, transform.eulerAngles.y, 0);
         movement = Vector3.up * Time.deltaTime;
@@ -33,6 +34,7 @@ public class SwordTypeA : MonoBehaviour
     {
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
         yield return new WaitForSeconds(stopDuration);
+        anim.SetFloat("Multiplier", 0);
         transform.LookAt(player.position);
         transform.eulerAngles = new Vector3(90, transform.eulerAngles.y, 0);
         movement = Vector3.up * Time.deltaTime * speed;
@@ -41,6 +43,9 @@ public class SwordTypeA : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("wall"))
+        {
             wait = true;
+            anim.SetFloat("Multiplier", 1);
+        }
     }
 }
