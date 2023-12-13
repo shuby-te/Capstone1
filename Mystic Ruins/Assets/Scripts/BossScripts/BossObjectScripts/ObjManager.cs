@@ -1,15 +1,20 @@
+using System.Collections;
 using UnityEngine;
 
 public class ObjManager : MonoBehaviour
 {
     public GameObject bomb;
     public GameObject bigRock;
+    public GameObject orbRot;
     public GameObject[] miniRock = new GameObject[8];
     public GameObject[] dropGear = new GameObject[6];
     public GameObject[] dropBomb = new GameObject[5];
     public GameObject[] dropRock = new GameObject[15];
     public GameObject[] fireBallL = new GameObject[4];
     public GameObject[] fireBallR = new GameObject[4];
+    public GameObject[] bossBarrier = new GameObject[3];
+    public GameObject[] orb = new GameObject[3];
+
 
 
     int rockNum = 0;
@@ -98,4 +103,22 @@ public class ObjManager : MonoBehaviour
             dropBomb[i].GetComponent<DropBomb>().Disable();
     }
 
+    public IEnumerator EnableBarrier()
+    {
+        for (int i = 0; i < bossBarrier.Length; i++)
+        {
+            bossBarrier[i].SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
+
+    public IEnumerator EnableOrb()
+    {
+        orbRot.transform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
+        for (int i = orb.Length - 1; i + 1 > 0; i--)
+        {
+            orb[i].SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+        }   
+    }
 }

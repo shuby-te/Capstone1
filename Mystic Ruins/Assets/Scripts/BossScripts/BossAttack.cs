@@ -1,15 +1,17 @@
-﻿using UnityEngine;
+﻿using System.Runtime.Serialization;
+using UnityEngine;
 
 public class BossAttack : MonoBehaviour
 {
     public GameObject[] landingPos; //0.player 1.center 2.east 3.west 4.south 5.north
     public GameObject attackRange;
-    public GameObject hpManager;
+    public GameObject objectManager;
     public GameObject dropRange;
     public GameObject dropParticle;
     MeshCollider mc;
     ParticleSystem ps;
     BossMovement bm;
+    ObjManager om;
     int count = 0;
 
     private void Start()
@@ -17,6 +19,7 @@ public class BossAttack : MonoBehaviour
         mc=dropRange.GetComponent<MeshCollider>();
         ps=dropParticle.GetComponent<ParticleSystem>();
         bm=dropRange.transform.parent.GetComponent<BossMovement>();
+        om = objectManager.GetComponent<ObjManager>();
         dropParticle.SetActive(false);
     }
 
@@ -82,6 +85,16 @@ public class BossAttack : MonoBehaviour
     void sp1()
     {
         mc.enabled = true;
+    }
+
+    void sp2_3()//barrier enable
+    {
+       StartCoroutine(om.EnableBarrier());
+    }
+
+    void sp2_4()//orb enable
+    {
+        StartCoroutine(om.EnableOrb());
     }
 
     void Stun()
