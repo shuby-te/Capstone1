@@ -30,6 +30,7 @@ public class SwordTypeA : MonoBehaviour
                 yield return StartCoroutine(Wait());
         }
     }
+
     IEnumerator Wait()
     {
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
@@ -40,6 +41,7 @@ public class SwordTypeA : MonoBehaviour
         movement = Vector3.up * Time.deltaTime * speed;
         wait = false;
     }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("wall"))

@@ -5,12 +5,13 @@ public class BossMovement : MonoBehaviour
 {
     public GameObject player;
     public GameObject objManager;
- 
-    
+    public ObjManager Objmanager;
+
     public bool isBreak = false;
     public bool isAttack = false;
     public bool isActive = false;
     public bool isBlocking = false;
+
     bool isDash = true;
     bool overheating = false;
     bool isFar = true;
@@ -26,8 +27,11 @@ public class BossMovement : MonoBehaviour
     public bool isturnhead = false;
     public float bossSpeed = 1f;
     public int isSpecial = 0;
+    public int barrierNum = 3;
+    public int remainAttack = 5;
+
     bool sp = false;
-    public ObjManager Objmanager;
+
     Animator anim;
     void Start()
     {
@@ -433,7 +437,7 @@ public class BossMovement : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         anim.SetInteger("SpacialAttack", 0);
     }
-    IEnumerator TurnHead()
+    public IEnumerator TurnHead()
     {
         if (!isturnhead)
         {
