@@ -1,11 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Orb : MonoBehaviour
 {
     public float rotationSpeed = 5f; // 회전 속도
+    public int orbNum;
     int a, b, c;
 
     // Start is called before the first frame update
@@ -17,9 +15,9 @@ public class Orb : MonoBehaviour
 
     void Update()
     {
-        a = UnityEngine.Random.Range(0, 1);
-        b = UnityEngine.Random.Range(0, 1);
-        c = UnityEngine.Random.Range(0, 1);
+        a = Random.Range(0, 1);
+        b = Random.Range(0, 1);
+        c = Random.Range(0, 1);
         if ((a == 0 && b == 0 && c == 0))
             a = 1;
         float x = transform.eulerAngles.x + a;
