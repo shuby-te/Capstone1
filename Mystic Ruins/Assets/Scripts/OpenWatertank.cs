@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class OpenWatertank : MonoBehaviour
 {
+    public GameObject waterInTank;
+
     Animator anim;
 
     bool isOpen;
@@ -18,13 +20,24 @@ public class OpenWatertank : MonoBehaviour
         if (isOpen && Input.GetKeyDown(KeyCode.E))
         {
             anim.SetBool("isOpen", true);
-            //물 채워지는 기능 구현
+            StartCoroutine(FillTheWater());
         }
     }
 
     public void CloseValve()
     {
         anim.SetBool("isOpen", false);
+    }
+
+    IEnumerator FillTheWater()
+    {
+        while(waterInTank.transform.localPosition.y < 4.5f)
+        {
+            waterInTank.transform.Translate(Vector3.up * Time.deltaTime * 1.5f);
+            yield return null;
+        }
+
+        DataManager.Instance.gameData.mapProgress[4] = 2;
     }
 
     private void OnTriggerEnter(Collider other)

@@ -19,6 +19,7 @@ public class AssembleLadder : MonoBehaviour
             {
                 ladder.SetActive(true);
                 DataManager.Instance.gameData.mapProgress[4] = 1;
+                this.gameObject.SetActive(false);
             }
         }
     }

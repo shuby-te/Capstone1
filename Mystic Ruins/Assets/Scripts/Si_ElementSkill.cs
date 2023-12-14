@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Si_ElementSkill : MonoBehaviour
@@ -96,8 +94,8 @@ public class Si_ElementSkill : MonoBehaviour
 
     IEnumerator WaterAttack()
     {
-            time++;
-            Debug.Log("attack");
+        time++;
+        Debug.Log("attack");
         yield return new WaitForEndOfFrame();
         run = false;
         Debug.Log("stop");

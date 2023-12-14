@@ -10,6 +10,7 @@ public class Sh_PipeController : MonoBehaviour
     public GameObject[] pipes = new GameObject[24];
     public Camera cameraObj;
     public GameObject player;
+    public GameObject plane;
 
     Animator anim;
     Vector3 cPos = new Vector3(-33.6f, 14.5f, 153f);
@@ -34,6 +35,7 @@ public class Sh_PipeController : MonoBehaviour
                 cameraObj.transform.rotation = Quaternion.Euler(cRot);
                 player.GetComponent<PlayerAnim>().enabled = false;
                 player.GetComponent<PlayerMovement2>().isActive = false;
+                plane.SetActive(false);
                 isControl = true;
             }
             else if (isControl)
@@ -41,6 +43,7 @@ public class Sh_PipeController : MonoBehaviour
                 cameraObj.GetComponent<CameraMovement>().enabled = true;
                 player.GetComponent<PlayerAnim>().enabled = true;
                 player.GetComponent<PlayerMovement2>().isActive = true;
+                plane.SetActive(true);
                 isControl = false;
             }
         }

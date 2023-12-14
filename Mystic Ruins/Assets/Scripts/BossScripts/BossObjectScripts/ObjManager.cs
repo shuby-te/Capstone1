@@ -1,27 +1,33 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjManager : MonoBehaviour
 {
     public GameObject bomb;
+    public GameObject boss;
     public GameObject bigRock;
+    public GameObject orbRot;
     public GameObject[] miniRock = new GameObject[8];
     public GameObject[] dropGear = new GameObject[6];
     public GameObject[] dropBomb = new GameObject[5];
     public GameObject[] dropRock = new GameObject[15];
     public GameObject[] fireBallL = new GameObject[4];
     public GameObject[] fireBallR = new GameObject[4];
-
+    public GameObject[] bossBarrier = new GameObject[3];
+    public GameObject[] orb = new GameObject[3];
+    public GameObject[] throwPipe = new GameObject[5];
 
     int rockNum = 0;
     int bombNum = 0;
+    int count = 5;
 
+    bool turn = true;
+    BossMovement bm;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        bm = boss.GetComponent<BossMovement>();
     }
     // Update is called once per frame
     void Update()
@@ -35,11 +41,12 @@ public class ObjManager : MonoBehaviour
     }
     public void BigRockInactive()
     {
-        bigRock.GetComponent<Rock>().Disable();
         for (int i = 0; i < 8; i++)
         {
             miniRock[i].SetActive(true);
+            miniRock[i].transform.position=bigRock.transform.position;
         }
+        bigRock.GetComponent<Rock>().Disable();
     }
     public void DropGear(int i)
     {
@@ -97,6 +104,48 @@ public class ObjManager : MonoBehaviour
     {
         for(int i= 0; i < 4; i++)
             dropBomb[i].GetComponent<DropBomb>().Disable();
+    }
+
+    public IEnumerator EnableBarrier()
+    {
+        for (int i = 0; i < bossBarrier.Length; i++)
+        {
+            bossBarrier[i].SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+        }
+    }
+
+    public IEnumerator EnableOrb()
+    {
+        orbRot.transform.eulerAngles = new Vector3(0, Random.Range(0, 360), 0);
+        for (int i = orb.Length - 1; i + 1 > 0; i--)
+        {
+            orb[i].SetActive(true);
+            yield return new WaitForSeconds(0.3f);
+        }   
+    }
+
+    public IEnumerator ThrowPipe()
+    {
+        while (true)
+        {
+            turn = true;
+            throwPipe[--bm.remainAttack].SetActive(true);
+            StartCoroutine(Timer(5));
+            while (turn)
+            {
+                StartCoroutine(bm.TurnHead());
+                yield return new WaitForEndOfFrame();
+            }
+            yield return new WaitForSeconds(1.5f);
+            //throwPipe의 bool값하나 만들어서 on
+        }
+    }
+
+    IEnumerator Timer(int i)
+    {
+        yield return new WaitForSeconds(i);
+        turn = false;
     }
 
 }

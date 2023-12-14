@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class MiniRock : BossObject
 {
@@ -27,7 +24,6 @@ public class MiniRock : BossObject
     new private void OnEnable()
     {
         base.OnEnable();
-        transform.position=Rock.transform.position;
     }
 
     private void OnTriggerEnter(Collider other)

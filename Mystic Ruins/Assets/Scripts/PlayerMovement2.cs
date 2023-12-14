@@ -6,7 +6,8 @@ using UnityEngine;
 
 public class PlayerMovement2 : MonoBehaviour
 {
-    public GameObject cart;    
+    public GameObject cart;
+    public GameObject fade;
 
     public float speed = 10f;
     public float dashSpeed = 2f;
@@ -32,7 +33,9 @@ public class PlayerMovement2 : MonoBehaviour
     bool isDash;
     bool isMove;
     bool isKnokback;
+    [SerializeField]
     bool isGround;
+    [SerializeField]
     bool isLadder;
     public bool isCart;
     bool isCoal;
@@ -63,11 +66,12 @@ public class PlayerMovement2 : MonoBehaviour
                 isInteract = true;
                 isClimb = 1;
 
-                transform.position = new Vector3(ladder.transform.position.x,
-                    transform.position.y, ladder.transform.position.z - 0.2f);
+                this.GetComponent<ConstantForce>().enabled = false;
 
-                transform.forward = new Vector3(ladder.transform.position.x - transform.position.x, 
-                    0, ladder.transform.position.z - transform.position.z);
+                transform.position = new Vector3(ladder.transform.position.x - 0.2f,
+                    transform.position.y, ladder.transform.position.z);
+
+                transform.forward = ladder.transform.forward;
 
                 anim.SetInteger("isClimb", 1);
 
@@ -77,6 +81,7 @@ public class PlayerMovement2 : MonoBehaviour
         else if(isClimb == 1 && (Input.GetKeyDown(KeyCode.E) || isGround))
         {
             isInteract = false;
+            this.GetComponent<ConstantForce>().enabled = true;
             anim.SetInteger("isClimb", -1);
         }
 
@@ -250,6 +255,12 @@ public class PlayerMovement2 : MonoBehaviour
         isDash = false;
         yield return new WaitForSeconds(1.5f);
         dashCool = true;
+    }
+
+    public void GameOver()
+    {
+        isActive = false;
+        anim.SetBool("isOver", true);
     }
 
     void Attack()
