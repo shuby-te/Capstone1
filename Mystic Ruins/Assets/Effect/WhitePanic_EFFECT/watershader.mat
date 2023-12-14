@@ -50,16 +50,16 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _agitation: 10
+    - _agitation: 5
     - _metalic: 0.1
     - _normalstrength: 0.01
-    - _power: 4
-    - _scale: 10
+    - _power: 10
+    - _scale: 7
     - _smoothness: 0.5
     m_Colors:
-    - _Color: {r: 0.19339621, g: 0.5788362, b: 1, a: 1}
+    - _Color: {r: 0.08788716, g: 0.15438688, b: 0.23584908, a: 1}
     - _Vector2: {r: 0, g: 0.2, b: 0, a: 0}
     - _basecolor: {r: 1, g: 1, b: 1, a: 1}
     - _speed: {r: -0.5, g: 0, b: 0, a: 0}
-    - _tilling: {r: 2, g: 2, b: 0, a: 0}
+    - _tilling: {r: 5, g: 8, b: 0, a: 0}
   m_BuildTextureStacks: []
