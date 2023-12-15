@@ -4,6 +4,8 @@ public class Orb : MonoBehaviour
 {
     public float rotationSpeed = 5f; // 회전 속도
     public int orbNum;
+    public GameObject barrier;
+    public GameObject boss;
     int a, b, c;
 
     // Start is called before the first frame update
@@ -28,7 +30,19 @@ public class Orb : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        
+        Debug.Log(other.tag);
+        if(other.GetComponent<ThrowPipe>() != null)
+        {
+            Destroy(gameObject);
+            Destroy(other);
+            if (--boss.GetComponent<BossMovement>().barrierNum == 0)
+            {
+                boss.GetComponent<Animator>().SetBool("throw", false);
+            }
+            if (other.GetComponent<ThrowPipe>().orbNum==orbNum)
+            {
+                Destroy(barrier);
+            }
+        }
     }
 }
