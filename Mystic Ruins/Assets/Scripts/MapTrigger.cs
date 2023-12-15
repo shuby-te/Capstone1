@@ -7,6 +7,7 @@ public class MapTrigger : MonoBehaviour
     public GameObject Camera;
     public GameObject player;
     public GameObject[] tpPoint;
+    public FadeEffect fade;
 
     public int triggerTag;
 
@@ -36,7 +37,7 @@ public class MapTrigger : MonoBehaviour
         player.GetComponent<PlayerMovement2>().enabled = false;
         player.GetComponent<PlayerAnim>().enabled = false;
 
-        yield return StartCoroutine(CM.Fade(false));
+        yield return StartCoroutine(fade.Fade(0));
 
         if (triggerTag == 0)//���>������
         {
@@ -70,7 +71,7 @@ public class MapTrigger : MonoBehaviour
         else
             PM.yAngle = 0;
 
-        yield return StartCoroutine(CM.Fade(true));
+        yield return StartCoroutine(fade.Fade(1));
 
         player.GetComponent<PlayerMovement2>().enabled = true;
         player.GetComponent<PlayerAnim>().enabled = true;

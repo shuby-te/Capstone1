@@ -8,6 +8,9 @@ public class Sh_HpManager : MonoBehaviour
 {
     public GameObject needle;
     public List<GameObject> gears;
+    public GameObject player;
+
+    PlayerMovement2 pm;
 
     public float maxBossHp = 6000;
     public float maxPlayerHp = 100;
@@ -20,8 +23,16 @@ public class Sh_HpManager : MonoBehaviour
 
     private void Start()
     {
+        pm = player.GetComponent<PlayerMovement2>();
+
         bossHp = maxBossHp;
         playerHp = maxPlayerHp;
+    }
+
+    private void Update()
+    {
+        if(playerHp < 0)
+            pm.GameOver();
     }
 
     public void AttackToBoss()

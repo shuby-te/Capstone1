@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerMovement2 : MonoBehaviour
 {
     public GameObject cart;
-    public GameObject fade;
+    public FadeEffect fade;
 
     public float speed = 10f;
     public float dashSpeed = 2f;
@@ -158,11 +158,10 @@ public class PlayerMovement2 : MonoBehaviour
             }
         }      
 
-        //임시
+        //game over
         if(transform.position.y < -15)
         {
-            GameData gd = DataManager.Instance.gameData;
-            transform.position = new Vector3(gd.x, gd.y, gd.z);
+            StartCoroutine(GameOver());
         }
     }
 
@@ -257,10 +256,17 @@ public class PlayerMovement2 : MonoBehaviour
         dashCool = true;
     }
 
-    public void GameOver()
+    public IEnumerator GameOver()
     {
         isActive = false;
         anim.SetBool("isOver", true);
+        yield return new WaitForSeconds(0); //애니메이션 진행시간
+        yield return StartCoroutine(fade.GetComponent<FadeEffect>().Fade(0));
+
+        GameData gd = DataManager.Instance.gameData;
+        transform.position = new Vector3(gd.x, gd.y, gd.z);
+
+        yield return StartCoroutine(fade.GetComponent<FadeEffect>().Fade(1)); 
     }
 
     void Attack()

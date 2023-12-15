@@ -10,8 +10,8 @@ public class TurnWaterValves : MonoBehaviour
     public bool turnOn;
 
     Animator anim;
-    Vector3 cPos = new Vector3(44f, 37.6f, 124.4f);
-    Vector3 cRot = new Vector3(86f, -5.746f, -5.457f);
+    Vector3 cPos = new Vector3(44.79f, 33.1f,118.63f);
+    Vector3 cRot = new Vector3(86f, 60.61f, 0);
 
     bool isValve;
     

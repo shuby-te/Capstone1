@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        cartScript = cart.GetComponent<AssembleCart>();
+        cartScript = cart.GetComponent<AssembleCart>();        
 
         DataManager.Instance.LoadGameData();
         player.transform.position = new Vector3(
