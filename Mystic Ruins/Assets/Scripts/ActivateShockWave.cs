@@ -7,23 +7,25 @@ public class ActivateShockWave : MonoBehaviour
     public TurnWaterValves[] valves = new TurnWaterValves[5];
 
     bool isStop;
+    bool waveOnce;
     bool clear;
 
     void Update()
     {
         if (valves[1].turnOn || valves[2].turnOn)
         {
-            isStop = true;
-            StartCoroutine(ShockWave());
+            isStop = false;
+            if(!waveOnce)
+                StartCoroutine(ShockWave());
         }
         else if (valves[0].turnOn && !valves[1].turnOn && !valves[2].turnOn && valves[3].turnOn && valves[4].turnOn)
         {
-            isStop = false;
+            isStop = true;
             clear = true;            
         }
         else
         {
-            isStop = false;
+            isStop = true;
         }
 
         if(clear && DataManager.Instance.gameData.mapProgress[4] == 2)
@@ -38,13 +40,27 @@ public class ActivateShockWave : MonoBehaviour
 
     IEnumerator ShockWave()
     {
+        waveOnce = true;
         while (transform.localPosition.y < 3.67f)
         {
             if(isStop)
+            {
+                waveOnce = false;
                 yield break;
+            }
 
-            transform.Translate(Vector3.up * Time.deltaTime * 1.5f);
+            transform.Translate(Vector3.up * Time.deltaTime);
             yield return null;
+        }
+
+        waveOnce = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            StartCoroutine(collision.gameObject.GetComponent<PlayerMovement2>().GameOver());
         }
     }
 }

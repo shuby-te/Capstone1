@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class CameraMovement : MonoBehaviour
 {
-    public GameObject fade;
     public GameObject player;
     public bool boss;
     public bool isFade = false;
@@ -14,7 +13,6 @@ public class CameraMovement : MonoBehaviour
     bool isMap;
     public float a = 40, b = 0, c = 0, x = 0, y = 15, z = -13;
 
-    //�ӽ�
     public bool isRotate;
 
     private void Start()
@@ -75,14 +73,4 @@ public class CameraMovement : MonoBehaviour
     {
         this.a = a; this.b = b;this.c = c; this.x = x;this.y = y; this.z = z;
     }
-
-    public IEnumerator Fade(bool state)
-    {
-        fade.GetComponent<FadeEffect>().Fade(state);
-        if (state)
-            yield return new WaitForSeconds(1.5f);
-        else
-            yield return new WaitForSeconds(3);
-    }
-
 }

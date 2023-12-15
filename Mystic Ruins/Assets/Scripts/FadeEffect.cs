@@ -10,30 +10,24 @@ public class FadeEffect : MonoBehaviour
     [SerializeField]
     AnimationCurve fadeCurve;
 
-    public Image image;
+    Image image;
     
     void Start()
     {
-        
+        image = GetComponent<Image>();
     }
 
-    public void Fade(bool state)    //true면 fade in false면 fade out
-    {
-        if (state)
-            StartCoroutine(Fade(1, 0)); 
-        else
-            StartCoroutine(Fade(0, 1));
-    }
-
-    public void Fade1(int state)    //0이면 fade in 1이면 fade out
+    public IEnumerator Fade(int state)
     {
         if (state == 1)
-            StartCoroutine(Fade(1, 0));
+            yield return StartCoroutine(FadeEff(1, 0)); //fade in
         else
-            StartCoroutine(Fade(0, 1));
+            yield return StartCoroutine(FadeEff(0, 1)); //fade out
+
+        yield return null;
     }
 
-    private IEnumerator Fade(float start,float end)
+    private IEnumerator FadeEff(float start, float end)
     {
         float currentTime = 0.0f;
         float percent = 0.0f;
