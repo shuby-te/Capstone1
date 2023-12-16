@@ -8,11 +8,6 @@ public class BackgroundMoveLeft : MonoBehaviour
     public float speed = 20;
     public Vector3 dir;
 
-    void Start()
-    {
-       
-    }
-
     void Update()
     {
         transform.Translate(dir * Time.deltaTime * speed);

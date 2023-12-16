@@ -1,24 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class RepeatBackground : MonoBehaviour
 {
-    private Vector3 startPos;
-    private float repeatWidth;
-    public float Size = 1;
+    public GameObject titleB;
+    public float spawnTime;
 
-    void Start()
+    public float endX;
+    public float startX;
+    public bool isTitle;
+
+    TextMeshProUGUI titleT;
+
+    private void Start()
     {
-        startPos = transform.position;
-        repeatWidth = GetComponent<BoxCollider>().size.x * Size;
+        if(isTitle)
+        {
+            titleT = titleB.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
+            StartCoroutine(toTitle());
+        }        
     }
 
     void Update()
     {
-        if (transform.position.x < startPos.x - repeatWidth)
+        if (transform.position.x < endX)
         {
-            transform.position = startPos;
+            transform.position = new Vector3(startX - 0.1f, 0, 0);
         }
+    }
+
+    IEnumerator toTitle()
+    {
+        yield return new WaitForSeconds(spawnTime);
+        Color color = titleT.color;
+
+        float time = 0f;
+
+        Color targetColor = new Color(color.r, color.g, color.b, 1f);
+
+        while (time < 1f)
+        {
+            titleT.color = Color.Lerp(color, targetColor, time);
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        titleB.GetComponent<Button>().enabled = true;
     }
 }
