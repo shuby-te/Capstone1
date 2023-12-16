@@ -329,9 +329,9 @@ Material:
     - _SpecShadowStrength: 1
     - _SpecSource: 0
     - _SpecularClipStrength: 0
-    - _SpecularFalloff: 0.489
+    - _SpecularFalloff: 1
     - _SpecularHighlights: 0
-    - _SpecularSize: 0.659
+    - _SpecularSize: 0.05
     - _SpherizeNormalEnabled: 0
     - _SrcBlend: 1
     - _StencilComp: 0
@@ -376,7 +376,7 @@ Material:
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineDistancFade: {r: -73.711945, g: 1.2880554, b: 0, a: 0}
     - _Outline_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-    - _RimColor: {r: 0.68436277, g: 0.7923006, b: 0.8584906, a: 1}
+    - _RimColor: {r: 0.6862745, g: 0.7921569, b: 0.85882354, a: 0.75}
     - _RimLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 0.435}
     - _SpecColor: {r: 0.19999993, g: 0.19999993, b: 0.19999993, a: 0.5}
