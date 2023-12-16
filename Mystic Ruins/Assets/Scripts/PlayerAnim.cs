@@ -152,7 +152,7 @@ public class PlayerAnim : MonoBehaviour
         anim.SetBool("isKnockback", true);
     }
 
-    public void StandUp()
+    public void Stand()
     {
         anim.SetBool("isKnockback", false);
     }

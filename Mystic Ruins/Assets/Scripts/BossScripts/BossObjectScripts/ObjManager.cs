@@ -16,18 +16,22 @@ public class ObjManager : MonoBehaviour
     public GameObject[] bossBarrier = new GameObject[3];
     public GameObject[] orb = new GameObject[3];
     public GameObject[] throwPipe = new GameObject[5];
+    public GameObject cutSceanManager;
 
     int rockNum = 0;
     int bombNum = 0;
     int count = 5;
 
     bool turn = true;
-    BossMovement bm;
+
+    CutSceanManager csm;
+    BossPhase1 bm;
 
     // Start is called before the first frame update
     void Start()
     {
-        bm = boss.GetComponent<BossMovement>();
+        csm = cutSceanManager.GetComponent<CutSceanManager>();
+        bm = boss.GetComponent<BossPhase1>();
     }
     // Update is called once per frame
     void Update()
@@ -143,7 +147,7 @@ public class ObjManager : MonoBehaviour
     public void ThrowPipe()
     {
         throwPipe[bm.remainAttack].GetComponent<ThrowPipe>().isThrow = true;
-        throwPipe[bm.remainAttack].GetComponent<ThrowPipe>().orbNum = boss.GetComponent<BossMovement>().barrierNum;
+        throwPipe[bm.remainAttack].GetComponent<ThrowPipe>().orbNum = boss.GetComponent<BossPhase1>().barrierNum;
     }
 
     public void CheckBarrier()
@@ -160,7 +164,7 @@ public class ObjManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("¾ÈµÚÁü");
+            StartCoroutine(csm.CutSceanStart(2));
         }
     }
     IEnumerator Timer(int i)

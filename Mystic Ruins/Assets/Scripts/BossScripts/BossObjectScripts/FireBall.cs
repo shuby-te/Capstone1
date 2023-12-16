@@ -11,6 +11,7 @@ public class FireBall : BossObject
     protected float timeToFloor;
     public float t;
     public GameObject rock;
+    public GameObject fireRange;
     public ParticleSystem[] particle = new ParticleSystem[4];
     bool isActive = true;
     // Start is called before the first frame update
@@ -49,6 +50,8 @@ public class FireBall : BossObject
     new private void OnDisable()
     {
         base.OnDisable();
+        transform.GetComponent<BoxCollider>().enabled = true;
+        fireRange.gameObject.SetActive(false);
     }
     IEnumerator disable(float i)
     {
@@ -74,6 +77,8 @@ public class FireBall : BossObject
             transform.localPosition = tempPos;
             yield return new WaitForEndOfFrame();
         }
+        fireRange.gameObject.SetActive(true);
+        transform.GetComponent<BoxCollider>().enabled = false;
         transform.position = new Vector3(transform.position.x,0.5f, transform.position.z);
     }
     public void launch()

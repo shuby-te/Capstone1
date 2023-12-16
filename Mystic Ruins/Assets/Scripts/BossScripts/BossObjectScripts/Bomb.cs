@@ -1,15 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Bomb : MonoBehaviour
 {
     public GameObject timer;
     public GameObject bombPos;
+    public GameObject hpManager;
     public ParticleSystem[] particle = new ParticleSystem[3];
+
+    Sh_HpManager hm;
     // Start is called before the first frame update
     void Start()
     {
+        hm = hpManager.GetComponent<Sh_HpManager>();
         gameObject.transform.eulerAngles=new Vector3(0,270,0);
         timer.transform.eulerAngles = new Vector3(180, 0, 0);
         gameObject.SetActive(true);
@@ -37,6 +40,7 @@ public class Bomb : MonoBehaviour
             k++;
             yield return new WaitForEndOfFrame();
         }
+        hm.AttackToPlayer(4);
         gameObject.SetActive(false);
     }
     private void OnEnable()

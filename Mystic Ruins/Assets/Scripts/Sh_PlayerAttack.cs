@@ -18,26 +18,21 @@ public class Sh_PlayerAttack : MonoBehaviour
 
     public void Attack()
     {
-        col.enabled = true;
-        
-        if (isOverlapped)
-            hpManager.GetComponent<Sh_HpManager>().AttackToBoss();
+        col.enabled = true;            
     }
 
     public void EndAttack()
     {
         col.enabled = false;
     }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if(other.gameObject.CompareTag("Boss"))
-            isOverlapped = true;
-    }
-
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Boss"))
-            isOverlapped = false;
+            hpManager.GetComponent<Sh_HpManager>().AttackToBoss();
+    }
+
+    private void OnDisable()
+    {
+        isOverlapped = false;
     }
 }

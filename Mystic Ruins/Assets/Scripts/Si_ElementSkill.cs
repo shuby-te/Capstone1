@@ -8,13 +8,13 @@ public class Si_ElementSkill : MonoBehaviour
     public bool isSkil = false;
     public int skillNum; // fire = 1 water = 2 metal = 3 
     public GameObject boss;
-    BossMovement bm;
+    BossPhase1 bm;
     Animator anim;
     bool run = false;
     // Start is called before the first frame update
     void Start()
     {
-        bm=boss.GetComponent<BossMovement>();
+        bm=boss.GetComponent<BossPhase1>();
         anim=boss.GetComponent<Animator>();
     }
 
@@ -24,15 +24,17 @@ public class Si_ElementSkill : MonoBehaviour
         if (Input.GetKey(KeyCode.Alpha1))
         {
             isActive = true;
+            time = 0;
         }
         if (Input.GetKey(KeyCode.Alpha2)&&!isActive&&!isSkil)
         {
             isSkil = true;
             StartCoroutine(on(6));
         }
-        if (time > 60&& !bm.isStun)
+        if (time > 60 && !bm.isStun)
         {
-            bm.isStun=true;
+            StartCoroutine(bm.Stun(3));
+            time = -999;
         }
     }
     private void OnTriggerStay(Collider other)
@@ -68,7 +70,7 @@ public class Si_ElementSkill : MonoBehaviour
                 else
                 {
                     anim.SetFloat("AttackSpeed", 1.5f);
-                    boss.GetComponent<BossMovement>().bossSpeed = 1.5f;
+                    boss.GetComponent<BossPhase1>().bossSpeed = 1.5f;
                     StartCoroutine(bm.OverHeat());
                 }
                 isActive = false;
@@ -83,11 +85,12 @@ public class Si_ElementSkill : MonoBehaviour
                 }
             }
         }
-        else if (other.CompareTag("Object"))
+        else if (isActive && other.CompareTag("Bomb"))
         {
             if (other.GetComponent<DropBomb>() != null && skillNum == 1)
             {
                 other.GetComponent<DropBomb>().isFire = true;
+                isActive = false;
             }
         }
     }
@@ -100,11 +103,7 @@ public class Si_ElementSkill : MonoBehaviour
         run = false;
         Debug.Log("stop");
     }
-    IEnumerator wake()
-    {
-        yield return new WaitForSeconds(3);
-        bm.isStun = false;
-    }
+
     IEnumerator on(int x)
     {
         yield return new WaitForSeconds(0.4f);
