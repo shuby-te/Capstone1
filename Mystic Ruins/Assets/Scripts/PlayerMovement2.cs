@@ -33,9 +33,7 @@ public class PlayerMovement2 : MonoBehaviour
     bool isDash;
     bool isMove;
     bool isKnokback;
-    [SerializeField]
     bool isGround;
-    [SerializeField]
     bool isLadder;
     public bool isCart;
     bool isCoal;
@@ -174,12 +172,6 @@ public class PlayerMovement2 : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
             {
-                /*Vector3 point = new Vector3(hit.point.x, transform.position.y, hit.point.z);
-
-                Vector3 rotateDir = point - transform.position;
-                if (rotateDir != Vector3.zero)
-                    transform.forward = rotateDir;*/
-
                 Vector3 projectedPoint = Vector3.ProjectOnPlane(hit.point - transform.position, Vector3.up);
 
                 Vector3 ignoreHeightPoint = new Vector3(projectedPoint.x, 0, projectedPoint.z);
@@ -260,13 +252,20 @@ public class PlayerMovement2 : MonoBehaviour
     {
         isActive = false;
         anim.SetBool("isOver", true);
-        yield return new WaitForSeconds(0); //애니메이션 진행시간
+        yield return new WaitForSeconds(1.5f); //애니메이션 진행시간
+        
         yield return StartCoroutine(fade.GetComponent<FadeEffect>().Fade(0));
 
         GameData gd = DataManager.Instance.gameData;
         transform.position = new Vector3(gd.x, gd.y, gd.z);
 
-        yield return StartCoroutine(fade.GetComponent<FadeEffect>().Fade(1)); 
+        
+        yield return StartCoroutine(fade.GetComponent<FadeEffect>().Fade(1));        
+    }
+
+    public void Over()
+    {
+        anim.SetBool("isOver", false);
     }
 
     void Attack()
