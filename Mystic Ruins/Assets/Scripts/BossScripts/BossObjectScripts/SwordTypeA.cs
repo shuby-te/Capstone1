@@ -9,11 +9,13 @@ public class SwordTypeA : MonoBehaviour
     bool wait = false;
     Vector3 movement;
 
+    BoxCollider bc;
     Animator anim;
 
     private void Start()
     {
-        anim= GetComponent<Animator>();
+        anim = GetComponent<Animator>();
+        bc = GetComponent<BoxCollider>();
         transform.LookAt(player.position);
         transform.eulerAngles = new Vector3(90, transform.eulerAngles.y, 0);
         movement = Vector3.up * Time.deltaTime;
@@ -39,7 +41,9 @@ public class SwordTypeA : MonoBehaviour
         transform.LookAt(player.position);
         transform.eulerAngles = new Vector3(90, transform.eulerAngles.y, 0);
         movement = Vector3.up * Time.deltaTime * speed;
+        bc.enabled = true;
         wait = false;
+        transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -48,6 +52,7 @@ public class SwordTypeA : MonoBehaviour
         {
             wait = true;
             anim.SetFloat("Multiplier", 1);
+            bc.enabled = false;
         }
     }
 }

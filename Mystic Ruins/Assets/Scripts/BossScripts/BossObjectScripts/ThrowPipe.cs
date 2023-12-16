@@ -18,6 +18,7 @@ public class ThrowPipe : MonoBehaviour
         {
             if (transform.parent != null)
                 transform.parent = null;
+            transform.GetComponent<MeshCollider>().enabled = true;
             transform.Translate(Vector3.down * speed * Time.deltaTime, Space.Self);
         }
     }

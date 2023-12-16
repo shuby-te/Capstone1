@@ -19575,6 +19575,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rock
       objectReference: {fileID: 0}
+    - target: {fileID: 6929574377906070043, guid: c3ba38baa17cad3429938fa2a71fc376,
+        type: 3}
+      propertyPath: m_TagString
+      value: Object
+      objectReference: {fileID: 0}
     - target: {fileID: 7737495880983197857, guid: c3ba38baa17cad3429938fa2a71fc376,
         type: 3}
       propertyPath: m_RootOrder
@@ -19660,6 +19665,19 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 4039717939943158158}
   m_PrefabAsset: {fileID: 0}
+--- !u!65 &678346764647707148
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6351550188198876053}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.1827679, y: 3.1873982, z: 3.1865375}
+  m_Center: {x: -4.8900566e-20, y: 1.5856457e-18, z: 0.00000005960466}
 --- !u!114 &3252940693441600516
 MonoBehaviour:
   m_ObjectHideFlags: 0

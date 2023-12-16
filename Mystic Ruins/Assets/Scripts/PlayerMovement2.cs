@@ -8,6 +8,7 @@ public class PlayerMovement2 : MonoBehaviour
 {
     public GameObject cart;
     public FadeEffect fade;
+    public GameObject hpManager;
 
     public float speed = 10f;
     public float dashSpeed = 2f;
@@ -15,12 +16,14 @@ public class PlayerMovement2 : MonoBehaviour
     public float yAngle;
     public float climbToTopLen;
 
+    public bool isKnockback = false;
     public bool isActive;
     public int isClimb;
     public bool setCart;
 
     public bool isInteract;
 
+    Sh_HpManager hm;
     GameObject partner;
     GameObject attackRange;
     GameObject ladder;
@@ -32,7 +35,6 @@ public class PlayerMovement2 : MonoBehaviour
     bool dashCool;
     bool isDash;
     bool isMove;
-    bool isKnokback;
     bool isGround;
     bool isLadder;
     public bool isCart;
@@ -52,6 +54,7 @@ public class PlayerMovement2 : MonoBehaviour
         rb = GetComponent<Rigidbody>();        
         anim = GetComponent<Animator>();
         cartWheel = cart.GetComponent<AssembleCart>();
+        hm = hpManager.GetComponent<Sh_HpManager>();
     }
 
     void Update()
@@ -110,7 +113,7 @@ public class PlayerMovement2 : MonoBehaviour
             anim.SetInteger("isClimb", 2);
         }    
 
-        if(!isKnokback)
+        if(!isKnockback)
         {
             //key input
             if (!isDash && isClimb == 0)
@@ -146,18 +149,19 @@ public class PlayerMovement2 : MonoBehaviour
                 xAxis -= Time.deltaTime * partnerSpeed;
                 if (xAxis < -1f) xAxis = -1f;
             }
-
-            //dash
-            if (isClimb == 0 && Input.GetKeyDown(KeyCode.LeftShift) && dashCool)
-            {
-                isDash = true;
-                dashCool = false;
-                StartCoroutine("OffTheDash");
-            }
-        }      
+        }
+        //dash
+        if (isClimb == 0 && Input.GetKeyDown(KeyCode.LeftShift) && dashCool)
+        {
+            hm.ChangeDamageImmune(true);
+            hm.ChangeFireDamageImmune(true);
+            isDash = true;
+            dashCool = false;
+            StartCoroutine("OffTheDash");
+        }
 
         //game over
-        if(transform.position.y < -15)
+        if (transform.position.y < -15)
         {
             StartCoroutine(GameOver());
         }
@@ -165,7 +169,7 @@ public class PlayerMovement2 : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!isKnokback && isClimb == 0)
+        if(!isKnockback && isClimb == 0)
         {
             //rotation
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

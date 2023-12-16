@@ -8,13 +8,6 @@ public class Orb : MonoBehaviour
     public GameObject boss;
     int a, b, c;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-
     void Update()
     {
         a = Random.Range(0, 1);
@@ -30,12 +23,9 @@ public class Orb : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.tag);
         if(other.GetComponent<ThrowPipe>() != null)
         {
-            Destroy(gameObject);
-            Destroy(other);
-            if (--boss.GetComponent<BossMovement>().barrierNum == 0)
+            if (--boss.GetComponent<BossPhase1>().barrierNum == 0)
             {
                 boss.GetComponent<Animator>().SetBool("throw", false);
             }
@@ -43,6 +33,8 @@ public class Orb : MonoBehaviour
             {
                 Destroy(barrier);
             }
+            Destroy(other.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

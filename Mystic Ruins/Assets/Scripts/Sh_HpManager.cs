@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class Sh_HpManager : MonoBehaviour
 {
-    public GameObject needle;
     public List<GameObject> gears;
+    public GameObject needle;
     public GameObject player;
+    public GameObject hpBar;
 
     PlayerMovement2 pm;
 
@@ -16,15 +16,21 @@ public class Sh_HpManager : MonoBehaviour
     public float maxPlayerHp = 100;
 
     float playerDmg = 100;
-    float bossDmg = 100;
-
-    float bossHp;
+    float bombDmg = 8;
+    float bossDmg = 5;
+    float objectDmg = 3;
+    float fireDmg = 1;
+    public float bossHp;
     float playerHp;
 
+    bool damageImmune = false;
+    bool fireDamageImmune = false;
+
+    Slider hpSlider;
     private void Start()
     {
         pm = player.GetComponent<PlayerMovement2>();
-
+        hpSlider=hpBar.GetComponent<Slider>();
         bossHp = maxBossHp;
         playerHp = maxPlayerHp;
     }
@@ -42,10 +48,45 @@ public class Sh_HpManager : MonoBehaviour
         MoveHpNeedle();
     }
 
-    public void AttackToPlayer()
+    public void AttackToPlayer(int type)
     {
-        playerHp -= bossDmg;
-        Debug.Log("boss attacked: " + bossDmg + "?????");
+        if (!damageImmune)
+        {
+            if (type == 0)
+            {
+                playerHp -= bossDmg;
+                Debug.Log("boss attacked: " + bossDmg + "?????");
+                Debug.Log("hp = " + playerHp);
+                player.GetComponent<PlayerMovement2>().isKnockback = true;
+                player.GetComponent<Animator>().SetBool("isKnockbackaa", true);
+            }
+            else if (type == 1)
+            {
+                playerHp -= objectDmg;
+                Debug.Log("obj attacked: " + objectDmg + "?????");
+                Debug.Log("hp=" + playerHp);
+            }
+            else if (type == 2)
+            {
+                playerHp -= fireDmg;
+                Debug.Log("fire attacked: " + fireDmg + "?????");
+                Debug.Log("hp=" + playerHp);
+            }
+            else if(type==4)
+            {
+                playerHp -= bombDmg;
+                Debug.Log("obj attacked: " + objectDmg + "?????");
+                Debug.Log("hp=" + playerHp);
+            }
+        }
+        if (!fireDamageImmune)
+            if (type == 3)
+            {
+                playerHp -= bombDmg;
+                Debug.Log("boss attacked: " + bombDmg + "?????");
+                Debug.Log("hp=" + playerHp);
+            }
+        hpSlider.value = playerHp;
     }
 
     public void MoveHpNeedle()
@@ -73,5 +114,14 @@ public class Sh_HpManager : MonoBehaviour
             yield return null;
             n++;
         }
+    }
+
+    public void ChangeDamageImmune(bool state)
+    {
+        damageImmune = state;
+    }
+    public void ChangeFireDamageImmune(bool state)
+    {
+        fireDamageImmune = state;
     }
 }
