@@ -51,6 +51,11 @@ public class DataManager : MonoBehaviour
         gameData.y = 0;
         gameData.z = 0;
 
+        gameData.coalNum = 0;
+        gameData.wheelNum = 0;
+
+        gameData.localWaveY = 0;
+
         Array.Fill(gameData.items, 0);
         Array.Fill(gameData.pulleyState, 0);
 

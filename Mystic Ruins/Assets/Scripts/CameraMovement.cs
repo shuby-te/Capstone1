@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CameraMovement : MonoBehaviour
 {
     public GameObject player;
-    public bool boss;
-    public bool isFade = false;
+    
+    Vector3 boxSize = new Vector3(4, 0.1f, 1);
     Vector3 t_pos;
-    bool isMap;
-    public float a = 40, b = 0, c = 0, x = 0, y = 15, z = -13;
 
+    public bool boss;    
+    public float a = 40, b = 0, c = 0, x = 0, y = 15, z = -13;
+    
+    public bool isFade = false;
     public bool isRotate;
+    bool isMap;
 
     private void Start()
     {
@@ -55,12 +59,15 @@ public class CameraMovement : MonoBehaviour
     void LateUpdate()
     {
         Vector3 direction = (player.transform.position - transform.position).normalized;
-        RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, Mathf.Infinity,
-                            1 << LayerMask.NameToLayer("Wall"));
+        RaycastHit[] hits = Physics.BoxCastAll(transform.position, boxSize / 2, 
+            direction, Quaternion.identity, Mathf.Infinity, 1 << LayerMask.NameToLayer("Wall"));
+        /*RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, Mathf.Infinity,
+                            1 << LayerMask.NameToLayer("Wall"));*/
+        
 
         for (int i = 0; i < hits.Length; i++)
         {
-            TransParentWall[] obj = hits[i].transform.GetComponentsInChildren<TransParentWall>();
+            TransParentWall[] obj = hits[i].transform.GetComponentsInChildren<TransParentWall>();            
 
             for (int j = 0; j < obj.Length; j++)
             {

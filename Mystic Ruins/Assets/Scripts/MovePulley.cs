@@ -9,10 +9,11 @@ public class MovePulley : MonoBehaviour
     public GameObject cart;
     public GameObject wall;
     public Animator anim;
+    public Animator engine;
+    public ParticleSystem dust;
 
     public bool isDetect;
     public int value;
-
     
     PlayerMovement2 pm;
 
@@ -22,6 +23,10 @@ public class MovePulley : MonoBehaviour
     {
         state = DataManager.Instance.gameData.pulleyState[value - 1];
         pm = player.GetComponent<PlayerMovement2>();
+        if (DataManager.Instance.gameData.pulleyState[value - 1] >= 1 && DataManager.Instance.gameData.mapProgress[7] == 2)
+            engine.SetFloat("engineSpeed", 1);
+        else
+            engine.SetFloat("engineSpeed", 0);
     }
 
     void Update()
@@ -48,6 +53,9 @@ public class MovePulley : MonoBehaviour
                     DataManager.Instance.gameData.mapProgress[6] = 1;
             }
         }
+
+        if (DataManager.Instance.gameData.pulleyState[value - 1] >= 1 && DataManager.Instance.gameData.mapProgress[7] == 2)
+            engine.SetFloat("engineSpeed", 1);
     }
 
     public void ResetClearedState()
@@ -66,6 +74,12 @@ public class MovePulley : MonoBehaviour
         wall.SetActive(false);
         state = 2;
         DataManager.Instance.gameData.pulleyState[value - 1] = 2;
+        dust.Play();
+    }
+
+    public void Dusted()
+    {
+        
     }
 
     private void OnTriggerStay(Collider other)

@@ -33,7 +33,7 @@ public class OpenWatertank : MonoBehaviour
     {
         while(waterInTank.transform.localPosition.y < 4.5f)
         {
-            waterInTank.transform.Translate(Vector3.up * Time.deltaTime * 1.5f);
+            waterInTank.transform.Translate(Vector3.up * Time.deltaTime * 1.5f);            
             yield return null;
         }
 

@@ -50,6 +50,7 @@ public class ActivateShockWave : MonoBehaviour
             }
 
             transform.Translate(Vector3.up * Time.deltaTime);
+            DataManager.Instance.gameData.localWaveY = transform.localPosition.y;
             yield return null;
         }
 

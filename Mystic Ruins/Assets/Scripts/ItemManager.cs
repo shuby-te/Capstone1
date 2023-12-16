@@ -8,8 +8,8 @@ public class ItemManager : MonoBehaviour
 {
     public GameObject[] itemImages = new GameObject[4];
 
-    public Sprite[] itemSprites = new Sprite[3];
-    //(0)¹ÙÄû / (1)¼®Åº / (2)»ç´Ù¸®
+    public Sprite[] itemSprites = new Sprite[4];
+    //(0)¹ÙÄû / (1)¼®Åº / (2)»ç´Ù¸® / (3)ÆÇÀÚ
 
     public void SetItems()
     {

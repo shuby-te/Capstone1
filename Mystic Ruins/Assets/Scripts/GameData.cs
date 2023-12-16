@@ -3,7 +3,7 @@ using System;
 [Serializable]
 public class GameData
 {
-    public float x = 0, y = 0, z = 0;
+    public float x = -1.3f, y = 0, z = -40f;
 
     public int[] items = new int[4];
 
@@ -11,6 +11,8 @@ public class GameData
 
     public int coalNum;
     public int wheelNum;
+
+    public float localWaveY;
 
     public float[] cartPos = new float[3];
 
@@ -21,7 +23,7 @@ public class GameData
 
     public int[] mapProgress = new int[9];
     //인덱스 - 맵이름 : (값)상태
-    //0 - 튜토리얼 : (0)분기 없음
+    //0 - 튜토리얼 : (0)튜토리얼 완료 전 / (1)튜토리얼 완료 후
     //1 - 회전발판 : (0)분기 없음
     //2 - 광산 : (0)카트 조립 전 / (1)카트 조립 후
     //3 - 화로 : (0)불 원소 흡수 전 / (1)불 원소 흡수 후

@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
     public GameObject pipeController;
     public GameObject itemManager;
 
+    public GameObject tankLadder;
+    public GameObject water;
+    public GameObject wave;
+
     AssembleCart cartScript;
 
     private void Start()
@@ -38,6 +42,16 @@ public class GameManager : MonoBehaviour
             cartScript.wheels[i].SetActive(true);
             uniqueItems[i].SetActive(false);
         }
+
+        if(DataManager.Instance.gameData.mapProgress[4] >= 1)
+            tankLadder.SetActive(true);
+
+        if (DataManager.Instance.gameData.mapProgress[4] >= 2)
+            water.transform.localPosition = new Vector3(
+                water.transform.localPosition.x, 4.5f, water.transform.localPosition.z);
+
+        wave.transform.localPosition = new Vector3(wave.transform.localPosition.x, 
+            DataManager.Instance.gameData.localWaveY, wave.transform.localPosition.z);
 
         if (DataManager.Instance.gameData.mapProgress[2] == 1)
             cart.transform.position = new Vector3(
