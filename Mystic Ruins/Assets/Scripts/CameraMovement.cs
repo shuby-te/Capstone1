@@ -64,7 +64,9 @@ public class CameraMovement : MonoBehaviour
 
             for (int j = 0; j < obj.Length; j++)
             {
-                obj[j]?.BecomeTransparent();
+                obj[j].time = 0;
+                if(!obj[j].isDetectOut)
+                    obj[j]?.BecomeTransparent();                
             }
         }
     }
