@@ -15,6 +15,7 @@ TagManager:
   - Cart
   - Rock
   - Coal
+  - FlowedWater
   layers:
   - Default
   - TransparentFX

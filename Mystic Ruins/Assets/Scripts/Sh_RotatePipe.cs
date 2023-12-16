@@ -72,4 +72,9 @@ public class Sh_RotatePipe : MonoBehaviour
         transform.rotation = newRot;
     }
 
+    private void OnTriggerStay(Collider other)
+    {
+        
+    }
+
 }

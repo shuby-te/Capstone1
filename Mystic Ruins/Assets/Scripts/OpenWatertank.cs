@@ -38,6 +38,7 @@ public class OpenWatertank : MonoBehaviour
         }
 
         DataManager.Instance.gameData.mapProgress[4] = 2;
+        this.GetComponent<OpenWatertank>().enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)

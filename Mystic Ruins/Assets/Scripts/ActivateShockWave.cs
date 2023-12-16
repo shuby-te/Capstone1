@@ -62,6 +62,7 @@ public class ActivateShockWave : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(collision.gameObject.GetComponent<PlayerMovement2>().GameOver());
+            transform.localPosition = new Vector3(transform.localPosition.x, - 3.5f, transform.localPosition.z);
         }
     }
 }

@@ -7,6 +7,8 @@ public class TurnPipeValve : MonoBehaviour
     public GameObject[] pipes = new GameObject[24];
     Animator anim;
 
+    public bool isClicked;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -21,7 +23,7 @@ public class TurnPipeValve : MonoBehaviour
             if (hit.transform.gameObject == this.gameObject)
             {
                 anim.SetBool("isOpen", true);
-                if(CountCorrecting())
+                if (CountCorrecting())
                 {
                     //ÆÛÁñ Å¬¸®¾î
 
@@ -29,8 +31,19 @@ public class TurnPipeValve : MonoBehaviour
 
                     Debug.Log("Pipe Clear~~");
                 }
+                else
+                {
+                    StartCoroutine(Clicked());
+                }
             }
         }
+    }
+
+    IEnumerator Clicked()
+    {
+        isClicked = true;
+        yield return new WaitForSeconds(4);
+        isClicked = false;
     }
 
     bool CountCorrecting()
@@ -51,5 +64,6 @@ public class TurnPipeValve : MonoBehaviour
     void CloseValve()
     {
         anim.SetBool("isOpen", false);
+        //isClicked = false;
     }
 }

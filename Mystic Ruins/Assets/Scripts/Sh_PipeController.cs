@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class Sh_PipeController : MonoBehaviour
 {
-    public GameObject[] pipes = new GameObject[24];
+    public Sh_RotatePipe[] pipes = new Sh_RotatePipe[24];
     public Camera cameraObj;
     public GameObject player;
     public GameObject plane;
@@ -30,7 +30,7 @@ public class Sh_PipeController : MonoBehaviour
         {
             if (!isControl)
             {
-                cameraObj.GetComponent<CameraMovement>().enabled = false;
+                cameraObj.GetComponent<CameraMovement>().isRotate = true;
                 cameraObj.transform.position = cPos;
                 cameraObj.transform.rotation = Quaternion.Euler(cRot);
                 player.GetComponent<PlayerAnim>().enabled = false;
@@ -40,7 +40,7 @@ public class Sh_PipeController : MonoBehaviour
             }
             else if (isControl)
             {
-                cameraObj.GetComponent<CameraMovement>().enabled = true;
+                cameraObj.GetComponent<CameraMovement>().isRotate = false;
                 player.GetComponent<PlayerAnim>().enabled = true;
                 player.GetComponent<PlayerMovement2>().isActive = true;
                 plane.SetActive(true);
@@ -49,7 +49,7 @@ public class Sh_PipeController : MonoBehaviour
         }
 
        if(isControl)
-        {
+       {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Pipe")))
@@ -70,7 +70,31 @@ public class Sh_PipeController : MonoBehaviour
                 }
             }
 
+       }
+
+        if (CountCorrecting())
+        {
+            //ÆÛÁñ Å¬¸®¾î
+
+            DataManager.Instance.gameData.mapProgress[5] = 1;
+
+            Debug.Log("Pipe Clear~~");
         }
+    }
+
+    bool CountCorrecting()
+    {
+        int count = 0;
+        for (int i = 0; i < pipes.Length; i++)
+        {
+            if (!(i == 2 || i == 3 || i == 4 || i == 5 || i == 9 || i == 10 || i == 14))
+            {
+                if (!pipes[i].correct)
+                    return false;
+            }
+        }
+
+        return true;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -93,7 +117,7 @@ public class Sh_PipeController : MonoBehaviour
     {
         for (int i = 0; i < pipes.Length; i++)
         {
-            pipes[i].GetComponent<Sh_RotatePipe>().ResetPipe();
+            pipes[i].ResetPipe();
         }
     }
 
@@ -101,7 +125,7 @@ public class Sh_PipeController : MonoBehaviour
     {
         for (int i = 0; i < pipes.Length; i++)
         {
-            pipes[i].GetComponent<Sh_RotatePipe>().ClearPipe();
+            pipes[i].ClearPipe();
         }
     }
 }
