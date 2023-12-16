@@ -47,9 +47,9 @@ public class DataManager : MonoBehaviour
 
     public void ResetGameData()
     {
-        gameData.x = 0;
+        gameData.x = -1.3f;
         gameData.y = 0;
-        gameData.z = 0;
+        gameData.z = -40f;
 
         gameData.coalNum = 0;
         gameData.wheelNum = 0;

@@ -6,6 +6,7 @@ using UnityEngine;
 public class BackgroundMoveLeft : MonoBehaviour
 {
     public float speed = 20;
+    public Vector3 dir;
 
     void Start()
     {
@@ -14,6 +15,6 @@ public class BackgroundMoveLeft : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(Vector3.left * Time.deltaTime * speed);
+        transform.Translate(dir * Time.deltaTime * speed);
     }
 }

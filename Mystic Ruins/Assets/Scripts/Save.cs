@@ -6,8 +6,17 @@ using UnityEngine;
 public class Save : MonoBehaviour
 {
     public Vector3 posWeight;
+    public StartTutorial tutoSystem;
+
+    public int tutoPoint;
 
     bool isSave;
+
+    private void Start()
+    {
+        if(tutoPoint == 0)
+            this.transform.GetChild(1).gameObject.SetActive(true);
+    }
 
     void Update()
     {
@@ -18,7 +27,17 @@ public class Save : MonoBehaviour
             DataManager.Instance.gameData.z = transform.position.z + posWeight.z;
 
             DataManager.Instance.SaveGameData();
+            StartCoroutine(PlayEffect());
+            if (tutoPoint == 1)
+                tutoSystem.isSave = true;
         }           
+    }
+
+    IEnumerator PlayEffect()
+    {
+        this.transform.GetChild(0).gameObject.SetActive(true);
+        yield return new WaitForSeconds(7f);
+        this.transform.GetChild(0).gameObject.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)

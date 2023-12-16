@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Park_TitleScene.unity
     guid: 2f4e6058030979f40a977b654e3eebf5
   - enabled: 1
+    path: Assets/Scenes/Shuby_TestScene.unity
+    guid: 1adef097ea2dec94590ec78a4a73a972
+  - enabled: 1
     path: Assets/Scenes/MainScene.unity
     guid: 645711aae90dcd44b9ef121185a95aee
   - enabled: 1
