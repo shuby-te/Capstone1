@@ -197,9 +197,9 @@ Material:
     - _SpecShadowStrength: 1
     - _SpecSource: 0
     - _SpecularClipStrength: 0
-    - _SpecularFalloff: 0.701
+    - _SpecularFalloff: 1
     - _SpecularHighlights: 0
-    - _SpecularSize: 0.907
+    - _SpecularSize: 0.02
     - _SpherizeNormalEnabled: 0
     - _SrcBlend: 1
     - _StencilComp: 0
