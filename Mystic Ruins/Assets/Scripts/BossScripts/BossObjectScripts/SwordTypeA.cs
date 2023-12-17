@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class SwordTypeA : MonoBehaviour
 {
+    public GameObject range;
     public Transform player; 
     public float speed = 5f; 
-    public float stopDuration = 2f;
-    bool wait = false;
+    public bool wait = false;
     Vector3 movement;
 
     BoxCollider bc;
@@ -17,8 +17,9 @@ public class SwordTypeA : MonoBehaviour
         anim = GetComponent<Animator>();
         bc = GetComponent<BoxCollider>();
         transform.LookAt(player.position);
+        range.transform.LookAt(player.position);
         transform.eulerAngles = new Vector3(90, transform.eulerAngles.y, 0);
-        movement = Vector3.up * Time.deltaTime;
+        movement = transform.up * speed * 5;
         StartCoroutine(ChasePlayer());
     }
 
@@ -26,8 +27,9 @@ public class SwordTypeA : MonoBehaviour
     {
         while (true)
         {
-            transform.Translate(movement);
-            yield return new WaitForFixedUpdate();
+            movement = transform.up * Time.deltaTime * speed * 20;
+            transform.localPosition += movement;
+            yield return new WaitForEndOfFrame();
             if (wait)
                 yield return StartCoroutine(Wait());
         }
@@ -36,13 +38,17 @@ public class SwordTypeA : MonoBehaviour
     IEnumerator Wait()
     {
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
-        yield return new WaitForSeconds(stopDuration);
-        anim.SetFloat("Multiplier", 0);
+
+        yield return new WaitForSeconds(2f);
         transform.LookAt(player.position);
+        range.transform.LookAt(player.position);
+        range.transform.position = new Vector3(transform.position.x, 0.5f, transform.position.z);
+        range.transform.localScale = new Vector3(0.1f, 0.5f, 0.3f);
+        range.transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 90, 0);
+        yield return StartCoroutine(range.GetComponent<Range>().RangeScaleUp());
+        anim.SetFloat("Multiplier", 0);
         transform.eulerAngles = new Vector3(90, transform.eulerAngles.y, 0);
-        movement = Vector3.up * Time.deltaTime * speed;
         bc.enabled = true;
-        wait = false;
         transform.position = new Vector3(transform.position.x, 2.5f, transform.position.z);
     }
 
@@ -53,6 +59,7 @@ public class SwordTypeA : MonoBehaviour
             wait = true;
             anim.SetFloat("Multiplier", 1);
             bc.enabled = false;
+
         }
     }
 }

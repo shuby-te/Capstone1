@@ -106,6 +106,7 @@ public class DropBomb : BossObject
     }
     new private void OnDisable()
     {
+        particle[5].Play();
         base.OnDisable();
         particle[4].Stop();
         particle[4].gameObject.SetActive(false);
