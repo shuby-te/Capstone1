@@ -7,7 +7,7 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject[] uniqueItems = new GameObject[3];
+    public GameObject[] uniqueItems = new GameObject[6];
     public GameObject[] pulleys = new GameObject[4];
 
     public GameObject player;    
@@ -15,9 +15,9 @@ public class GameManager : MonoBehaviour
     public GameObject pipeController;
     public GameObject itemManager;
 
-    public GameObject tankLadder;
     public GameObject water;
     public GameObject wave;
+    public StartTutorial tuto;
 
     AssembleCart cartScript;
 
@@ -44,7 +44,19 @@ public class GameManager : MonoBehaviour
         }
 
         if(DataManager.Instance.gameData.mapProgress[4] >= 1)
-            tankLadder.SetActive(true);
+        {
+            uniqueItems[2].SetActive(true);
+            uniqueItems[3].SetActive(false);
+        }
+
+        if (DataManager.Instance.gameData.mapProgress[0] == 1)
+        {
+            uniqueItems[4].SetActive(true);
+            uniqueItems[5].SetActive(false);
+        }
+
+        if (DataManager.Instance.gameData.mapProgress[0] == 1)
+            tuto.state = 6;
 
         if (DataManager.Instance.gameData.mapProgress[4] >= 2)
             water.transform.localPosition = new Vector3(
@@ -93,12 +105,6 @@ public class GameManager : MonoBehaviour
 
         //임시로 넣음
         if (Input.GetKeyDown(KeyCode.R))
-            player.transform.position = new Vector3(0, 0, 0);
-
-        //임시로 넣음
-        if (Input.GetKeyDown(KeyCode.I))
-            pipeController.GetComponent<Sh_PipeController>().ResetPipes();
-        if (Input.GetKeyDown(KeyCode.O))
-            pipeController.GetComponent<Sh_PipeController>().ClearPipes();
+            player.transform.position = new Vector3(-1.13f, 0, -40f);
     }
 }

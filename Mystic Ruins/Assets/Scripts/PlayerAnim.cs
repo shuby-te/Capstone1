@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerAnim : MonoBehaviour
 {
-    Animator anim;
+    public Sh_HpManager hm;
+
+    Animator anim;    
     PlayerMovement2 pm;
 
     int keyN, mouseN;
@@ -94,23 +96,6 @@ public class PlayerAnim : MonoBehaviour
         else
             keyN = 0;
 
-        /*if (-22.5f < yAngle && yAngle <= 22.5f)
-            mouseN = 1;
-        else if (22.5f < yAngle && yAngle <= 67.5f)
-            mouseN = 2;
-        else if (67.5f < yAngle && yAngle <= 112.5f)
-            mouseN = 3;
-        else if (112.5f < yAngle && yAngle <= 157.5f)
-            mouseN = 4;
-        else if ((157.5f < yAngle && yAngle <= 180f) || (-180f < yAngle && yAngle <= -157.5f))
-            mouseN = 5;
-        else if (-157.5f < yAngle && yAngle <= -112.5f)
-            mouseN = 6;
-        else if (-112.5f < yAngle && yAngle <= -67.5f)
-            mouseN = 7;
-        else if (-67.5f < yAngle && yAngle <= -22.5f)
-            mouseN = 8;*/
-
         if(pm.isActive)
         {
             if (-22.5f < yAngle && yAngle <= 22.5f)
@@ -145,6 +130,26 @@ public class PlayerAnim : MonoBehaviour
         anim.SetBool("isRoll", false);
         yield return new WaitForSeconds(2f);
         isRoll = false;
+    }
+
+    void EndRoll()
+    {
+        Debug.Log("endroll");
+        hm.ChangeDamageImmune(false);
+        hm.ChangeFireDamageImmune(false);
+        pm.isKnockback = false;
+    }
+
+    void EndEmmune()
+    {
+        hm.ChangeDamageImmune(false);
+    }
+
+    void StandUp()
+    {
+        hm.ChangeDamageImmune(false);
+        hm.ChangeFireDamageImmune(false);
+        pm.isKnockback = false;
     }
 
     public void KnockBacked()

@@ -14,15 +14,17 @@ public class StartTutorial : MonoBehaviour
     public GameObject boardTwinkle;
     public GameObject saveTwinkle;
 
-    [SerializeField]
-    int state;
+    public float msgPrintTime;
+
+    public bool isUse;
+    public bool isSave;
+    
+    public int state;
 
     bool[] alphas = new bool[4];
     float yAngle;
 
-    public bool isUse;
-
-    public bool isSave;
+    
 
     void Start()
     {        
@@ -91,14 +93,18 @@ public class StartTutorial : MonoBehaviour
             case 6:
                 if (isSave)
                 {
+                    boardWall.SetActive(false);
                     saveTwinkle.SetActive(false);
+                    tutoMsg.gameObject.SetActive(false);
+                    msgText.gameObject.SetActive(false);
                     state = 7;
+                    this.gameObject.SetActive(false);
                 }
                 break;
         }
     }
 
-    public string[] messages = new string[6] {
+    string[] messages = new string[6] {
         "W,A,S,D를 눌러 이동",
         "마우스 회전으로 방향 조절",
         "LeftShift를 눌러 구르기",
@@ -135,7 +141,7 @@ public class StartTutorial : MonoBehaviour
             yield return null;
         }
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(msgPrintTime);
 
         time = 0f;
         color = msgText.color;

@@ -7,7 +7,7 @@ public class GameData
 
     public int[] items = new int[4];
 
-    public int skillState;
+    public int[] skillStates = new int[3];
 
     public int coalNum;
     public int wheelNum;

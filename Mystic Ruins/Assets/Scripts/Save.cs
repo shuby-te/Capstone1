@@ -26,6 +26,9 @@ public class Save : MonoBehaviour
             DataManager.Instance.gameData.y = transform.position.y + posWeight.y;
             DataManager.Instance.gameData.z = transform.position.z + posWeight.z;
 
+            if (DataManager.Instance.gameData.mapProgress[0] == 0)
+                DataManager.Instance.gameData.mapProgress[0] = 1;
+
             DataManager.Instance.SaveGameData();
             StartCoroutine(PlayEffect());
             if (tutoPoint == 1)

@@ -101070,7 +101070,7 @@ AnimationClip:
   - time: 2.3333333
     functionName: EndRoll
     data: 
-    objectReferenceParameter: {fileID: 11500000, guid: 0024804aac8bf824ab47301dc67e44a6,
+    objectReferenceParameter: {fileID: 11500000, guid: 7962aee6b488e3a48bb4a27de4921be3,
       type: 3}
     floatParameter: 0
     intParameter: 0

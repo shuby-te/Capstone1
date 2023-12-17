@@ -75,7 +75,7 @@ public class Sh_PartnerSkill : MonoBehaviour
         //skillState 활용해서 스킬 사용 상태 수정
         if(pm.isActive)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1) && fTime >= FCool)
+            if (DataManager.Instance.gameData.skillStates[0] == 1 && Input.GetKeyDown(KeyCode.Alpha1) && fTime >= FCool)
             {
                 if (!isSkill)
                 {
@@ -85,7 +85,7 @@ public class Sh_PartnerSkill : MonoBehaviour
                     StartCoroutine(Blink(1));
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha2) && hTime >= HCool)
+            else if (DataManager.Instance.gameData.skillStates[1] == 1 && Input.GetKeyDown(KeyCode.Alpha2) && hTime >= HCool)
             {
                 if (!isSkill)
                 {
@@ -95,7 +95,7 @@ public class Sh_PartnerSkill : MonoBehaviour
                     StartCoroutine(Blink(2));
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.Alpha3) && sTime >= SCool)
+            else if (DataManager.Instance.gameData.skillStates[2] == 1 && Input.GetKeyDown(KeyCode.Alpha3) && sTime >= SCool)
             {
                 if (!isSkill)
                 {
@@ -111,9 +111,9 @@ public class Sh_PartnerSkill : MonoBehaviour
         hTime += Time.deltaTime;
         sTime += Time.deltaTime;
 
-        if (fTime > 100) fTime = 0;
-        if (hTime > 100) hTime = 0;
-        if (sTime > 100) sTime = 0;        
+        if (fTime > 100) fTime = FCool;
+        if (hTime > 100) hTime = HCool;
+        if (sTime > 100) sTime = SCool;        
     }
 
     IEnumerator Blink(int num)
