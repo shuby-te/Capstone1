@@ -34,7 +34,7 @@ public class SwordTypeB : MonoBehaviour
             yield return new WaitForSeconds(delay);
         }
     }
-
+ 
     private void OnEnable()
     {
         StartCoroutine(Move());
@@ -43,5 +43,14 @@ public class SwordTypeB : MonoBehaviour
     private void OnDisable()
     {
         StopCoroutine(Move());
+    }
+
+    void ColliderOn()
+    {
+        GetComponent<BoxCollider>().enabled = true;
+    }
+    void ColliderOff()
+    {
+        GetComponent<BoxCollider>().enabled = false;
     }
 }

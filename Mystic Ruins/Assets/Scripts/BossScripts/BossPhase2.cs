@@ -6,7 +6,10 @@ public class BossPhase2 : MonoBehaviour
 {
     public GameObject player;
     public GameObject farTrigger;
+    public RuntimeAnimatorController animController;
 
+    public bool isBehave = true;
+    public bool isAttack = false;
 
     [SerializeField]
     int attackNum;
@@ -16,30 +19,45 @@ public class BossPhase2 : MonoBehaviour
     bool isWalk = true;
     [SerializeField]
     bool turnHead = false;
-
-
+    [SerializeField]
     bool isFar = true;
+    bool isCheck = false;
 
-
+    Animator anim;
     // Start is called before the first frame update
     void Start()
     {
+        anim = transform.GetComponent<Animator>();
+        anim.runtimeAnimatorController = animController;
         StartCoroutine(TurnHead());
         StartCoroutine(Walk());
+        StartCoroutine(ExecuteBossPattern());
+        StartCoroutine(AttackDelay(2));
     }
 
     // Update is called once per frame
     void Update()
-    {
-
+    {              
+        float dir = Vector3.Distance(transform.position, player.transform.position);
+        if (dir > 5 && !isAttack)
+        {
+            isFar = true;
+            anim.SetBool("isWalk", true);
+        }
+        
+        if (isAttack && anim.GetInteger("AttackType") == 0 && !isCheck)
+        {
+            isCheck = true;
+            StartCoroutine(CheckAttack());
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            anim.SetBool("isWalk", false);
             isFar = false;
-            isWalk = false;
         }
     }
 
@@ -47,8 +65,8 @@ public class BossPhase2 : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            anim.SetBool("isWalk", true);
             isFar = true;
-            isWalk = true;
         }
     }
 
@@ -57,8 +75,8 @@ public class BossPhase2 : MonoBehaviour
         bool ing = false;
         while (true)
         {
-            if(turnHead)
-                if (!ing) 
+            if (turnHead)
+                if (!ing)
                 {
                     ing = true;
                     Vector3 playerPos = new Vector3(player.transform.position.x, transform.position.y, player.transform.position.z); ;
@@ -79,7 +97,7 @@ public class BossPhase2 : MonoBehaviour
     {
         while (true)
         {
-            if (isWalk)
+            if (isFar && !isAttack)
             {
                 turnHead = true;
                 transform.position += transform.forward * Time.deltaTime * speed;
@@ -90,19 +108,43 @@ public class BossPhase2 : MonoBehaviour
 
     IEnumerator ExecuteBossPattern()
     {
+        while (true)
+        {
+            if (!isAttack && !isFar)
+            {
+                isAttack = true;
+                attackNum = Random.Range(1, 4);
+                anim.SetInteger("AttackType", attackNum);
+                Debug.Log("ATTACK");
+            }
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public IEnumerator AttackDelay(float t)
+    {
+        yield return new WaitForSeconds(t);
+        isAttack = false;
+    }
+
+    IEnumerator CheckAttack()
+    {
+        int i = 0;
         while(true)
         {
-            attackNum = Random.Range(0,3);
-            switch (attackNum)
+            i++;
+            if(!isAttack)
             {
-                case 0:
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
+                isCheck = false;
+                yield break;
+            }
+            if(i==120)
+            {
+                isAttack = false;
+                yield break;
             }
             yield return new WaitForEndOfFrame();
         }
     }
 }
+    

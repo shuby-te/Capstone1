@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class BossAttackPhase2 : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject boss;
+    public GameObject player;
+
+    Animator anim;
+    BossPhase2 bp;
+
+    private void Start()
     {
-        
+        anim = GetComponent<Animator>();
+        bp = GetComponent<BossPhase2>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    void EndAttack(float t)
     {
-        
+        anim.SetInteger("AttackType", 0);
+        anim.SetBool("isWalk", false);
+        StartCoroutine(bp.AttackDelay(t));
     }
 }

@@ -6,6 +6,7 @@ public class Orb : MonoBehaviour
     public int orbNum;
     public GameObject barrier;
     public GameObject boss;
+    public ParticleSystem[] ps; 
     int a, b, c;
 
     void Update()
@@ -33,8 +34,14 @@ public class Orb : MonoBehaviour
             {
                 Destroy(barrier);
             }
+            for(int  i = 0; i < ps.Length; i++)
+            {
+                ps[i].Play();
+            }
+
             Destroy(other.gameObject);
             Destroy(this.gameObject);
+            
         }
     }
 }
