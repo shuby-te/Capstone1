@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ActivateShockWave : MonoBehaviour
@@ -62,7 +63,10 @@ public class ActivateShockWave : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             StartCoroutine(collision.gameObject.GetComponent<PlayerMovement2>().GameOver());
-            transform.localPosition = new Vector3(transform.localPosition.x, - 3.5f, transform.localPosition.z);
+            //transform.localPosition = new Vector3(transform.localPosition.x, - 3.5f, transform.localPosition.z);
+            valves[1].turnOn = false;
+            valves[2].turnOn = false;
+            //isStop = true;
         }
     }
 }

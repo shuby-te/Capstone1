@@ -7,8 +7,11 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public FadeEffect fade;
+
     public GameObject[] uniqueItems = new GameObject[6];
     public GameObject[] pulleys = new GameObject[4];
+    public GameObject[] skillTrigs = new GameObject[3];
 
     public GameObject player;    
     public GameObject cart;    
@@ -23,6 +26,9 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Image image = fade.gameObject.GetComponent<Image>();
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 1f);        
+
         cartScript = cart.GetComponent<AssembleCart>();        
 
         DataManager.Instance.LoadGameData();
@@ -30,6 +36,12 @@ public class GameManager : MonoBehaviour
             DataManager.Instance.gameData.x,
             DataManager.Instance.gameData.y,
             DataManager.Instance.gameData.z);
+
+        for (int i = 0; i < skillTrigs.Length; i++)
+        {
+            if (DataManager.Instance.gameData.skillStates[i] == 1)
+                skillTrigs[i].SetActive(false);
+        }
 
         cartScript.coalNum = DataManager.Instance.gameData.coalNum;
         cartScript.wheelNum = DataManager.Instance.gameData.wheelNum;
@@ -56,7 +68,10 @@ public class GameManager : MonoBehaviour
         }
 
         if (DataManager.Instance.gameData.mapProgress[0] == 1)
+        {
             tuto.state = 6;
+            tuto.isSave = true;
+        }
 
         if (DataManager.Instance.gameData.mapProgress[4] >= 2)
             water.transform.localPosition = new Vector3(
@@ -86,6 +101,8 @@ public class GameManager : MonoBehaviour
         }
 
         itemManager.GetComponent<ItemManager>().SetItems();
+
+        StartCoroutine(fade.Fade(1));
     }
 
     private void OnApplicationQuit()

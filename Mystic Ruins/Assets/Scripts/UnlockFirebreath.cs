@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnlockFirebreath : MonoBehaviour
 {
+    public UIManager ui;
+
     Animator anim;
+
+    string firebreathTuto = "1번을 눌러 정면을 향해 화염방사";
     bool isDetect;
 
     void Start()
@@ -24,7 +30,8 @@ public class UnlockFirebreath : MonoBehaviour
                 DataManager.Instance.gameData.mapProgress[3] = 1;
 
                 DataManager.Instance.gameData.skillStates[0] = 1;
-                //스킬 획득 시의 이펙트나 컷신, 튜토리얼 등의 실행
+                ui.SetTutoText(firebreathTuto);
+                StartCoroutine(ui.FadeTutoText(4f));
             }
         }
         else

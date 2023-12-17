@@ -21,7 +21,7 @@ public class Sh_HpManager : MonoBehaviour
     float objectDmg = 3;
     float fireDmg = 1;
     public float bossHp;
-    float playerHp;
+    public float playerHp;
 
     bool damageImmune = false;
     bool fireDamageImmune = false;
@@ -30,7 +30,7 @@ public class Sh_HpManager : MonoBehaviour
     private void Start()
     {
         pm = player.GetComponent<PlayerMovement2>();
-        hpSlider=hpBar.GetComponent<Slider>();
+        hpSlider = hpBar.GetComponent<Slider>();
         bossHp = maxBossHp;
         playerHp = maxPlayerHp;
     }
@@ -38,7 +38,7 @@ public class Sh_HpManager : MonoBehaviour
     private void Update()
     {
         if(playerHp < 0)
-            pm.GameOver();
+            StartCoroutine(pm.GameOver());
     }
 
     public void AttackToBoss()
@@ -89,6 +89,16 @@ public class Sh_HpManager : MonoBehaviour
         hpSlider.value = playerHp;
     }
 
+    public void ChangeDamageImmune(bool state)
+    {
+        damageImmune = state;
+    }
+
+    public void ChangeFireDamageImmune(bool state)
+    {
+        fireDamageImmune = state;
+    }
+
     public void MoveHpNeedle()
     {        
         StartCoroutine(RotateHpNeedle(needle));
@@ -114,14 +124,5 @@ public class Sh_HpManager : MonoBehaviour
             yield return null;
             n++;
         }
-    }
-
-    public void ChangeDamageImmune(bool state)
-    {
-        damageImmune = state;
-    }
-    public void ChangeFireDamageImmune(bool state)
-    {
-        fireDamageImmune = state;
     }
 }

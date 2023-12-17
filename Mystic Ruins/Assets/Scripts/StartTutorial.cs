@@ -6,11 +6,10 @@ using TMPro;
 
 public class StartTutorial : MonoBehaviour
 {
-    public Image tutoMsg;
+    public UIManager ui;
+    
     public GameObject player;
-    public GameObject boardWall;
-    public TextMeshProUGUI msgText;
-
+    public GameObject boardWall;    
     public GameObject boardTwinkle;
     public GameObject saveTwinkle;
 
@@ -24,13 +23,11 @@ public class StartTutorial : MonoBehaviour
     bool[] alphas = new bool[4];
     float yAngle;
 
-    
-
     void Start()
     {        
         yAngle = player.transform.rotation.eulerAngles.y;
-        SetTutoText(0);
-        StartCoroutine(FadeTutoText());
+        ui.SetTutoText(messages[0]);
+        StartCoroutine(ui.FadeTutoText(msgPrintTime));
     }
 
     void Update()
@@ -46,8 +43,8 @@ public class StartTutorial : MonoBehaviour
                 if (alphas[0] && alphas[1] && alphas[2] && alphas[3])
                 {                    
                     state = 2;
-                    SetTutoText(state - 1);
-                    StartCoroutine(FadeTutoText());
+                    ui.SetTutoText(messages[state - 1]);
+                    StartCoroutine(ui.FadeTutoText(msgPrintTime));
                 }
                 break;
 
@@ -55,8 +52,8 @@ public class StartTutorial : MonoBehaviour
                 if (player.transform.rotation.eulerAngles.y != yAngle)
                 {
                     state = 3;
-                    SetTutoText(state - 1);
-                    StartCoroutine(FadeTutoText());                    
+                    ui.SetTutoText(messages[state - 1]);
+                    StartCoroutine(ui.FadeTutoText(msgPrintTime));                    
                 }
                 break;
 
@@ -64,8 +61,8 @@ public class StartTutorial : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
                     state = 4;
-                    SetTutoText(state - 1);
-                    StartCoroutine(FadeTutoText());                    
+                    ui.SetTutoText(messages[state - 1]);
+                    StartCoroutine(ui.FadeTutoText(msgPrintTime));                    
                 }
                 break;
 
@@ -73,8 +70,8 @@ public class StartTutorial : MonoBehaviour
                 if (Input.GetMouseButtonDown(0))
                 {
                     state = 5;
-                    SetTutoText(state - 1);
-                    StartCoroutine(FadeTutoText());
+                    ui.SetTutoText(messages[state - 1]);
+                    StartCoroutine(ui.FadeTutoText(msgPrintTime));
                     boardTwinkle.SetActive(true);
                 }
                 break;
@@ -84,8 +81,8 @@ public class StartTutorial : MonoBehaviour
                 {
                     state = 6;
                     boardWall.SetActive(false);
-                    SetTutoText(state - 1);
-                    StartCoroutine(FadeTutoText());
+                    ui.SetTutoText(messages[state - 1]);
+                    StartCoroutine(ui.FadeTutoText(msgPrintTime));
                     saveTwinkle.SetActive(true);
                 }
                 break;
@@ -95,9 +92,8 @@ public class StartTutorial : MonoBehaviour
                 {
                     boardWall.SetActive(false);
                     saveTwinkle.SetActive(false);
-                    tutoMsg.gameObject.SetActive(false);
-                    msgText.gameObject.SetActive(false);
-                    state = 7;
+                    ui.tutoMsg.color = new Color(ui.tutoMsg.color.r, ui.tutoMsg.color.g, ui.tutoMsg.color.b, 0f);
+                    ui.msgText.color = new Color(ui.msgText.color.r, ui.msgText.color.g, ui.msgText.color.b, 0f);
                     this.gameObject.SetActive(false);
                 }
                 break;
@@ -112,51 +108,6 @@ public class StartTutorial : MonoBehaviour
         "F를 눌러 아이템 획득/사용",
         "E를 눌러 진행 사항 저장"
     };
-
-    void SetTutoText(int i)
-    {
-        msgText.text = messages[i];
-    }
-
-    IEnumerator FadeTutoText()
-    {
-        Color color = msgText.color;
-        Color color2 = tutoMsg.color;
-
-        /*msgText.color = new Color(color.r, color.g, color.b, 0f);
-        tutoMsg.color = new Color(color2.r, color2.g, color2.b, 0f);
-
-        yield return new WaitForSeconds(3f);*/
-
-        float time = 0f;
-
-        Color targetColor = new Color(color.r, color.g, color.b, 1f);
-        Color targetColor2 = new Color(color2.r, color2.g, color2.b, 1f);
-
-        while (time < 1f)
-        {
-            msgText.color = Color.Lerp(color, targetColor, time);
-            tutoMsg.color = Color.Lerp(color2, targetColor2, time);
-            time += Time.deltaTime;
-            yield return null;
-        }
-
-        yield return new WaitForSeconds(msgPrintTime);
-
-        time = 0f;
-        color = msgText.color;
-        color2 = tutoMsg.color;
-        targetColor = new Color(color.r, color.g, color.b, 0f);
-        targetColor2 = new Color(color2.r, color2.g, color2.b, 0f);
-
-        while (time < 1f)
-        {
-            msgText.color = Color.Lerp(color, targetColor, time);
-            tutoMsg.color = Color.Lerp(color2, targetColor2, time);
-            time += Time.deltaTime;
-            yield return null;
-        }
-    }
 
     private void OnTriggerEnter(Collider other)
     {

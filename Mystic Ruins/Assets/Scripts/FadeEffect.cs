@@ -10,12 +10,7 @@ public class FadeEffect : MonoBehaviour
     [SerializeField]
     AnimationCurve fadeCurve;
 
-    Image image;
-    
-    void Start()
-    {
-        image = GetComponent<Image>();
-    }
+    public Image image;
 
     public IEnumerator Fade(int state)
     {

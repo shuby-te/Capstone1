@@ -5,6 +5,7 @@ using UnityEngine;
 public class OpenWatertank : MonoBehaviour
 {
     public GameObject waterInTank;
+    public GameObject hydroTrig;
 
     Animator anim;
 
@@ -39,6 +40,7 @@ public class OpenWatertank : MonoBehaviour
 
         DataManager.Instance.gameData.mapProgress[4] = 2;
         this.GetComponent<OpenWatertank>().enabled = false;
+        hydroTrig.SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)

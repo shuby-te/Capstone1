@@ -5,6 +5,7 @@ using UnityEngine;
 public class TurnPipeValve : MonoBehaviour
 {
     public GameObject[] pipes = new GameObject[24];
+    public Sh_PipeController controller;
     Animator anim;
 
     public bool isClicked;
@@ -42,8 +43,10 @@ public class TurnPipeValve : MonoBehaviour
     IEnumerator Clicked()
     {
         isClicked = true;
+        controller.isValveStop = true;
         yield return new WaitForSeconds(4);
         isClicked = false;
+        controller.isValveStop = false;
     }
 
     bool CountCorrecting()

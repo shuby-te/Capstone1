@@ -18,6 +18,7 @@ public class Sh_PipeController : MonoBehaviour
 
     bool isActive;
     bool isControl;
+    public bool isValveStop;
 
     private void Start()
     {
@@ -52,7 +53,7 @@ public class Sh_PipeController : MonoBehaviour
        {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Pipe")))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Pipe")) && !isValveStop)
             {
                 Sh_RotatePipe hitPipe = hit.transform.gameObject.GetComponent<Sh_RotatePipe>();
                 if (!hitPipe.isSelect)

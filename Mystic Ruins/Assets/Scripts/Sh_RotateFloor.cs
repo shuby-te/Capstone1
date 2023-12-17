@@ -83,12 +83,11 @@ public class Sh_RotateFloor : MonoBehaviour
         while(n < num)
         {
             yield return new WaitForSeconds(Time.deltaTime);
-            gameObj.transform.Rotate(0, 0, 1);
+            gameObj.transform.Rotate(0, 0, 1.5f);
             yield return null;
             n++;
         }
 
-        Debug.Log(num);
         if (gameObj == minuteFloor)
             isActivate = false;
     }

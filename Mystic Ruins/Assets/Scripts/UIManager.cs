@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class UIManager : MonoBehaviour
     public GameObject itemPointer;
     public GameObject itemsUI;
     public GameObject battleUI;
+    public Image tutoMsg;
+    public TextMeshProUGUI msgText;
+    
 
     public float duration;
     public float hintPrintTime;
@@ -96,6 +100,54 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void SetTutoText(string msg)
+    {
+        msgText.text = msg;
+    }
+
+    public IEnumerator FadeTutoText(float printTime)
+    {
+        Color color = msgText.color;
+        Color color2 = tutoMsg.color;
+
+        float time = 0f;
+
+        Color targetColor = new Color(color.r, color.g, color.b, 1f);
+        Color targetColor2 = new Color(color2.r, color2.g, color2.b, 1f);
+
+        while (true)
+        {
+            msgText.color = Color.Lerp(color, targetColor, time);
+            tutoMsg.color = Color.Lerp(color2, targetColor2, time);
+            time += Time.deltaTime;
+
+            if (msgText.color.a == 1f && tutoMsg.color.a == 1f)
+                break;
+            
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(printTime);
+
+        time = 0f;
+        color = msgText.color;
+        color2 = tutoMsg.color;
+        targetColor = new Color(color.r, color.g, color.b, 0f);
+        targetColor2 = new Color(color2.r, color2.g, color2.b, 0f);
+
+        while (true)
+        {
+            msgText.color = Color.Lerp(color, targetColor, time);
+            tutoMsg.color = Color.Lerp(color2, targetColor2, time);
+            time += Time.deltaTime;
+
+            if (msgText.color.a == 0f && tutoMsg.color.a == 0f)
+                break;
+
+            yield return null;
+        }
+    }
+
     void setHint()
     {
         hintData.Add(0, "이상한 곳이네.. 일단 앞으로 나아가보자!");
@@ -175,8 +227,6 @@ public class UIManager : MonoBehaviour
         }
 
         itemPointer.transform.SetParent(itemsUI.transform.parent, true);
-        /*itemPointer.transform.position = new Vector3(itemPointer.transform.position.x,
-            itemsUI.transform.position.y + 59, itemPointer.transform.position.z);*/
     }
 
 }

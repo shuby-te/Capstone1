@@ -44,7 +44,6 @@ public class TransParentWall : MonoBehaviour
 
         if (!isDetectIn && time > delayTime)
         {
-            Debug.Log("124");
             StartCoroutine(FadeIn());
         }
     }
@@ -68,10 +67,7 @@ public class TransParentWall : MonoBehaviour
             if (!timerStarted && currentAlpha <= 0.3f)
             {
                 timerStarted = true;
-                //yield return new WaitForSeconds(delayTime);
-                Debug.Log("123");
-                isDetectIn = false;
-                
+                isDetectIn = false;                
             }
 
             yield return null;

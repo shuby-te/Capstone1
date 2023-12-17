@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement2 : MonoBehaviour
 {
     public GameObject cart;
     public FadeEffect fade;
-    public GameObject hpManager;
+    public Sh_HpManager hm;
 
     public float speed = 10f;
     public float dashSpeed = 2f;
@@ -23,7 +24,6 @@ public class PlayerMovement2 : MonoBehaviour
 
     public bool isInteract;
 
-    Sh_HpManager hm;
     GameObject partner;
     GameObject attackRange;
     GameObject ladder;
@@ -54,7 +54,6 @@ public class PlayerMovement2 : MonoBehaviour
         rb = GetComponent<Rigidbody>();        
         anim = GetComponent<Animator>();
         cartWheel = cart.GetComponent<AssembleCart>();
-        hm = hpManager.GetComponent<Sh_HpManager>();
     }
 
     void Update()
@@ -256,15 +255,19 @@ public class PlayerMovement2 : MonoBehaviour
     {
         isActive = false;
         anim.SetBool("isOver", true);
-        yield return new WaitForSeconds(1.5f); //애니메이션 진행시간
+        yield return new WaitForSeconds(1.5f); //time of playing die anim
         
         yield return StartCoroutine(fade.GetComponent<FadeEffect>().Fade(0));
 
-        GameData gd = DataManager.Instance.gameData;
-        transform.position = new Vector3(gd.x, gd.y, gd.z);
+        /*GameData gd = DataManager.Instance.gameData;
+        transform.position = new Vector3(gd.x, gd.y, gd.z);*/
+        //hm.playerHp = hm.maxPlayerHp;
 
-        
-        yield return StartCoroutine(fade.GetComponent<FadeEffect>().Fade(1));        
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.UnloadSceneAsync(currentSceneIndex);
+        SceneManager.LoadScene(currentSceneIndex, LoadSceneMode.Single);
+
+        //yield return StartCoroutine(fade.GetComponent<FadeEffect>().Fade(1));        
     }
 
     public void Over()
