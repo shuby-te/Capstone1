@@ -87,11 +87,11 @@ public class ObjManager : MonoBehaviour
     }
     public void DropBombActive()
     {
-        float x, z, r = 30f;
+        float x, z, r = 0.12f;
         while (true)
         {
-            x = Random.Range(-30f, 30f);
-            z = Random.Range(-30f, 30f);
+            x = Random.Range(-0.12f, 0.12f);
+            z = Random.Range(-0.12f, 0.12f);
             if (x * x + z * z < r * r)
             {
                 dropBomb[bombNum].SetActive(true);
@@ -107,7 +107,7 @@ public class ObjManager : MonoBehaviour
     public void DropBombInactive()
     {
         for(int i= 0; i < 4; i++)
-            dropBomb[i].GetComponent<DropBomb>().Disable();
+            dropBomb[i].SetActive(false);
     }
 
     public IEnumerator EnableBarrier()
@@ -153,11 +153,13 @@ public class ObjManager : MonoBehaviour
     public void CheckBarrier()
     {
         bool remain = false;
-        for (int i = 0; i < bossBarrier.Length; i++) 
-        {
-            if (bossBarrier[i] != null)
-                remain = true;
-        }
+        if (bossBarrier != null)
+            for (int i = 0; i < bossBarrier.Length; i++)
+            {
+                if (bossBarrier[i] != null)
+                    remain = true;
+            }
+
         if(remain)
         {
             for (int i = 0; i < bossBarrier.Length; i++)

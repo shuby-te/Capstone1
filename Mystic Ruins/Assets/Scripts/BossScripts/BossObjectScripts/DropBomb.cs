@@ -13,7 +13,8 @@ public class DropBomb : BossObject
     new void Start()
     {
         base.Start();
-        particle[0].gameObject.SetActive(false);
+        gameObject.SetActive(true);
+        particle[0].Stop();
     }
 
     // Update is called once per frame
@@ -27,7 +28,7 @@ public class DropBomb : BossObject
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.CompareTag("Boss"))
+        if (collision.transform.CompareTag("BossAttackRange"))
         {
             if(isFire)
             {
@@ -39,7 +40,7 @@ public class DropBomb : BossObject
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Boss"))
+        if (other.CompareTag("BossAttackRange"))
         {
             if (isFire)
             {
@@ -85,33 +86,34 @@ public class DropBomb : BossObject
         }
         isFire = false;
         isStart = false;
-
+        particle[4].Stop();
+        particle[4].gameObject.SetActive(false);
+        particle[5].Play();
         explosionRange.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.1f);
         explosionRange.gameObject.SetActive(false);
-
-        Disable();
+        yield return new WaitForSeconds(0.3f);
+        transform.localPosition = pos;
+        transform.eulerAngles = rot;
+        isFire = false;
+        transform.parent.gameObject.SetActive(false);
         yield break;
     }
 
     IEnumerator Del()
     {
         yield return new WaitForSeconds(15);
-        Disable();
+        transform.parent.gameObject.SetActive(false);
     }
 
     new private void OnEnable()
     {
+        timer.transform.localEulerAngles = new Vector3(0, -90, 0);
         StartCoroutine(Drop());
     }
     new private void OnDisable()
     {
-        particle[5].Play();
-        base.OnDisable();
-        particle[4].Stop();
-        particle[4].gameObject.SetActive(false);
-
         isFire = false;
-        //StopCoroutine(Timer());
+        transform.localPosition = Vector3.zero;
     }
 }
