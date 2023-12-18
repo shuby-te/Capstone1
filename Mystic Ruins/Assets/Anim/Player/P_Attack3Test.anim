@@ -35690,6 +35690,14 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.33333334
+    functionName: PlayAttackSound
+    data: 
+    objectReferenceParameter: {fileID: 11500000, guid: 7962aee6b488e3a48bb4a27de4921be3,
+      type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.93333334
     functionName: EndAttack
     data: 

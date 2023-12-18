@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
             DataManager.Instance.gameData.y,
             DataManager.Instance.gameData.z);
 
-        StartCoroutine(mt.Move(true));
+        StartCoroutine(mt.Move(2));
 
         for (int i = 0; i < skillTrigs.Length; i++)
         {

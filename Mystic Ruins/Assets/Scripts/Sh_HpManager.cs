@@ -10,6 +10,7 @@ public class Sh_HpManager : MonoBehaviour
     public GameObject player;
     public GameObject hpBar;
 
+    public AudioSource attackedS;
     PlayerMovement2 pm;
 
     public float maxBossHp = 6000;
@@ -46,6 +47,7 @@ public class Sh_HpManager : MonoBehaviour
         bossHp -= playerDmg;
         Debug.Log("player attacked: " + playerDmg + "!!!!!");
         MoveHpNeedle();
+        attackedS.Play();
     }
 
     public void AttackToPlayer(int type)

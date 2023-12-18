@@ -39,6 +39,10 @@ public class Sh_PartnerSkill : MonoBehaviour
     TextMeshProUGUI hydroCoolText;
     TextMeshProUGUI shieldCoolText;
 
+    public AudioSource fS;
+    public AudioSource hS;
+    public AudioSource sS;
+
     private void Start()
     {
         fTime = FCool;
@@ -155,6 +159,7 @@ public class Sh_PartnerSkill : MonoBehaviour
         yield return new WaitForSeconds(0.4f);
         
         fireBreath.Play();
+        fS.Play();
         yield return new WaitForSeconds(2f);    //���� ���� �ð��� 1.7f
 
         PlayBlink();
@@ -168,6 +173,7 @@ public class Sh_PartnerSkill : MonoBehaviour
         yield return null;
 
         blink.transform.position = partner.position;
+        fS.Stop();
         PlayBlink();
         //원위치      
     }
@@ -180,6 +186,7 @@ public class Sh_PartnerSkill : MonoBehaviour
         hydropump.transform.GetChild(0).gameObject.GetComponent<Renderer>().material.SetFloat("_MainTime", waterLen);
         hydropump.transform.GetChild(1).gameObject.GetComponent<Renderer>().material.SetFloat("_MainTime", waterLen);
         PlayHydropump();
+        hS.Play();
         yield return new WaitForSeconds(3f);    //���� ���� �ð��� 7f (���� 6f + �Ҹ� 1f)
 
         StartCoroutine("DeleteWater");
@@ -198,6 +205,7 @@ public class Sh_PartnerSkill : MonoBehaviour
         yield return null;
 
         blink.transform.position = partner.position;
+        hS.Stop();
         PlayBlink();
         //원위치     
     }
@@ -215,6 +223,7 @@ public class Sh_PartnerSkill : MonoBehaviour
         spark.transform.position = new Vector3(spawnShield.transform.position.x,
             spawnShield.transform.position.y - 1.2f, spawnShield.transform.position.z);
         PlaySpark();
+        sS.Play();
         
         yield return new WaitForSeconds(1f);
 

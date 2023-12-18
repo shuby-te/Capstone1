@@ -134,8 +134,8 @@ public class PlayerAnim : MonoBehaviour
     }
 
     void PlayAttackSound()
-    { 
-
+    {
+        attackS.Play();
     }
 
     void EndRoll()
