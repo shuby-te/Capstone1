@@ -34,7 +34,7 @@ public class PlayerMovement2 : MonoBehaviour
     Vector3 dir = Vector3.zero;
     bool dashCool;
     bool isDash;
-    bool isMove;
+    public bool isMove;
     bool isGround;
     bool isLadder;
     public bool isCart;

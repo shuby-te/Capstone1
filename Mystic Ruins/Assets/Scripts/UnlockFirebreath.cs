@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class UnlockFirebreath : MonoBehaviour
 {
     public UIManager ui;
+    public GameObject fireTwinkle;
 
     Animator anim;
 
@@ -32,6 +33,7 @@ public class UnlockFirebreath : MonoBehaviour
                 DataManager.Instance.gameData.skillStates[0] = 1;
                 ui.SetTutoText(firebreathTuto);
                 StartCoroutine(ui.FadeTutoText(4f));
+                fireTwinkle.SetActive(false);
             }
         }
         else

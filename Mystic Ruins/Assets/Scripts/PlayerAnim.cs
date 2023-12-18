@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerAnim : MonoBehaviour
 {
     public Sh_HpManager hm;
+    public AudioSource attackS;
 
     Animator anim;    
     PlayerMovement2 pm;
@@ -130,6 +131,11 @@ public class PlayerAnim : MonoBehaviour
         anim.SetBool("isRoll", false);
         yield return new WaitForSeconds(2f);
         isRoll = false;
+    }
+
+    void PlayAttackSound()
+    { 
+
     }
 
     void EndRoll()

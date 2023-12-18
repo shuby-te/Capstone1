@@ -25,6 +25,7 @@ public class MapTrigger : MonoBehaviour
         anim.SetInteger("isAttack", 0);
         anim.SetBool("isRoll", false);
 
+        PM.gameObject.GetComponent<PlayerMovement2>().isMove = false;
         PM.gameObject.GetComponent<PlayerMovement2>().enabled = false;
         PM.gameObject.GetComponent<PlayerAnim>().enabled = false;
 
@@ -101,6 +102,7 @@ public class MapTrigger : MonoBehaviour
         }
 
         PM.gameObject.GetComponent<PlayerMovement2>().enabled = true;
+        PM.gameObject.GetComponent<PlayerMovement2>().isMove = true;
         PM.gameObject.GetComponent<PlayerAnim>().enabled = true;
     }
 }

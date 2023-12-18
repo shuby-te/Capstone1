@@ -13,8 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject[] pulleys = new GameObject[4];
     public GameObject[] skillTrigs = new GameObject[3];
 
-    public GameObject player;
-    public MapTrigger mt;
+    public GameObject player;    
     public GameObject cart;    
     public GameObject pipeController;
     public GameObject itemManager;
@@ -23,7 +22,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject water;
     public GameObject wave;
-    public StartTutorial tuto;  
+
+    public PlayerSound ps;
+    public StartTutorial tuto;
+    public MapTrigger mt;
 
     AssembleCart cartScript;
 
@@ -47,11 +49,19 @@ public class GameManager : MonoBehaviour
             if (DataManager.Instance.gameData.skillStates[i] == 1)
             {
                 if(i == 0)
+                {
+                    skillTrigs[i].GetComponent<UnlockFirebreath>().fireTwinkle.SetActive(false);
                     skillTrigs[i].GetComponent<UnlockFirebreath>().enabled = false;
+                }
                 else
                     skillTrigs[i].SetActive(false);
             }
         }
+
+        if (DataManager.Instance.gameData.currentMapValue == 2)
+            ps.stepS = ps.stepSand;
+        else
+            ps.stepS = ps.stepMetal;
 
         if (DataManager.Instance.gameData.mapProgress[7] == 0)
             engineCoal.SetActive(false);
