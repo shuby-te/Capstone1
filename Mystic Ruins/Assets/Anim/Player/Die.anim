@@ -94011,7 +94011,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
+  - time: 3.9
     functionName: Over
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 2b9fa33ad8de6f24c92918cd8dbb9d98,

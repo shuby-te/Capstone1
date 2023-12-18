@@ -54,7 +54,9 @@ public class MovePulley : MonoBehaviour
             }
         }
 
-        if (DataManager.Instance.gameData.pulleyState[value - 1] >= 1 && DataManager.Instance.gameData.mapProgress[7] == 2)
+        if (DataManager.Instance.gameData.pulleyState[value - 1] >= 1
+            && DataManager.Instance.gameData.mapProgress[7] == 2
+            && DataManager.Instance.gameData.mapProgress[4] == 3)
             engine.SetFloat("engineSpeed", 1);
     }
 

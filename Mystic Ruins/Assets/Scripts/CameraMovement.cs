@@ -60,10 +60,7 @@ public class CameraMovement : MonoBehaviour
     {
         Vector3 direction = (player.transform.position - transform.position).normalized;
         RaycastHit[] hits = Physics.BoxCastAll(transform.position, boxSize / 2, 
-            direction, Quaternion.identity, Mathf.Infinity, 1 << LayerMask.NameToLayer("Wall"));
-        /*RaycastHit[] hits = Physics.RaycastAll(transform.position, direction, Mathf.Infinity,
-                            1 << LayerMask.NameToLayer("Wall"));*/
-        
+            direction, Quaternion.identity, Mathf.Infinity, 1 << LayerMask.NameToLayer("Wall"));        
 
         for (int i = 0; i < hits.Length; i++)
         {
@@ -78,7 +75,7 @@ public class CameraMovement : MonoBehaviour
         }
     }
 
-    public void SetCamera(int a,int b,int c,int x, int y,int z)
+    public void SetCamera(int a,int b,int c,int x, int y, int z)
     {
         this.a = a; this.b = b;this.c = c; this.x = x;this.y = y; this.z = z;
     }

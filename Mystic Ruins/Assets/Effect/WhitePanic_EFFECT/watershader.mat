@@ -57,7 +57,7 @@ Material:
     - _scale: 7
     - _smoothness: 0.5
     m_Colors:
-    - _Color: {r: 0.08788716, g: 0.15438688, b: 0.23584908, a: 1}
+    - _Color: {r: 0.3498614, g: 0.61595315, b: 0.9411765, a: 1}
     - _Vector2: {r: 0, g: 0.2, b: 0, a: 0}
     - _basecolor: {r: 1, g: 1, b: 1, a: 1}
     - _speed: {r: -0.5, g: 0, b: 0, a: 0}

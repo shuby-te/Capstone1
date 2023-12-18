@@ -13,7 +13,8 @@ public class GameManager : MonoBehaviour
     public GameObject[] pulleys = new GameObject[4];
     public GameObject[] skillTrigs = new GameObject[3];
 
-    public GameObject player;    
+    public GameObject player;
+    public MapTrigger mt;
     public GameObject cart;    
     public GameObject pipeController;
     public GameObject itemManager;
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject water;
     public GameObject wave;
-    public StartTutorial tuto;
+    public StartTutorial tuto;  
 
     AssembleCart cartScript;
 
@@ -38,6 +39,8 @@ public class GameManager : MonoBehaviour
             DataManager.Instance.gameData.x,
             DataManager.Instance.gameData.y,
             DataManager.Instance.gameData.z);
+
+        StartCoroutine(mt.Move(true));
 
         for (int i = 0; i < skillTrigs.Length; i++)
         {

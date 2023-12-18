@@ -5,6 +5,9 @@ public class GameData
 {
     public float x = -1.3f, y = 0, z = -40f;
 
+    public int[] cameraTrans = new int[6] { 40, 0, 0, 0, 15, -13 };
+    public float yAngle;
+
     public int[] items = new int[4];
 
     public int[] skillStates = new int[3];
