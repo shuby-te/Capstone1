@@ -34,7 +34,7 @@ public class SwordTypeB : MonoBehaviour
             yield return new WaitForSeconds(delay);
         }
     }
- 
+
     private void OnEnable()
     {
         StartCoroutine(Move());
