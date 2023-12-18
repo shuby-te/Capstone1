@@ -7,8 +7,10 @@ using UnityEngine.UI;
 public class RepeatBackground : MonoBehaviour
 {
     public GameObject titleB;
-    public float spawnTime;
+    public FadeEffect fade;
 
+
+    public float spawnTime;
     public float endX;
     public float startX;
     public bool isTitle;
@@ -19,8 +21,10 @@ public class RepeatBackground : MonoBehaviour
     {
         if(isTitle)
         {
+            StartCoroutine(fade.Fade(1));
+            
             titleT = titleB.transform.GetChild(0).GetComponent<TextMeshProUGUI>();
-            StartCoroutine(toTitle());
+            StartCoroutine(toTitle());                      
         }        
     }
 

@@ -41,11 +41,7 @@ public class Sh_PipeController : MonoBehaviour
             }
             else if (isControl)
             {
-                cameraObj.GetComponent<CameraMovement>().isRotate = false;
-                player.GetComponent<PlayerAnim>().enabled = true;
-                player.GetComponent<PlayerMovement2>().isActive = true;
-                plane.SetActive(true);
-                isControl = false;
+                NotControl();
             }
         }
 
@@ -96,6 +92,22 @@ public class Sh_PipeController : MonoBehaviour
         }
 
         return true;
+    }
+
+    public void NotControl()
+    {
+        cameraObj.GetComponent<CameraMovement>().isRotate = false;
+        player.GetComponent<PlayerAnim>().enabled = true;
+        player.GetComponent<PlayerMovement2>().isActive = true;
+        plane.SetActive(true);
+        isControl = false;
+    }
+
+    public void ClearAct()
+    {
+        transform.GetChild(0).gameObject.SetActive(false);
+        NotControl();
+        this.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)

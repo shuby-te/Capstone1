@@ -103,7 +103,10 @@ public class GameManager : MonoBehaviour
         if (DataManager.Instance.gameData.mapProgress[5] == 0)
             pipeController.GetComponent<Sh_PipeController>().ResetPipes();
         else
+        {
             pipeController.GetComponent<Sh_PipeController>().ClearPipes();
+            pipeController.GetComponent<Sh_PipeController>().ClearAct();
+        }
 
         if (DataManager.Instance.gameData.mapProgress[6] == 1)
         {

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TurnPipeValve : MonoBehaviour
@@ -29,7 +30,7 @@ public class TurnPipeValve : MonoBehaviour
                     //ÆÛÁñ Å¬¸®¾î
 
                     DataManager.Instance.gameData.mapProgress[5] = 1;
-
+                    controller.ClearAct();
                     Debug.Log("Pipe Clear~~");
                 }
                 else
@@ -63,6 +64,8 @@ public class TurnPipeValve : MonoBehaviour
 
         return true;
     }
+
+    
 
     void CloseValve()
     {

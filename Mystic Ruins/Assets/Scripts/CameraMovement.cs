@@ -12,7 +12,7 @@ public class CameraMovement : MonoBehaviour
     Vector3 boxSize = new Vector3(4, 0.1f, 1);
     Vector3 t_pos;
 
-    public bool boss;    
+    public bool afterBoss;    
     public float a = 40, b = 0, c = 0, x = 0, y = 15, z = -13;
     
     public bool isFade = false;
@@ -38,13 +38,13 @@ public class CameraMovement : MonoBehaviour
         }
         else if (isMap)
         {
-            if (boss)
+            if (afterBoss)
             {
-                t_pos = new Vector3(player.transform.position.x + x, player.transform.position.y + y, player.transform.position.z + z);
+                t_pos = new Vector3(player.transform.position.x + x, player.transform.position.y + y + 17, player.transform.position.z + z - 12);
             }
             else
             {
-                t_pos = new Vector3(player.transform.position.x, player.transform.position.y + 8.5f, player.transform.position.z - 8);
+                t_pos = new Vector3(player.transform.position.x + x, player.transform.position.y + y, player.transform.position.z + z);
             }
             transform.rotation = Quaternion.Euler(a, b, c);
             transform.position = Vector3.Lerp(transform.position, t_pos, Time.deltaTime * 2);
