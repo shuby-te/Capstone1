@@ -24,6 +24,7 @@ public class BossAttackPhase1 : MonoBehaviour
 
     void Disable()
     {
+        attackRange.SetActive(false);
         mc.enabled = false;
     }
     public void Disable1()

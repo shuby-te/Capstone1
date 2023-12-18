@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3829705749108154912}
   - component: {fileID: 2806438751063151028}
   m_Layer: 0
-  m_Name: FireCircle
+  m_Name: DropRange
   m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4900,7 +4900,7 @@ GameObject:
   - component: {fileID: 1192275126853871522}
   - component: {fileID: 5779124836158210451}
   m_Layer: 7
-  m_Name: FireCircle (1)
+  m_Name: ExplosionRange
   m_TagString: Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9914,7 +9914,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -14832,7 +14832,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -24748,7 +24748,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -29591,8 +29591,8 @@ GameObject:
   - component: {fileID: 3536414095692270309}
   - component: {fileID: 7165895404841368852}
   m_Layer: 7
-  m_Name: ExplosionRange
-  m_TagString: Boss
+  m_Name: ExplosionTrigger
+  m_TagString: BossAttackRange
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -29605,7 +29605,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8510609039237071701}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -1.699997, y: 1.69, z: 367.09998}
+  m_LocalPosition: {x: 0, y: -43.75, z: 0}
   m_LocalScale: {x: 11, y: 0.0001, z: 11}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29671,7 +29671,7 @@ MeshCollider:
   m_GameObject: {fileID: 8510609039237071701}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
   m_CookingOptions: 30

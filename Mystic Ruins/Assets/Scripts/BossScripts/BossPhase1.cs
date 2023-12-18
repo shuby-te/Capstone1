@@ -26,9 +26,9 @@ public class BossPhase1 : MonoBehaviour
     int count;
     public int isSpecial = 0;
 
-    bool isBreak = false;
-    bool isAttack = false;
-    bool isActive = false;
+    public bool isBreak = false;
+    public bool isAttack = false;
+    public bool isActive = false;
     bool isDash = true;
     bool overheating = false;
     bool isFar = true;
@@ -36,6 +36,7 @@ public class BossPhase1 : MonoBehaviour
     bool boomActive = false;
     bool isturnhead = false;
     bool sp = false;
+    int lastSp = 0;
 
     UIManager um;
     Animator anim;
@@ -52,12 +53,32 @@ public class BossPhase1 : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (isSpecial == 0)
+        if (lastSp == 0)
         {
-            if ( hm.bossHp <= 7500f && hm.bossHp > 5000f)
+            if (hm.bossHp / hm.maxBossHp <= 0.75f && hm.bossHp / hm.maxBossHp > 0.5f)
+            {
                 isSpecial = 1;
+                lastSp = 1;
+            }
         }
-        else if (isSpecial == 1)
+        else if (lastSp == 1)
+        {
+            if (hm.bossHp / hm.maxBossHp <= 0.5f && hm.bossHp / hm.maxBossHp > 0.25f)
+            {
+                isSpecial = 2;
+                lastSp = 2;
+            }
+        }
+        else if (lastSp == 2)
+        {
+            if (hm.bossHp / hm.maxBossHp <= 0.25f && hm.bossHp / hm.maxBossHp > 0)
+            {
+                isSpecial = 1;
+                lastSp = 3;
+            }
+        }
+
+        if (isSpecial == 1)
         {
             isAttack = true;
             StartCoroutine(SpecialAttack1());
@@ -66,16 +87,6 @@ public class BossPhase1 : MonoBehaviour
         {
             isAttack = true;
             StartCoroutine(SpecialAttack2());
-        }
-        else if (isSpecial == 4)
-        {
-            if (hm.bossHp <= 5000f && hm.bossHp > 2500f)
-                isSpecial = 2;
-        }
-        else if (isSpecial == 5) ;
-        {
-            if (hm.bossHp <= 2500f &&hm.bossHp > 0) ;
-                //여기에서 칼 합치는 컷신
         }
 
         float dir = Vector3.Distance(transform.position, player.transform.position);
@@ -137,7 +148,7 @@ public class BossPhase1 : MonoBehaviour
         {
             if (count == 3 && !overheating)
             {
-                attackNum = UnityEngine.Random.Range(9, 11);
+                attackNum = Random.Range(9, 11);
                 isAttack = true;
                 yield return StartCoroutine(TurnHead());
                 yield return StartCoroutine(TurnHead());
@@ -439,7 +450,7 @@ public class BossPhase1 : MonoBehaviour
     }
     IEnumerator SpecialAttack1()
     {
-        isSpecial = 4;
+        isSpecial = 0;
         StopCoroutine(OverHeat());
         sp = true;
         gameObject.GetComponent<BoxCollider>().enabled = false;
@@ -451,7 +462,7 @@ public class BossPhase1 : MonoBehaviour
     }
     IEnumerator SpecialAttack2()
     {
-        isSpecial = 5;
+        isSpecial = 0;
         StopCoroutine(OverHeat());
         sp = true;
         gameObject.GetComponent<BoxCollider>().enabled = false;

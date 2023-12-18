@@ -58,7 +58,7 @@ public class Sh_HpManager : MonoBehaviour
                 Debug.Log("boss attacked: " + bossDmg + "?????");
                 Debug.Log("hp = " + playerHp);
                 player.GetComponent<PlayerMovement2>().isKnockback = true;
-                player.GetComponent<Animator>().SetBool("isKnockbackaa", true);
+                player.GetComponent<Animator>().SetBool("isKnockback", true);
             }
             else if (type == 1)
             {
