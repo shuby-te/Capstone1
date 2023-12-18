@@ -160,11 +160,28 @@ public class ObjManager : MonoBehaviour
         }
         if(remain)
         {
-            Debug.Log("µÚÁü");
+            for (int i = 0; i < bossBarrier.Length; i++)
+            {
+                if (bossBarrier[i] != null)
+                    StartCoroutine(BarrierGrow(i));
+            }
+            int c = 15;
+            DropRockActive(15, 0.12f);
+            for (int i = 0; i < 12; i++)
+                SpawnFire(i);
         }
         else
         {
             StartCoroutine(csm.CutSceanStart(2));
+        }
+    }
+
+    IEnumerator BarrierGrow(int i)
+    {
+        while (bossBarrier[i].transform.localScale.x<3) 
+        {
+            bossBarrier[i].transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+            yield return new WaitForEndOfFrame();
         }
     }
     IEnumerator Timer(int i)

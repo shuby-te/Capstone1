@@ -12,9 +12,13 @@ public class ChangeScene : MonoBehaviour
 
     public void ToTitleScene()
     {
-        SceneManager.LoadScene("Park_TitleScene");
+        SceneManager.LoadScene("TitleScene");
     }
 
+    public void ToCartoonScene()
+    {
+        SceneManager.LoadScene("CartoonScene");
+    }
     public void ToEnd()
     {
         Application.Quit();
