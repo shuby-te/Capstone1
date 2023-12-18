@@ -111,7 +111,7 @@ public class DropBomb : BossObject
         particle[4].Stop();
         particle[4].gameObject.SetActive(false);
 
-
+        isFire = false;
         //StopCoroutine(Timer());
     }
 }
