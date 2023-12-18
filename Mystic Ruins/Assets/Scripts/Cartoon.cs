@@ -45,7 +45,10 @@ public class Cartoon : MonoBehaviour
         // 다음 이미지는 서서히 밝아지게
         currentIndex = (currentIndex + 1) % images.Length;
         if (currentIndex == 0)
+        {
+            SceneManager.GetComponent<ResetGameData>().ResetData();
             SceneManager.GetComponent<ChangeScene>().ToMainScene();
+        }
         StartCoroutine(FadeImage(currentIndex, 1));
     }
 
