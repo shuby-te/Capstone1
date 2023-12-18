@@ -38,7 +38,7 @@ public class PlayerMovement2 : MonoBehaviour
     bool isGround;
     bool isLadder;
     public bool isCart;
-    bool isCoal;
+    bool isOver;
 
     float xAxis = 1f, zAxis = -1f;
     float partnerSpeed = 4f;
@@ -99,6 +99,7 @@ public class PlayerMovement2 : MonoBehaviour
         {
             isInteract = false;
             setCart = false;
+            isCart = false;
             cart.transform.parent = null;
             speed = 10f;
         }
@@ -160,8 +161,9 @@ public class PlayerMovement2 : MonoBehaviour
         }
 
         //game over
-        if (transform.position.y < -15)
+        if (!isOver && transform.position.y < -15)
         {
+            isOver = true;
             StartCoroutine(GameOver());
         }
     }
@@ -259,15 +261,10 @@ public class PlayerMovement2 : MonoBehaviour
         
         yield return StartCoroutine(fade.GetComponent<FadeEffect>().Fade(0));
 
-        /*GameData gd = DataManager.Instance.gameData;
-        transform.position = new Vector3(gd.x, gd.y, gd.z);*/
-        //hm.playerHp = hm.maxPlayerHp;
-
         int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
         SceneManager.UnloadSceneAsync(currentSceneIndex);
         SceneManager.LoadScene(currentSceneIndex, LoadSceneMode.Single);
-
-        //yield return StartCoroutine(fade.GetComponent<FadeEffect>().Fade(1));        
+        isOver = false;
     }
 
     public void Over()

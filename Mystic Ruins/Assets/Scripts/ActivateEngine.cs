@@ -6,6 +6,7 @@ public class ActivateEngine : MonoBehaviour
 {
     public GameObject player;
     public GameObject cart;
+    public GameObject fire;
 
     GameObject coal;
     PlayerMovement2 pm;
@@ -17,15 +18,7 @@ public class ActivateEngine : MonoBehaviour
     void Start()
     {
         coal = this.transform.GetChild(0).gameObject;
-        pm = player.GetComponent<PlayerMovement2>();
-
-        if(DataManager.Instance.gameData.mapProgress[7] == 0)
-            coal.SetActive(false);
-        else if(DataManager.Instance.gameData.mapProgress[7] == 1)
-            coal.SetActive(true);
-            //각종 이펙트 실행
-        //else
-            //각종 이펙트 실행
+        pm = player.GetComponent<PlayerMovement2>();        
     }
 
     void Update()
@@ -40,15 +33,8 @@ public class ActivateEngine : MonoBehaviour
         if(isFire && DataManager.Instance.gameData.mapProgress[7] == 1)
         {
             DataManager.Instance.gameData.mapProgress[7] = 2;
-            //석탄이 가열된 이펙트 실행 (또는 석탄 색을 빨갛게 달궈진 모습으로 조정)
-            //다른 기타 퍼즐 해결 관련 이펙트 실행
+            fire.SetActive(true);
         }
-
-        /*
-        if(){}  
-        //진행도가 2이고 파이프룸 및 수조룸이 모두 해결되었을때를 조건으로, 
-        //물이 끓거나 증기가 나오는 이펙트 실행하고 해결된 도르래에 한하여 증기 피스톤 애니메이션 재생
-        */
     }
 
     private void OnTriggerEnter(Collider other)

@@ -82,8 +82,8 @@ public class Sh_RotateFloor : MonoBehaviour
         int n = 0;
         while(n < num)
         {
-            yield return new WaitForSeconds(Time.deltaTime);
-            gameObj.transform.Rotate(0, 0, 1.5f);
+            yield return new WaitForSeconds(Time.deltaTime / 10f);
+            gameObj.transform.Rotate(0, 0, 1);
             yield return null;
             n++;
         }

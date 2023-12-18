@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
     public GameObject cart;    
     public GameObject pipeController;
     public GameObject itemManager;
+    public GameObject engineFire;
+    public GameObject engineCoal;
 
     public GameObject water;
     public GameObject wave;
@@ -40,8 +42,20 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < skillTrigs.Length; i++)
         {
             if (DataManager.Instance.gameData.skillStates[i] == 1)
-                skillTrigs[i].SetActive(false);
+            {
+                if(i == 0)
+                    skillTrigs[i].GetComponent<UnlockFirebreath>().enabled = false;
+                else
+                    skillTrigs[i].SetActive(false);
+            }
         }
+
+        if (DataManager.Instance.gameData.mapProgress[7] == 0)
+            engineCoal.SetActive(false);
+        else if (DataManager.Instance.gameData.mapProgress[7] == 1)
+            engineCoal.SetActive(true);
+        else if (DataManager.Instance.gameData.mapProgress[7] == 2)
+            engineFire.SetActive(true);
 
         cartScript.coalNum = DataManager.Instance.gameData.coalNum;
         cartScript.wheelNum = DataManager.Instance.gameData.wheelNum;

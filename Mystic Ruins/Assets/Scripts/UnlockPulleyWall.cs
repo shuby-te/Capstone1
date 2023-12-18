@@ -48,7 +48,7 @@ public class UnlockPulleyWall : MonoBehaviour
 
             if(state >= 4)
             {
-                transform.Translate(Vector3.forward * 1f);
+                transform.Translate(-Vector3.forward * 0.2f);
                 if(transform.position.y < -40f)
                     Destroy(this.gameObject);
             }
@@ -58,9 +58,9 @@ public class UnlockPulleyWall : MonoBehaviour
     IEnumerator Unlock(GameObject _lock, int dir)
     {
         int i = 0;
-        while (i < 20)
+        while (i < 80)
         {
-            _lock.transform.Translate(Vector3.up * dir * 0.2f);
+            _lock.transform.Translate(Vector3.up * dir * 0.05f);
             i++;
             yield return null;
         }
