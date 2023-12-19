@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     public GameObject engineFire;
     public GameObject engineCoal;
 
+    public GameObject bossS;
+    public GameObject mapS;
+
     public GameObject water;
     public GameObject wave;
 
@@ -40,12 +43,20 @@ public class GameManager : MonoBehaviour
         DataManager.Instance.LoadGameData();
 
         if (DataManager.Instance.gameData.bossSceneLoaded == 1)
+        {
             player.transform.position = tpPoint.transform.position;
+            bossS.SetActive(true);
+            mapS.SetActive(false);
+        }
         else
+        {
+            bossS.SetActive(false);
+            mapS.SetActive(true);
             player.transform.position = new Vector3(
                 DataManager.Instance.gameData.x,
                 DataManager.Instance.gameData.y,
                 DataManager.Instance.gameData.z);
+        }
 
         DataManager.Instance.gameData.bossSceneLoaded = 0;
 
