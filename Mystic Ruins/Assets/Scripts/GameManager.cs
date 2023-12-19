@@ -42,6 +42,9 @@ public class GameManager : MonoBehaviour
 
         DataManager.Instance.LoadGameData();
 
+        if (DataManager.Instance.gameData.currentMapValue == 8)
+            DataManager.Instance.gameData.bossSceneLoaded = 1;
+
         if (DataManager.Instance.gameData.bossSceneLoaded == 1)
         {
             player.transform.position = tpPoint.transform.position;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using UnityEngine.Playables;
 
 public class DataManager : MonoBehaviour
 {
@@ -47,16 +48,24 @@ public class DataManager : MonoBehaviour
 
     public void ResetGameData()
     {
+        gameData.bossSceneLoaded = 0;
+
         gameData.x = -1.3f;
         gameData.y = 0;
         gameData.z = -40f;
+
+        gameData.cameraTrans = new int[] { 40, 0, 0, 0, 15, -13 };
+        gameData.yAngle = 0;
+        
+        Array.Fill(gameData.items, 0);
+        Array.Fill(gameData.skillStates, 0);
 
         gameData.coalNum = 0;
         gameData.wheelNum = 0;
 
         gameData.localWaveY = -3.5f;
-
-        Array.Fill(gameData.items, 0);
+   
+        Array.Fill(gameData.cartPos, 0);
         Array.Fill(gameData.pulleyState, 0);
 
         gameData.currentMapValue = 0;
