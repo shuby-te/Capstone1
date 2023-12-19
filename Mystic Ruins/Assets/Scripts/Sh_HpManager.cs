@@ -27,7 +27,7 @@ public class Sh_HpManager : MonoBehaviour
 
     bool damageImmune = false;
     bool fireDamageImmune = false;
-
+    public BossPhase1 bm;
     public Slider hpSlider;
     private void Start()
     {
@@ -45,10 +45,13 @@ public class Sh_HpManager : MonoBehaviour
 
     public void AttackToBoss()
     {
-        bossHp -= playerDmg;
-        Debug.Log("player attacked: " + playerDmg + "!!!!!");
-        MoveHpNeedle();
-        attackedS.Play();
+        if (bm.isActive)
+        {
+            bossHp -= playerDmg;
+            Debug.Log("player attacked: " + playerDmg + "!!!!!");
+            MoveHpNeedle();
+            attackedS.Play();
+        }
     }
 
     public void BossOverHeat()

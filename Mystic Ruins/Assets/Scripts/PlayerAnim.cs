@@ -140,15 +140,16 @@ public class PlayerAnim : MonoBehaviour
     void StartRoll()
     {
         anim.SetBool("isRoll", true);
+        anim.SetBool("isKnockback", false);
     }
     void EndRoll()
     {
         Debug.Log("endroll");
         hm.ChangeDamageImmune(false);
         hm.ChangeFireDamageImmune(false);
+        anim.SetBool("isKnockback", false);
         pm.isKnockback = false;
         anim.SetBool("isRoll", false);
-        anim.SetBool("isKnockback", false);
     }
 
     void EndEmmune()
