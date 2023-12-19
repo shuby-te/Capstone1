@@ -37,7 +37,8 @@ public class BossPhase1 : MonoBehaviour
     bool move = false;
     bool boomActive = false;
     bool isturnhead = false;
-    bool sp = false;
+    public bool sp = false;
+    public bool qwe = false;
     public  int lastSp = 0;
     bool ui = false;
     UIManager um;
@@ -45,7 +46,7 @@ public class BossPhase1 : MonoBehaviour
     public Sh_HpManager hm;
     public GameObject key;
     public GameObject key2;
-
+    public GameObject aiSword;
     void Start()
     {
         om = objManager.GetComponent<ObjManager>();
@@ -56,47 +57,59 @@ public class BossPhase1 : MonoBehaviour
 
     void FixedUpdate()
     {
-
-        if (lastSp == 0)
+        if (!sp)
         {
-            if (hm.bossHp / hm.maxBossHp <= 0.75f && hm.bossHp / hm.maxBossHp > 0.5f)
+            if (lastSp == 0)
             {
-                isSpecial = 1;
-            }
-        }
-        else if (lastSp == 1)
-        {
-            if (hm.bossHp / hm.maxBossHp <= 0.5f)
-            {
-                isSpecial = 2;
-            }
-        }
-        else if (lastSp == 2)
-        {
-            if (hm.bossHp / hm.maxBossHp <= 0.25f)
-            {
-                isSpecial = 1;
-            }
-        }
-        else if (lastSp == 3)
-        {
-            if (hm.bossHp / hm.maxBossHp <= 0)
-            {
-                GetComponent<Animator>().SetFloat("AttackSpeed", 0);
-                GetComponent<Animator>().SetBool("isStun", false);
-                wall1.SetActive(true);
-                wall2.SetActive(false);
-                key.SetActive(true);
-                anim.SetBool("die", true);
-                lastSp=4;
-                if(ui)
+                if (hm.bossHp / hm.maxBossHp <= 0.75f && hm.bossHp / hm.maxBossHp > 0.5f)
                 {
-                    um.UiSwhitch();
-                    ui = false;
+                    sp = true;
+                    qwe = true;
+                    isSpecial = 1;
+                }
+            }
+            else if (lastSp == 1)
+            {
+                if (hm.bossHp / hm.maxBossHp <= 0.5f)
+                {
+                    sp = true;
+                    qwe = true;
+                    isSpecial = 2;
+                }
+            }
+            else if (lastSp == 2)
+            {
+                if (hm.bossHp / hm.maxBossHp <= 0.25f)
+                {
+                    sp = true;
+                    qwe = true;
+                    isSpecial = 1;
+                }
+            }
+            else if (lastSp == 3)
+            {
+                if (hm.bossHp / hm.maxBossHp <= 0)
+                {
+                    sp = true;
+
+                    GetComponent<Animator>().SetFloat("AttackSpeed", 0);
+                    GetComponent<Animator>().SetBool("isStun", false);
+                    wall1.SetActive(true);
+                    wall2.SetActive(false);
+                    key.SetActive(true);
+                    key.transform.parent = null;
+                    anim.SetBool("die", true);
+                    aiSword.SetActive(false);
+                    lastSp = 4;
+                    if (ui)
+                    {
+                        um.UiSwhitch();
+                        ui = false;
+                    }
                 }
             }
         }
-        if (!sp)
+        if (qwe)
         {
             if (isSpecial == 1)
             {
@@ -478,43 +491,57 @@ public class BossPhase1 : MonoBehaviour
     }
     IEnumerator SpecialAttack1()
     {
-        sp = true;
-        while (true)
+        qwe = false;
+        if (lastSp == 0 || lastSp == 2)
         {
-            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk") || anim.GetCurrentAnimatorStateInfo(0).IsName("stop"))
+            while (true)
             {
-                StopCoroutine(OverHeat());
-                gameObject.GetComponent<BoxCollider>().enabled = false;
-                overheating = false;
-                anim.SetFloat("AttackSpeed", 1);
-                anim.SetInteger("SpacialAttack", 1);
-                yield return new WaitForSeconds(0.2f);
-                anim.SetInteger("SpacialAttack", 0);
-                isSpecial = 0;
-                sp = false;
+                if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk") || anim.GetCurrentAnimatorStateInfo(0).IsName("stop"))
+                {
+                    StopCoroutine(OverHeat());
+                    gameObject.GetComponent<BoxCollider>().enabled = false;
+                    overheating = false;
+                    anim.SetFloat("AttackSpeed", 1);
+                    anim.SetInteger("SpacialAttack", 1);
+                    yield return new WaitForSeconds(0.5f);
+                    anim.SetInteger("SpacialAttack", 0);
+                    Debug.Log("aaa");
+                }
 
-                break;
+                if (anim.GetCurrentAnimatorStateInfo(0).IsName("Special1-1") || anim.GetCurrentAnimatorStateInfo(0).IsName("Special1-2"))
+                {
+                    isSpecial = 0;
+                    break;
+                }
+                yield return new WaitForEndOfFrame();
             }
-            yield return new WaitForEndOfFrame();
-        }
-        while(true)
-            while (anim.GetCurrentAnimatorStateInfo(0).IsName("Stun"))
+
+            while (true)
             {
-                if (lastSp == 0)
-                {
-                    lastSp = 1;
-                    break;
-                }
-                else if (lastSp == 2)
-                {
-                    lastSp = 3;
-                    break;
-                }
+                if (anim.GetCurrentAnimatorStateInfo(0).IsName("Stun"))
+                    if (lastSp == 0)
+                    {
+                        lastSp = 1;
+                        sp = false;
+                        Debug.Log("bbb");
+                        break;
+                    }
+                    else if (lastSp == 2)
+                    {
+                        lastSp = 3;
+                        sp = false;
+                        Debug.Log("ccc");
+
+                        break;
+                    }
+
                 yield return null;
             }
+        }
     }
     IEnumerator SpecialAttack2()
     {
+        qwe = false;
         sp = true;
         while (true)
         {
@@ -529,12 +556,24 @@ public class BossPhase1 : MonoBehaviour
                 anim.SetInteger("SpacialAttack", 0);
                 isSpecial = 0;
                 break;
+
             }
             yield return new WaitForEndOfFrame();
-            lastSp = 2;
-            sp = false;
-
         }
+        if(isSpecial==2)
+        {
+            StartCoroutine(SpecialAttack2());
+            yield break;
+        }
+            while (true)
+            {
+                if (anim.GetCurrentAnimatorStateInfo(0).IsName("Stun"))
+                {
+                    lastSp = 2;
+                    sp = false;
+                }
+                yield return null;
+            }        
     }
     public IEnumerator TurnHead()
     {
