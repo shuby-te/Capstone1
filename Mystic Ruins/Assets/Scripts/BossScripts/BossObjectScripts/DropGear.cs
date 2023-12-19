@@ -33,7 +33,7 @@ public class DropGear : BossObject
     }
     IEnumerator grow()
     {
-        while (gameObject.transform.localScale.y < 3)
+        while (gameObject.transform.localScale.y < 0.5f)
         {
             gameObject.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
             yield return new WaitForFixedUpdate();

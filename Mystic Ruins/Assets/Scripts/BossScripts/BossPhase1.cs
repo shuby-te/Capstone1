@@ -9,7 +9,7 @@ public class BossPhase1 : MonoBehaviour
     public GameObject hpManager;
  
     public ObjManager om;
-
+    public int num;
     public int attackNum;
     public int barrierNum = 3;
     public int remainAttack = 5;
@@ -17,7 +17,8 @@ public class BossPhase1 : MonoBehaviour
     public float hp;
     public float bossSpeed = 1f;
     public float speed = 1;
-
+    public GameObject wall1;
+    public GameObject wall2;
     public bool isBlocking = false;
     public bool isStun = false;
 
@@ -36,11 +37,13 @@ public class BossPhase1 : MonoBehaviour
     bool boomActive = false;
     bool isturnhead = false;
     bool sp = false;
-    int lastSp = 0;
-
+    public  int lastSp = 0;
+    bool ui = false;
     UIManager um;
     Animator anim;
-    Sh_HpManager hm;
+    public Sh_HpManager hm;
+    public GameObject key;
+    public GameObject key2;
 
     void Start()
     {
@@ -58,44 +61,68 @@ public class BossPhase1 : MonoBehaviour
             if (hm.bossHp / hm.maxBossHp <= 0.75f && hm.bossHp / hm.maxBossHp > 0.5f)
             {
                 isSpecial = 1;
-                lastSp = 1;
             }
         }
         else if (lastSp == 1)
         {
-            if (hm.bossHp / hm.maxBossHp <= 0.5f && hm.bossHp / hm.maxBossHp > 0.25f)
+            if (hm.bossHp / hm.maxBossHp <= 0.5f)
             {
                 isSpecial = 2;
-                lastSp = 2;
             }
         }
         else if (lastSp == 2)
         {
-            if (hm.bossHp / hm.maxBossHp <= 0.25f && hm.bossHp / hm.maxBossHp > 0)
+            if (hm.bossHp / hm.maxBossHp <= 0.25f)
             {
                 isSpecial = 1;
-                lastSp = 3;
             }
         }
-
-        if (isSpecial == 1)
+        else if (lastSp == 3)
         {
-            isAttack = true;
-            StartCoroutine(SpecialAttack1());
+            if (hm.bossHp / hm.maxBossHp <= 0)
+            {
+                GetComponent<Animator>().SetFloat("AttackSpeed", 0);
+                GetComponent<Animator>().SetBool("isStun", false);
+                wall1.SetActive(true);
+                wall2.SetActive(false);
+                key.SetActive(true);
+                anim.SetBool("die", true);
+                lastSp=4;
+                if(ui)
+                {
+                    um.UiSwhitch();
+                    ui = false;
+                }
+            }
         }
-        else if (isSpecial == 2)
+        if (!sp)
         {
-            isAttack = true;
-            StartCoroutine(SpecialAttack2());
+            if (isSpecial == 1)
+            {
+                isAttack = true;
+                StartCoroutine(SpecialAttack1());
+            }
+            else if (isSpecial == 2)
+            {
+                isAttack = true;
+                StartCoroutine(SpecialAttack2());
+            }
         }
 
         float dir = Vector3.Distance(transform.position, player.transform.position);
 
         DisCheck();
-        if (!isActive && Input.GetKeyDown(KeyCode.Space) && dir < 4)
+        if (!isActive && Input.GetKeyDown(KeyCode.E) && dir < 4)
         {
+            wall1.SetActive(false);
+            wall2.SetActive(true);
+            key2.SetActive(false);
             anim.SetBool("isActive", true);
-            um.UiSwhitch();
+            if (!ui)
+            {
+                um.UiSwhitch();
+                ui = true;
+            }
             StartCoroutine(deley(3f));
         }
         if (move)
@@ -107,7 +134,7 @@ public class BossPhase1 : MonoBehaviour
             anim.SetBool("isWalk", true);
             StartCoroutine(TurnHead());
         }
-        if (isActive && !isAttack && !isBreak && !isStun)
+        if (isActive && !isAttack && !isBreak && !isStun &&!sp)
         {
             if (isFar && !isturnhead)
             {
@@ -334,7 +361,7 @@ public class BossPhase1 : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
-        om.DropRockActive(3, 0.15f);
+        om.DropRockActive(10, 0.15f);
         {
             while (true)
             {
@@ -344,7 +371,7 @@ public class BossPhase1 : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             }
         }
-        om.DropRockActive(3, 0.15f);
+        om.DropRockActive(10, 0.15f);
         while (true)
         {
             if (anim.GetCurrentAnimatorStateInfo(0).IsName("Pattern5")&&
@@ -352,7 +379,7 @@ public class BossPhase1 : MonoBehaviour
                 break;
             yield return new WaitForEndOfFrame();
         }
-        om.DropRockActive(8, 0.15f);
+        om.DropRockActive(15, 0.15f);
         anim.SetInteger("AttackType", 0);
         yield return StartCoroutine(deley(1.5f));
         yield break;
@@ -433,7 +460,7 @@ public class BossPhase1 : MonoBehaviour
         {
             if (!anim.GetCurrentAnimatorStateInfo(0).IsName("Element2-1")&&isDash)
             {
-                    transform.position += Vector3.Normalize(transform.forward) * 20 / 30 / bossSpeed;
+                    transform.position += Vector3.Normalize(transform.forward) * num / 30 / bossSpeed;
             }
             i++;
             yield return new WaitForEndOfFrame();
@@ -450,27 +477,59 @@ public class BossPhase1 : MonoBehaviour
     }
     IEnumerator SpecialAttack1()
     {
-        isSpecial = 0;
-        StopCoroutine(OverHeat());
         sp = true;
-        gameObject.GetComponent<BoxCollider>().enabled = false;
-        overheating = false;
-        anim.SetFloat("AttackSpeed", 1);
-        anim.SetInteger("SpacialAttack", 1);
-        yield return new WaitForSeconds(0.2f);
-        anim.SetInteger("SpacialAttack", 0);
+        while (true)
+        {
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk") || anim.GetCurrentAnimatorStateInfo(0).IsName("stop"))
+            {
+                StopCoroutine(OverHeat());
+                gameObject.GetComponent<BoxCollider>().enabled = false;
+                overheating = false;
+                anim.SetFloat("AttackSpeed", 1);
+                anim.SetInteger("SpacialAttack", 1);
+                yield return new WaitForSeconds(0.2f);
+                anim.SetInteger("SpacialAttack", 0);
+                isSpecial = 0;
+                break;
+            }
+            yield return new WaitForEndOfFrame();
+            while (anim.GetCurrentAnimatorStateInfo(0).IsName("Stun"))
+                {
+                if (lastSp == 0)
+                {
+                    lastSp = 1;
+                }
+                else if (lastSp == 2)
+                {
+                    lastSp = 3;
+                }
+                yield return null;
+            }
+            sp = false;
+        }
     }
     IEnumerator SpecialAttack2()
     {
-        isSpecial = 0;
-        StopCoroutine(OverHeat());
         sp = true;
-        gameObject.GetComponent<BoxCollider>().enabled = false;
-        overheating = false;
-        anim.SetFloat("AttackSpeed", 1);
-        anim.SetInteger("SpacialAttack", 2);
-        yield return new WaitForSeconds(0.2f);
-        anim.SetInteger("SpacialAttack", 0);
+        while (true)
+        {
+            if (anim.GetCurrentAnimatorStateInfo(0).IsName("Walk") || anim.GetCurrentAnimatorStateInfo(0).IsName("stop"))
+            {
+                StopCoroutine(OverHeat());
+                gameObject.GetComponent<BoxCollider>().enabled = false;
+                overheating = false;
+                anim.SetFloat("AttackSpeed", 1);
+                anim.SetInteger("SpacialAttack", 2);
+                yield return new WaitForSeconds(0.2f);
+                anim.SetInteger("SpacialAttack", 0);
+                isSpecial = 0;
+                break;
+            }
+            yield return new WaitForEndOfFrame();
+            lastSp = 2;
+            sp = false;
+
+        }
     }
     public IEnumerator TurnHead()
     {
@@ -491,6 +550,11 @@ public class BossPhase1 : MonoBehaviour
     public IEnumerator Stun(float i)
     {
         isStun = true;
+        if (sp)
+        {
+            gameObject.GetComponent<BoxCollider>().enabled = true;
+            sp = false;
+        }
         transform.GetComponent<BossAttackPhase1>().Disable1();
         anim.SetFloat("AttackSpeed", 1);
         anim.SetBool("isStun", true);
@@ -506,17 +570,13 @@ public class BossPhase1 : MonoBehaviour
         if (i == 5.5)
             bossSpeed = 1;
         count = 0;
-        if (sp)
-        {
-            gameObject.GetComponent<BoxCollider>().enabled = true;
-            sp = false;
-        }
+ 
     }
     public IEnumerator OverHeat()
     {
         overheating = true;
         yield return new WaitForSeconds(15);
-        //boss damage
+        hm.BossOverHeat();
         StartCoroutine(Stun(5.5f));
     }
     private void OnCollisionEnter(Collision collision)

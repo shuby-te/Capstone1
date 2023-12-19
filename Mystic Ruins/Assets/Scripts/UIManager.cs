@@ -203,6 +203,8 @@ public class UIManager : MonoBehaviour
         {
             Transform tmp = openUI;
             openUI = closeUI; closeUI = tmp;
+            Debug.Log("aaaaaa");
+
         }
 
         float timeElapsed = 0f;
@@ -213,6 +215,7 @@ public class UIManager : MonoBehaviour
 
             timeElapsed += Time.deltaTime;
             yield return null;
+            Debug.Log("bbbbb");
         }
 
         timeElapsed = 0f;
@@ -224,9 +227,12 @@ public class UIManager : MonoBehaviour
 
             timeElapsed += Time.deltaTime;
             yield return null;
+            Debug.Log("ccc");
         }
 
         itemPointer.transform.SetParent(itemsUI.transform.parent, true);
+        Debug.Log("ddd");
+
     }
 
 }

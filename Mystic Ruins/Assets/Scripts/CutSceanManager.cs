@@ -52,7 +52,17 @@ public class CutSceanManager : MonoBehaviour
         aiSword.SetActive(true);
         cutSceneSword.SetActive(false);
         yield return StartCoroutine(fade.Fade(1));
+        anim2.SetBool("isPass", true);
     }
+
+    IEnumerator CutSceanEnd1()
+    {
+        yield return StartCoroutine(fade.Fade(0));
+        anim1.enabled = false;
+        cutSceneSword.SetActive(false);
+        yield return StartCoroutine(fade.Fade(1));
+    }
+
     IEnumerator SetInt()
     {
         yield return new WaitForSeconds(0.1f);

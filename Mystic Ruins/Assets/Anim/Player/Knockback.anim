@@ -132264,7 +132264,8 @@ AnimationClip:
   - time: 3.2666667
     functionName: EndEmmune
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: 7962aee6b488e3a48bb4a27de4921be3,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
