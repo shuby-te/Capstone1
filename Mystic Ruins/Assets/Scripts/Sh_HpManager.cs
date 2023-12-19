@@ -16,6 +16,7 @@ public class Sh_HpManager : MonoBehaviour
     public float maxBossHp = 6000;
     public float maxPlayerHp = 100;
 
+    float overHeat = 800;
     float playerDmg = 100;
     float bombDmg = 8;
     float bossDmg = 5;
@@ -27,7 +28,7 @@ public class Sh_HpManager : MonoBehaviour
     bool damageImmune = false;
     bool fireDamageImmune = false;
 
-    Slider hpSlider;
+    public Slider hpSlider;
     private void Start()
     {
         pm = player.GetComponent<PlayerMovement2>();
@@ -48,6 +49,19 @@ public class Sh_HpManager : MonoBehaviour
         Debug.Log("player attacked: " + playerDmg + "!!!!!");
         MoveHpNeedle();
         attackedS.Play();
+    }
+
+    public void BossOverHeat()
+    {
+        bossHp -= overHeat;
+        MoveHpNeedle();
+        MoveHpNeedle();
+        MoveHpNeedle();
+        MoveHpNeedle();
+        MoveHpNeedle();
+        MoveHpNeedle();
+        MoveHpNeedle();
+        MoveHpNeedle();
     }
 
     public void AttackToPlayer(int type)
@@ -117,6 +131,34 @@ public class Sh_HpManager : MonoBehaviour
     IEnumerator RotateHpNeedle(GameObject gameObj, int reverse = 1)
     {
         float angle = (playerDmg / maxBossHp * 360) * 10;
+
+        int n = 0;
+        while (n < angle)
+        {
+            yield return new WaitForSeconds(0.001f);
+            gameObj.transform.Rotate(new Vector3(transform.rotation.x, 0.1f * reverse, transform.rotation.z));
+            yield return null;
+            n++;
+        }
+    }
+
+    public void MoveHpNeedleWater()
+    {
+        StartCoroutine(RotateHpNeedleWater(needle));
+
+        for (int i = 0; i < gears.Count; i++)
+        {
+            if (i == 1 || i == 4)
+                StartCoroutine(RotateHpNeedleWater(gears[i]));
+            else
+                StartCoroutine(RotateHpNeedleWater(gears[i], -1));
+        }
+    }
+
+
+    IEnumerator RotateHpNeedleWater(GameObject gameObj, int reverse = 1)
+    {
+        float angle = (10 / maxBossHp * 360) * 10;
 
         int n = 0;
         while (n < angle)
