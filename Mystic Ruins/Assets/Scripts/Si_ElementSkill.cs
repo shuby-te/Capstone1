@@ -10,10 +10,12 @@ public class Si_ElementSkill : MonoBehaviour
     public GameObject boss;
     BossPhase1 bm;
     Animator anim;
+    Sh_HpManager hm;
     bool run = false;
     // Start is called before the first frame update
     void Start()
     {
+        hm = boss.GetComponent<BossPhase1>().hm;
         bm=boss.GetComponent<BossPhase1>();
         anim=boss.GetComponent<Animator>();
     }

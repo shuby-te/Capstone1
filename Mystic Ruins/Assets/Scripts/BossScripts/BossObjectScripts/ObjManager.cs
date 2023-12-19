@@ -16,8 +16,9 @@ public class ObjManager : MonoBehaviour
     public GameObject[] bossBarrier = new GameObject[3];
     public GameObject[] orb = new GameObject[3];
     public GameObject[] throwPipe = new GameObject[5];
+    public ParticleSystem[] explosionParticle;
     public GameObject cutSceanManager;
-
+    public GameObject hpManager;
     int rockNum = 0;
     int bombNum = 0;
     int count = 5;
@@ -26,10 +27,11 @@ public class ObjManager : MonoBehaviour
 
     CutSceanManager csm;
     BossPhase1 bm;
-
+    Sh_HpManager hm;
     // Start is called before the first frame update
     void Start()
     {
+        hm = hpManager.GetComponent<Sh_HpManager>();
         csm = cutSceanManager.GetComponent<CutSceanManager>();
         bm = boss.GetComponent<BossPhase1>();
     }
@@ -146,12 +148,21 @@ public class ObjManager : MonoBehaviour
 
     public void ThrowPipe()
     {
-        throwPipe[bm.remainAttack].GetComponent<ThrowPipe>().isThrow = true;
-        throwPipe[bm.remainAttack].GetComponent<ThrowPipe>().orbNum = boss.GetComponent<BossPhase1>().barrierNum;
+        if (count-- != 0)
+        {
+            throwPipe[bm.remainAttack].GetComponent<ThrowPipe>().isThrow = true;
+            throwPipe[bm.remainAttack].GetComponent<ThrowPipe>().orbNum = boss.GetComponent<BossPhase1>().barrierNum;
+        }
+        else
+            CheckBarrier();
     }
 
     public void CheckBarrier()
     {
+        for(int i=0;i< throwPipe.Length;i++)
+        {
+            Destroy(throwPipe[i]);
+        }
         bool remain = false;
         if (bossBarrier != null)
             for (int i = 0; i < bossBarrier.Length; i++)
@@ -164,13 +175,19 @@ public class ObjManager : MonoBehaviour
         {
             for (int i = 0; i < bossBarrier.Length; i++)
             {
-                if (bossBarrier[i] != null)
-                    StartCoroutine(BarrierGrow(i));
+                if (bossBarrier[i] != null) ;
+                    //StartCoroutine(BarrierGrow(i));
             }
             int c = 15;
             DropRockActive(15, 0.12f);
             for (int i = 0; i < 12; i++)
                 SpawnFire(i);
+            for (int i = 0; i < bossBarrier.Length; i++)
+                if (bossBarrier[i] != null)
+                    Destroy(bossBarrier[i]);
+            for (int i = 0; i < explosionParticle.Length; i++)
+                explosionParticle[i].Play();
+            StartCoroutine(Grow());
         }
         else
         {
@@ -182,7 +199,24 @@ public class ObjManager : MonoBehaviour
     {
         while (bossBarrier[i].transform.localScale.x<3) 
         {
-            bossBarrier[i].transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+            if (bossBarrier[i] != null)
+                bossBarrier[i].transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+            else
+                yield break;
+            yield return new WaitForEndOfFrame();
+        }
+    }
+    IEnumerator Grow()
+    {
+        StartCoroutine(Die());
+        while (explosionParticle[0].transform.localScale.x < 5)
+        {
+            explosionParticle[0].transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+            explosionParticle[1].transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+            explosionParticle[2].transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+            explosionParticle[0].transform.localPosition += Vector3.down * 0.1f;
+            explosionParticle[1].transform.localPosition += Vector3.down * 0.1f;
+            explosionParticle[2].transform.localPosition += Vector3.down * 0.1f;
             yield return new WaitForEndOfFrame();
         }
     }
@@ -190,6 +224,15 @@ public class ObjManager : MonoBehaviour
     {
         yield return new WaitForSeconds(i);
         turn = false;
+    }
+    IEnumerator Die()
+    {
+        while (hm.playerHp != 0)
+        {
+            hm.playerHp -= 1;
+            hm.hpSlider.value = hm.playerHp;
+            yield return new WaitForEndOfFrame();
+        }
     }
 
 }

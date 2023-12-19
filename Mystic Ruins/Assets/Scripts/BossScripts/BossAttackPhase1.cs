@@ -102,16 +102,22 @@ public class BossAttackPhase1 : MonoBehaviour
     void sp2_4_1()
     {
         if (bm.remainAttack != 0)
-            StartCoroutine(om.TurnHead()); 
+            StartCoroutine(om.TurnHead());
         else
+        {
             GetComponent<Animator>().SetBool("throw", false);
+            GetComponent<Animator>().SetFloat("AttackSpeed",1);
+        }
     }
 
     void sp2_5()
     {
         om.CheckBarrier();
     }
-
+    void Pass()
+    {
+        StartCoroutine(GetComponent<BossPhase1>().Stun(0.1f));
+    }
     void Stun()
     {
         GetComponent<Animator>().SetFloat("StunMultiplier", 0);
@@ -119,7 +125,7 @@ public class BossAttackPhase1 : MonoBehaviour
 
     void Rock()
     {
-        om.DropRockActive(5, 0.12f);
+        om.DropRockActive(7, 0.12f);
         if (count == 2)
         {
             om.DropBombActive();

@@ -114,6 +114,7 @@ public class DropBomb : BossObject
     new private void OnDisable()
     {
         isFire = false;
+        explosionRange.gameObject.SetActive(false);
         transform.localPosition = Vector3.zero;
     }
 }

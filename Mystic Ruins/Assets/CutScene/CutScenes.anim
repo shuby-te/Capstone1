@@ -386,7 +386,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 2.5
-    functionName: CutSceanEnd
+    functionName: CutSceanEnd1
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 4a1dc9fe326299549bcb62a25bd682ad,
       type: 3}
