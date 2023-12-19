@@ -37,10 +37,16 @@ public class GameManager : MonoBehaviour
         cartScript = cart.GetComponent<AssembleCart>();        
 
         DataManager.Instance.LoadGameData();
-        player.transform.position = new Vector3(
+
+        if (DataManager.Instance.gameData.bossSceneLoaded == 1)
+
+            player.transform.position = new Vector3(
             DataManager.Instance.gameData.x,
             DataManager.Instance.gameData.y,
             DataManager.Instance.gameData.z);
+
+        
+
 
         StartCoroutine(mt.Move(2));
 

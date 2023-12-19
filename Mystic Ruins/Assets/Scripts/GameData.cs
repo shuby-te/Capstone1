@@ -3,6 +3,8 @@ using System;
 [Serializable]
 public class GameData
 {
+    public int bossSceneLoaded;
+
     public float x = -1.3f, y = 0, z = -40f;
 
     public int[] cameraTrans = new int[6] { 40, 0, 0, 0, 15, -13 };

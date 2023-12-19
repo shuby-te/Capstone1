@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GameBuildScene/MainScene.unity
     guid: 645711aae90dcd44b9ef121185a95aee
   - enabled: 1
+    path: Assets/Scenes/GameBuildScene/BossRoomScene.unity
+    guid: dcd141b723d90574e81adfff36dd8938
+  - enabled: 1
     path: Assets/Scenes/GameBuildScene/EndingScene.unity
     guid: cfc3c66766dd0da459a23098a706349b
   m_configObjects: {}
