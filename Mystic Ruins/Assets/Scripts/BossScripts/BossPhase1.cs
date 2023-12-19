@@ -8,6 +8,7 @@ public class BossPhase1 : MonoBehaviour
     public GameObject uiManager;
     public GameObject hpManager;
  
+
     public ObjManager om;
     public int num;
     public int attackNum;
@@ -490,23 +491,27 @@ public class BossPhase1 : MonoBehaviour
                 yield return new WaitForSeconds(0.2f);
                 anim.SetInteger("SpacialAttack", 0);
                 isSpecial = 0;
+                sp = false;
+
                 break;
             }
             yield return new WaitForEndOfFrame();
+        }
+        while(true)
             while (anim.GetCurrentAnimatorStateInfo(0).IsName("Stun"))
-                {
+            {
                 if (lastSp == 0)
                 {
                     lastSp = 1;
+                    break;
                 }
                 else if (lastSp == 2)
                 {
                     lastSp = 3;
+                    break;
                 }
                 yield return null;
             }
-            sp = false;
-        }
     }
     IEnumerator SpecialAttack2()
     {
