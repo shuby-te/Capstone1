@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public FadeEffect fade;
 
+    public GameObject tpPoint;
     public GameObject[] uniqueItems = new GameObject[6];
     public GameObject[] pulleys = new GameObject[4];
     public GameObject[] skillTrigs = new GameObject[3];
@@ -39,14 +40,14 @@ public class GameManager : MonoBehaviour
         DataManager.Instance.LoadGameData();
 
         if (DataManager.Instance.gameData.bossSceneLoaded == 1)
-
+            player.transform.position = tpPoint.transform.position;
+        else
             player.transform.position = new Vector3(
-            DataManager.Instance.gameData.x,
-            DataManager.Instance.gameData.y,
-            DataManager.Instance.gameData.z);
+                DataManager.Instance.gameData.x,
+                DataManager.Instance.gameData.y,
+                DataManager.Instance.gameData.z);
 
-        
-
+        DataManager.Instance.gameData.bossSceneLoaded = 0;
 
         StartCoroutine(mt.Move(2));
 

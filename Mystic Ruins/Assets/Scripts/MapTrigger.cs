@@ -90,10 +90,10 @@ public class MapTrigger : MonoBehaviour
                     DataManager.Instance.gameData.cameraTrans = new int[] { 40, 0, 0, 0, 15, -13 };
                     if(triggerTag == 10)
                     {
-                        DataManager.Instance.gameData.bossSceneLoaded = 1;
                         DataManager.Instance.gameData.x = tpPoint[triggerTag].transform.position.x;
                         DataManager.Instance.gameData.y = tpPoint[triggerTag].transform.position.y;
                         DataManager.Instance.gameData.z = tpPoint[triggerTag].transform.position.z;
+                        DataManager.Instance.SaveGameData();
 
                         SceneManager.LoadScene("MainScene");
                     }
@@ -107,6 +107,13 @@ public class MapTrigger : MonoBehaviour
                 case 11: //boss
                     DataManager.Instance.gameData.currentMapValue = 8;
                     DataManager.Instance.gameData.cameraTrans = new int[] { 40, 0, 0, 0, 15, -13 };
+
+                    DataManager.Instance.gameData.bossSceneLoaded = 1;
+                    DataManager.Instance.gameData.x = tpPoint[triggerTag].transform.position.x;
+                    DataManager.Instance.gameData.y = tpPoint[triggerTag].transform.position.y;
+                    DataManager.Instance.gameData.z = tpPoint[triggerTag].transform.position.z;
+                    DataManager.Instance.SaveGameData();
+
                     SceneManager.LoadScene("BossRoomScene");
                     break;
             }
