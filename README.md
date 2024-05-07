@@ -1,7 +1,6 @@
 # :pushpin: Mystic Ruins
->게임 Demo
->
->asdfasdfasdf
+>게임 플레이 데모   
+>https://go-quality.dev  
 
 
 ## 1. 제작 기간 & 참여 인원
