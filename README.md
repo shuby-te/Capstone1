@@ -1,5 +1,6 @@
 # :pushpin: Mystic Ruins
 >게임 Demo
+>
 >asdfasdfasdf
 
 
@@ -36,4 +37,4 @@
 
 </br>
 
-## 6. 회고 / 느낀
+## 6. 회고 / 느낀점 
