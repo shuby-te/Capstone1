@@ -61,7 +61,16 @@
 </div>
 </details>
 
-- 
+- 아래의 **수정한 메카님**과 같이 달리는 애니메이션을 4방향으로 줄이고 애니메이션 전환 타이밍과 시간을 0으로 설정하여 좀 더 부드러운 움직임이 가능하도록 수정하였다.
+
+<details>
+<summary><b>수정한 메카님</b></summary>
+<div markdown="1">
+  
+![image](https://github.com/shuby-te/Mystic-Ruins/assets/101082590/2e325fd9-0369-45a1-b129-8e7ff9e543c3)
+
+</div>
+</details>
 
 </br>
 
