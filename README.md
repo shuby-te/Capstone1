@@ -1,4 +1,3 @@
-# :pushpin: Mystic Ruins
 >게임 플레이 데모   
 >https://drive.google.com/file/d/1EE2pPsvo2xygQ4Q2I5kPO9wL5JgjHtGb/view?usp=drive_link
 
@@ -48,7 +47,21 @@
 </br>
 
 ## 5. 핵심 트러블 슈팅
+### 5.1. 플레이어 캐릭터 애니메이션 FSM 구조 문제
+- 유니티에서 제공하는 '메카님'은 한 오브젝트에 적용한 복수의 애니메이션을 연결시키고 전이되도록 해주는 FSM(유한 상태 기계)입니다.
+저는 플레이어 캐릭터가 이동 시의 달리는 애니메이션을 8개의 방향마다 다른 애니메이션을 적용하여 달리는 애니메이션이 부드럽게 적용되도록 구현했습니다.
+- 하지만 아래와 같은 구조는 하나의 상태에서 다른 상태로 전이되기 위해 여러 상태를 거쳐야하는 경우가 생겨 전이 속도가 느려지는 문제가 발생하였다.
 
+<details>
+<summary><b>기존의 메카님</b></summary>
+<div markdown="1">
+  
+![](https://github.com/shuby-te/Mystic-Ruins/assets/101082590/2e27b860-0649-4d1d-9cac-8f7e6a7f9bca)
+
+</div>
+</details>
+
+- 
 
 </br>
 
